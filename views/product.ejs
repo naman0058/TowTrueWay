@@ -1,0 +1,579 @@
+<%- include ('./header.ejs') %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css">
+
+	
+		<section class="flat-product-detail">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="flexslider">
+							<ul class="slides">
+
+
+
+
+							    <li data-thumb="images/product/flexslider/thumb/2.jpg">
+							      <a href='#' id="zoom" class='zoom'><img src="/images/<%=result[1][0].image%>" alt='' width='400' height='300' /></a>
+							      <span>NEW</span>
+							    </li>
+
+
+  <% for(i=0;i<result[2].length;i++){ %>
+
+
+							    <li data-thumb="/images/<%=result[2][i].image%>">
+							      <a href='#' id="<%=result[2][i].id%>>" class='zoom'><img src="/images/<%=result[2][i].image%>" alt='' width='400' height='300' /></a>
+							    </li>
+							   
+
+<% } %>
+
+							</ul><!-- /.slides -->
+						</div><!-- /.flexslider -->
+					</div><!-- /.col-md-6 -->
+					<div class="col-md-6">
+						<div class="product-detail style4">
+							<div class="header-detail">
+								<h4 class="name"><%=result[1][0].name%></h4>
+								
+								<div class="reviewed">
+									
+									<div class="status-product">
+										Availablity <span>In stock</span>
+									</div>
+								</div><!-- /.reviewed -->
+							</div><!-- /.header-detail -->
+							<div class="content-detail">
+								<div class="price">
+									<div class="regular">
+										Rs. <%=result[1][0].price%>
+									</div>
+									<div class="sale">
+										Rs. <%=result[1][0].net_amount%>
+									</div>
+								</div>
+								<div class="info-text">
+                                        <%=result[1][0].description%>
+                                </div>
+								
+							</div><!-- /.content-detail -->
+							<div class="footer-detail">
+								<div class="quanlity-box">
+									<!-- <div class="colors">
+										<select name="color">
+											<option value="">Select Color</option>
+											<option value="">Black</option>
+											<option value="">Red</option>
+											<option value="">White</option>
+										</select>
+									</div> -->
+									<div class="quanlity">
+										<!-- <span class="btn-down"></span> -->
+										<input type="hidden" name="number" id="quantity" value="1" min="1" max="100"  placeholder="Quanlity">
+										<!-- <span class="btn-up"></span> -->
+									</div>
+								</div><!-- /.quanlity-box -->
+								<div class="box-cart style2">
+									<div class="btn-add-cart" style="cursor: pointer;">
+										<a  id="addToCart"  booking_id="<%=result[1][0].id%>" price="<%=result[1][0].net_amount%>" categoryid = '<%=result[1][0].categoryid%>' vendorid = '<%=result[1][0].vendorid%>'><img src="images/icons/add-cart.png" style="cursor:pointer" alt="">Add to Cart</a>
+									</div>
+								
+								</div><!-- /.box-cart style2 -->
+								
+							</div><!-- /.footer-detail -->
+						</div><!-- /.product-detail style4 -->
+					</div><!-- /.col-md-6 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section><!-- /.flat-product-detail -->
+
+		<section class="flat-product-content">
+			<ul class="product-detail-bar">
+				<li class="active">Description</li>
+				<!-- <li>Tecnical Specs</li>
+				<li>Reviews</li> -->
+			</ul><!-- /.product-detail-bar -->
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="description-text">
+							<div class="box-text">
+								<h4>Nuqqam Et Massa</h4>
+								<p>Sed sodales sed orci molestie tristique. Nunc dictum, erat id molestie vestibulum, ex leo vestibulum justo, luctus tempor erat sem quis diam. Lorem ipsum dolor sit amet.</p>
+							</div>
+							<div class="box-text">
+								<h4>Wireless</h4>
+								<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+							</div>
+							<div class="box-text">
+								<h4>Fresh Design</h4>
+								<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using</p>
+							</div>
+							<div class="box-text">
+								<h4>Fabolous Sound</h4>
+								<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
+							</div>
+						</div><!-- /.description-text -->
+					</div><!-- /.col-md-6 -->
+					<div class="col-md-6">
+						<div class="description-image">
+							<div class="box-image">
+								<img src="images/product/single/01.png" alt="">
+							</div>
+							<div class="box-text">
+								<h4>Nuqqam Et Massa</h4>
+								<p>Sed sodales sed orci molestie tristique. Nunc dictum, erat id molestie vestibulum, ex leo vestibulum justo, luctus tempor erat sem quis diam. Lorem ipsum dolor sit amet.</p>
+							</div>
+						</div><!-- /.description-image -->
+					</div><!-- /.col-md-6 -->
+					<div class="col-md-12">
+						<div class="different-color">
+							<div class="title">
+								Different Colors
+							</div>
+							<p>
+								Sed sodales sed orci<br />molestie
+							</p>
+						</div><!-- /.defferent-color -->
+					</div><!-- /.col-md-12 -->
+					<div class="col-md-6">
+						<div class="box-left">
+							<div class="img-line">
+								<img src="images/product/single/line-1.png" alt="">
+							</div>
+							<div class="img-product">
+								<img src="images/product/single/06.png" alt="">
+							</div>
+						</div><!-- /.box-left -->
+					</div><!-- /.col-md-6 -->
+					<div class="col-md-6">
+						<div class="box-right">
+							<div class="img-line">
+								<img src="images/product/single/line-2.png" alt="">
+								<img src="images/product/single/04.png" alt="">
+							</div>
+							<div class="img-product">
+								
+							</div>
+							<div class="box-text">
+								<h4>Nuqqam Et Massa</h4>
+								<p>Sed sodales sed orci molestie tristique. Nunc dictum, erat id molestie vestibulum, ex leo vestibulum justo, luctus tempor erat sem quis diam. Lorem ipsum dolor sit amet.</p>
+							</div>
+						</div><!-- /.box-right -->
+					</div><!-- /.col-md-6 -->
+				</div><!-- /.row -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="tecnical-specs">
+							<h4 class="name">
+								Warch 42 mm Smart Watches
+							</h4>
+							<table>
+								<tbody>
+									<tr>
+										<td>Height</td>
+										<td>38.6mm</td>
+									</tr>
+									<tr>
+										<td>Meterial</td>
+										<td>Stainless Stee</td>
+									</tr>
+									<tr>
+										<td>Case</td>
+										<td>40g</td>
+									</tr>
+									<tr>
+										<td>Color</td>
+										<td>blue, gray, green, light blue, lime, purple, red, yellow</td>
+									</tr>
+									<tr>
+										<td>Depth</td>
+										<td>10.5mm</td>
+									</tr>
+									<tr>
+										<td>Width</td>
+										<td>33.3mm</td>
+									</tr>
+									<tr>
+										<td>Size</td>
+										<td>Large, Medium, Small</td>
+									</tr>
+								</tbody>
+							</table>
+						</div><!-- /.tecnical-specs -->
+					</div><!-- /.col-md-12 -->
+				</div><!-- /.row -->
+				<div class="row">
+					<div class="col-md-6">
+						<div class="rating">
+							<div class="title">
+								Based on 3 reviews
+							</div>
+							<div class="score">
+								<div class="average-score">
+									<p class="numb">4.3</p>
+									<p class="text">Average score</p>
+								</div>
+								<div class="queue">
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+								</div>
+							</div>
+							<ul class="queue-box">
+								<li class="five-star">
+									<span>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+									</span>
+									<span class="numb-star">3</span>
+								</li>
+								<li class="four-star">
+									<span>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+									</span>
+									<span class="numb-star">4</span>
+								</li>
+								<li class="three-star">
+									<span>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+									</span>
+									<span class="numb-star">3</span>
+								</li>
+								<li class="two-star">
+									<span>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+									</span>
+									<span class="numb-star">2</span>
+								</li>
+								<li class="one-star">
+									<span>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+									</span>
+									<span class="numb-star">0</span>
+								</li>
+							</ul>
+						</div><!-- /.rating -->
+					</div><!-- /.col-md-6 -->
+					<div class="col-md-6">
+						<div class="form-review">
+							<div class="title">
+								Add a review 
+							</div>
+							<div class="your-rating queue">
+								<span>Your Rating</span>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+							</div>
+							<form action="#" method="get" accept-charset="utf-8">
+								<div class="review-form-name">
+									<input type="text" name="name-author" value="" placeholder="Name">
+								</div>
+								<div class="review-form-email">
+									<input type="text" name="email-author" value="" placeholder="Email">
+								</div>
+								<div class="review-form-comment">
+									<textarea name="review-text" placeholder="Your Name"></textarea>
+								</div>
+								<div class="btn-submit">
+									<button type="submit">Add Review</button>
+								</div>
+							</form>
+						</div><!-- /.form-review -->
+					</div><!-- /.col-md-6 -->
+					<div class="col-md-12">
+						<ul class="review-list">
+							<li>
+								<div class="review-metadata">
+									<div class="name">
+										Ali Tufan : <span>April 3, 2016</span>
+									</div>
+									<div class="queue">
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+									</div>
+								</div><!-- /.review-metadata -->
+								<div class="review-content">
+									<p>
+										Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+									</p> 
+								</div><!-- /.review-content -->
+							</li>
+							<li>
+								<div class="review-metadata">
+									<div class="name">
+										Peter Tufan : <span>April 3, 2016</span>
+									</div>
+									<div class="queue">
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+									</div>
+								</div><!-- /.review-metadata -->
+								<div class="review-content">
+									<p>
+										Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+									</p> 
+								</div><!-- /.review-content -->
+							</li>
+							<li>
+								<div class="review-metadata">
+									<div class="name">
+										Jon Tufan : <span>April 3, 2016</span>
+									</div>
+									<div class="queue">
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+										<i class="fa fa-star" aria-hidden="true"></i>
+									</div>
+								</div><!-- /.review-metadata -->
+								<div class="review-content">
+									<p>
+										Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
+									</p> 
+								</div><!-- /.review-content -->
+							</li>
+						</ul><!-- /.review-list -->
+					</div><!-- /.col-md-12 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section><!-- /.flat-product-content -->
+
+		<section class="flat-imagebox style4">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="flat-row-title">
+							<h3>Recent Products</h3>
+						</div>
+					</div><!-- /.col-md-12 -->
+				</div><!-- /.row -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="owl-carousel-3">
+
+
+<% for(i=0;i<result[3].length;i++) { %>
+
+							<div class="imagebox style4">
+								<div class="box-image">
+									<a href="/product?id=<%=result[3][i].id%>" title="">
+										<img src="/images/<%=result[3][i].image%>" alt="" style="width: 100px;">
+									</a>
+								</div><!-- /.box-image -->
+								<div class="box-content">
+									
+									<div class="product-name">
+										<a href="/product?id=<%=result[3][i].id%>" title=""><%=result[3][i].name%></a>
+									</div>
+									<div class="price">
+										<span class="sale">Rs.<%=result[3][i].net_amount%></span>
+										<span class="regular">Rs. <%=result[3][i].price%></span>
+									</div>
+								</div><!-- /.box-content -->
+							</div><!-- /.imagebox style4 -->
+
+                            <% } %>
+					
+						</div><!-- /.owl-carousel-3 -->
+					</div><!-- /.col-md-12 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section><!-- /.flat-imagebox style4 -->
+
+		<%- include ('./footer.ejs') %>
+
+
+
+
+	
+		<section class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<p class="copyright"> All Rights Reserved © Techno Store 2017</p>
+						<p class="btn-scroll">
+							<a href="#" title="">
+								<img src="images/icons/top.png" alt="">
+							</a>
+						</p>
+					</div><!-- /.col-md-12 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section><!-- /.footer-bottom -->
+
+	</div><!-- /.boxed -->
+	<div id="pageMessages" style="position: fixed;bottom:20px;right:20px">
+
+
+		<!-- Javascript -->
+		<script type="text/javascript" src="javascript/jquery.min.js"></script>
+		<script type="text/javascript" src="javascript/tether.min.js"></script>
+		<script type="text/javascript" src="javascript/bootstrap.min.js"></script>
+		<script type="text/javascript" src="javascript/waypoints.min.js"></script>
+		<script type="text/javascript" src="javascript/jquery.circlechart.js"></script>
+		<script type="text/javascript" src="javascript/easing.js"></script>
+		<script type="text/javascript" src="javascript/jquery.zoom.min.js"></script>
+		<script type="text/javascript" src="javascript/jquery.flexslider-min.js"></script>
+		<script type="text/javascript" src="javascript/owl.carousel.js"></script>
+		<script type="text/javascript" src="javascript/smoothscroll.js"></script>
+		<script type="text/javascript" src="javascript/jquery-ui.js"></script>
+		<script type="text/javascript" src="javascript/jquery.mCustomScrollbar.js"></script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&region=GB"></script>
+	   	<script type="text/javascript" src="javascript/gmap3.min.js"></script>
+	   	<script type="text/javascript" src="javascript/waves.min.js"></script>
+		<script type="text/javascript" src="javascript/jquery.countdown.js"></script>
+
+		<script type="text/javascript" src="javascript/main.js"></script>
+
+
+
+		<script>
+
+
+			$('#addToCart').click(function(){
+			
+				// id="<%=result[1][0].id%>" price="<%=result[1][0].net_amount%>" categoryid = '<%=result[1][0].categoryid%>' vendorid = '<%=result[1][0].vendorid%>' 
+				let quantity = $('#quantity').val();
+				let booking_id = $(this).attr('booking_id');
+				let price = $(this).attr('price');
+				let oneprice = $(this).attr('price');
+				let categoryid = $(this).attr('categoryid');
+				let vendorid = $(this).attr('vendorid');
+			
+			
+				 price = price*quantity
+			
+				$.post('/add-to-cart',{booking_id,price,categoryid,vendorid,oneprice,quantity},data=>{
+					createAlert('','Nice Work!','Here is a bunch of text about some stuff that happened.','success',true,true,'pageMessages')
+				})
+				
+			})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			function createAlert(title, summary, details, severity, dismissible, autoDismiss, appendToId) {
+			
+  var iconMap = {
+    info: "fa fa-info-circle",
+    success: "fa fa-thumbs-up",
+    warning: "fa fa-exclamation-triangle",
+    danger: "fa ffa fa-exclamation-circle"
+  };
+
+  var iconAdded = false;
+
+  var alertClasses = ["alert", "animated", "flipInX"];
+  alertClasses.push("alert-" + severity.toLowerCase());
+
+  if (dismissible) {
+    alertClasses.push("alert-dismissible");
+  }
+
+  var msgIcon = $("<i />", {
+    "class": iconMap[severity] // you need to quote "class" since it's a reserved keyword
+  });
+
+  var msg = $("<div />", {
+    "class": alertClasses.join(" ") // you need to quote "class" since it's a reserved keyword
+  });
+
+  if (title) {
+    var msgTitle = $("<h4 />", {
+      html: title
+    }).appendTo(msg);
+    
+    if(!iconAdded){
+      msgTitle.prepend(msgIcon);
+      iconAdded = true;
+    }
+  }
+
+  if (summary) {
+    var msgSummary = $("<strong />", {
+      html: 'Added To Cart'
+    }).appendTo(msg);
+    
+    if(!iconAdded){
+      msgSummary.prepend(msgIcon);
+      iconAdded = true;
+    }
+  }
+
+  
+  
+
+  if (dismissible) {
+    var msgClose = $("<span />", {
+      "class": "close", // you need to quote "class" since it's a reserved keyword
+      "data-dismiss": "alert",
+      html: "<i class='fa fa-times-circle'></i>"
+    }).appendTo(msg);
+  }
+  
+  $('#' + appendToId).prepend(msg);
+  
+  if(autoDismiss){
+    setTimeout(function(){
+      msg.addClass("flipOutX");
+      setTimeout(function(){
+        msg.remove();
+      },1000);
+    }, 5000);
+  }
+}
+
+
+
+
+			
+			</script>
+
+
+</body>	
+</html>

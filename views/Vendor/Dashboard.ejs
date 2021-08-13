@@ -1,0 +1,675 @@
+<%- include ('./Header.ejs') %>
+
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+
+          
+            <div class="container-fluid">
+                <div class="row justify-content-between mb-4">
+					<!-- <div class="col-xl-3 col-lg-4">
+						<h2 class="page-heading">Hi,Welcome Back!</h2>
+						<p class="mb-0">Your restaurent admin template</p>
+                    </div> -->
+                    <!-- <div class="col-xl-9 col-xxl-9 col-lg-8 mt-4 mt-lg-0">
+                        <div class="steps">
+                            <ul class="list-unstyled multi-steps">
+                                <li>Ordered</li>
+                                <li>Pending</li>
+                                <li class="is-active">Accept</li>
+                                <li>Delivery</li>
+                                <li>Received</li>
+                            </ul>
+                        </div> 
+                    </div> -->
+    
+                </div>
+                <div class="row">
+                    <div class="col-xl-6 col-xxl-12">
+                        <div class="row">
+                            <div class="col-sm-6 col-xxl-6 col-xl-6">
+                                <div class="card">
+                                    <div class="card-body pb-0">
+                                        <div class="row justify-content-between">
+                                            <div class="col-auto">
+                                                <h4 class="text-muted mb-3">Today Order</h4>
+                                            </div>
+                                            <div class="col-auto">
+                                                <h2><%=result[0][0].today_order%></h2>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="chart-wrapper">
+                                        <div id="home_chart_widget_1" class="home_chart_widget chart-one"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xxl-6 col-xl-6">
+                                <div class="card">
+                                    <div class="card-body pb-0">
+                                        <div class="row justify-content-between">
+                                            <div class="col-auto">
+                                                <h4 class="text-muted mb-3">Completed Order</h4>
+                                            </div>
+                                            <div class="col-auto">
+                                                <h2><%=result[1][0].todat_completed_order%></h2>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="chart-wrapper">
+                                        <div id="home_chart_widget_2" class="home_chart_widget chart-two"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xxl-6 col-xl-6">
+                                <div class="card">
+                                    <div class="card-body pb-0">
+                                        <div class="row justify-content-between">
+                                            <div class="col-auto">
+                                                <h4 class="text-muted mb-3">Today Revenue</h4>
+                                            </div>
+                                            <div class="col-auto">
+                                                <h2>Rs. <%=result[2][0].today_revenue%></h2>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="chart-wrapper">
+                                        <div id="home_chart_widget_3" class="home_chart_widget chart-three"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xxl-6 col-xl-6">
+                                <div class="card">
+                                    <div class="card-body pb-0">
+                                        <div class="row justify-content-between">
+                                            <div class="col-auto">
+                                                <h4 class="text-muted mb-3">Total Revenue</h4>
+                                            </div>
+                                            <div class="col-auto">
+                                                <h2>Rs. <%=result[3][0].total_price%></h2>
+                                            </div>
+                                        </div>
+                                      
+                                    </div>
+                                    <div class="chart-wrapper">
+                                        <div id="home_chart_widget_4" class="home_chart_widget chart-four"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-xl-6 col-xxl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                    <h4 class="card-title mb-4">Earnings</h4>
+                                <canvas id="earnings_bar_chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+              
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                    <h4 class="card-title">Restaurent Rating</h4>
+                                <div class="custom-tab-1">
+                                    <ul class="nav nav-tabs justify-content-end">
+                                        <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#success1">Graph</a></li>
+                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#info1">Review</a></li>
+                                    </ul>
+                                    <div class="tab-content tab-content-default">
+                                        <div class="tab-pane fade active show" id="success1" role="tabpanel">
+                                            <div class="row justify-content-between">
+                                                <div class="col-md-6">
+                                                    <canvas id="user_rating_graph"></canvas>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div>
+                                                        <div class="d-flex justify-content-between">
+                                                            <p>Food</p>
+                                                            <p><b class="text-dark">220 </b> (10%)</p>
+                                                        </div>
+                                                        <div class="progress mt-2" style="height: 9px;">
+                                                            <div class="progress-bar bg-primary" style="width: 50%;" role="progressbar"><span class="sr-only">50% Complete</span></div>
+                                                        </div>                
+                                                    </div>
+                                                    <div class="mt-4">
+                                                        <div class="d-flex justify-content-between">
+                                                            <p>Service</p>
+                                                            <p><b class="text-dark">420</b> (40%)</p>
+                                                        </div>
+                                                        <div class="progress mt-2" style="height: 9px;">
+                                                            <div class="progress-bar bg-info" style="width: 50%;" role="progressbar"><span class="sr-only">50% Complete</span></div>
+                                                        </div>                
+                                                    </div>
+                                                    <div class="mt-4">
+                                                        <div class="d-flex justify-content-between">
+                                                            <p>Waiting Time</p>
+                                                            <p><b class="text-dark">260</b> (30%)</p>
+                                                        </div>
+                                                        <div class="progress mt-2" style="height: 9px;">
+                                                            <div class="progress-bar bg-success" style="width: 50%;" role="progressbar"><span class="sr-only">50% Complete</span></div>
+                                                        </div>                
+                                                    </div>
+                                                    <div class="mt-4">
+                                                        <div class="d-flex justify-content-between">
+                                                            <p>Others</p>
+                                                            <p><b class="text-dark">460</b> (20%)</p>
+                                                        </div>
+                                                        <div class="progress mt-2" style="height: 9px;">
+                                                            <div class="progress-bar bg-dark" style="width: 50%;" role="progressbar"><span class="sr-only">50% Complete</span></div>
+                                                        </div>                
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="info1">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="media">
+                                                        <img src="../../assets/images/avatar/1.jpg" width="35" alt="reviewer">
+                                                        <div class="media-body ml-4">
+                                                            <div class="d-flex justify-content-between">
+                                                                <strong>Antony Jonus</strong>
+                                                                <div class="vertical-card__menu--rating c-pointer">
+                                                                    <span class="icon"><i class="fa fa-star"></i></span>
+                                                                    <span class="icon"><i class="fa fa-star"></i></span>
+                                                                    <span class="icon"><i class="fa fa-star"></i></span>
+                                                                    <span class="icon"><i class="fa fa-star"></i></span>
+                                                                    <span class="icon"><i class="fa fa-star-o"></i></span>
+                                                                </div>
+                                                            </div>
+                                                            <p>
+                                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem, voluptatibus!
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="media mt-4">
+                                                        <img src="../../assets/images/avatar/2.jpg" width="35" alt="reviewer">
+                                                        <div class="media-body ml-4">
+                                                            <div class="d-flex justify-content-between">
+                                                                <strong>Antony Jonus</strong>
+                                                                <div class="vertical-card__menu--rating c-pointer">
+                                                                    <span class="icon"><i class="fa fa-star"></i></span>
+                                                                    <span class="icon"><i class="fa fa-star"></i></span>
+                                                                    <span class="icon"><i class="fa fa-star"></i></span>
+                                                                    <span class="icon"><i class="fa fa-star"></i></span>
+                                                                    <span class="icon"><i class="fa fa-star-o"></i></span>
+                                                                </div>
+                                                            </div>
+                                                            <p>
+                                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem, voluptatibus!
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="media mt-4">
+                                                        <img src="../../assets/images/avatar/1.jpg" width="35" alt="reviewer">
+                                                        <div class="media-body ml-4">
+                                                            <div class="d-flex justify-content-between">
+                                                                <strong>Antony Jonus</strong>
+                                                                <div class="vertical-card__menu--rating c-pointer">
+                                                                    <span class="icon"><i class="fa fa-star"></i></span>
+                                                                    <span class="icon"><i class="fa fa-star"></i></span>
+                                                                    <span class="icon"><i class="fa fa-star"></i></span>
+                                                                    <span class="icon"><i class="fa fa-star"></i></span>
+                                                                    <span class="icon"><i class="fa fa-star-o"></i></span>
+                                                                </div>
+                                                            </div>
+                                                            <p>
+                                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem, voluptatibus!
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="media mt-4">
+                                                        <img src="../../assets/images/avatar/2.jpg" width="35" alt="reviewer">
+                                                        <div class="media-body ml-4">
+                                                            <div class="d-flex justify-content-between">
+                                                                <strong>Antony Jonus</strong>
+                                                                <div class="vertical-card__menu--rating c-pointer">
+                                                                    <span class="icon"><i class="fa fa-star"></i></span>
+                                                                    <span class="icon"><i class="fa fa-star"></i></span>
+                                                                    <span class="icon"><i class="fa fa-star"></i></span>
+                                                                    <span class="icon"><i class="fa fa-star"></i></span>
+                                                                    <span class="icon"><i class="fa fa-star-o"></i></span>
+                                                                </div>
+                                                            </div>
+                                                            <p>
+                                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem, voluptatibus!
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Visit Hour</h4>
+                                <div class="row mb-3 mt-4">
+                                    <div class="col text-center">
+                                        <p class="mb-2 text-dark">Day</p>
+                                        <h4><span class="text-success mdi mdi-arrow-up-bold"></span> 82.24 %</h4>
+                                    </div>
+                                    <div class="col text-center">
+                                        <p class="mb-2 text-dark">Night</p>
+                                        <h4><span class="text-danger mdi mdi-arrow-down-bold"></span> 12.24 %</h4>
+                                    </div>
+                                </div>
+                                <div class="chart-wrapper">
+                                    <canvas id="visitor_graph"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-xl-4 col-lg-6 col-xxl-6">
+                        <div class="card top_menu_widget">
+                            <div class="card-body">
+                                <h4 class="card-title">Latests Menus</h4>
+
+
+<% for(i=0;i<result[4].length;i++) { %>
+
+                                <div class="media border-bottom pt-3 pb-3">
+                                    <img width="50" height="50"  alt="#" class="mr-3" src="/images/<%=result[4][i].image%>">
+                                    <div class="media-body">
+                                        <h5 class="mb-1 mt-sm-1 mt-0"><%=result[4][i].name%></h5>
+                                        <span><%=result[4][i].name%></span>
+                                    </div>
+                                    <h5 class="badge-lighten-primary">Rs. <%=result[4][i].price%></h5>
+                                </div>
+
+
+
+<% } %>
+
+
+
+                                
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-lg-7 col-xxl-8">
+                        <div class="card world_map_card">
+                            <div class="card-body">
+                                <h4 class="card-title">Branches</h4>
+                                <div class="row">
+                                    <div class="col-xl-9 col-xxl-12">
+                                        <div class="map">
+                                            <div id="world-datamap"></div>                                    
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-xxl-12">
+                                        <div class="d-flex justify-content-center h-100 flex-column">
+                                            <ul class="list-group w-100">
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                    India <span class="badge badge-primary">$ 999</span>
+                                                </li>
+                                              
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+              
+                <div class="row">
+                    
+
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Order List</h4>
+                                <div class="table-responsive">
+                                    <table class="table verticle-middle table-responsive-lg mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Order Name</th>
+                                                <th scope="col">Custommer Name</th>
+                                                <th scope="col">Location</th>
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col">Price</th>
+                                                <th scope="col">Status</th>
+                                               
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+   <% for(i=0;i<result[5].length;i++) { %>
+
+
+                                            <tr>
+                                                <td><%=result[5][i].orderid%></td>
+                                                <td><%=result[5][i].booking_id%></td>
+                                                <td><%=result[5][i].name%></td>
+                                                <td><%=result[5][i].address%></td>
+                                                <td><%=result[5][i].quantity%></td>
+                                                <td><%=result[5][i].price%></td>
+                                                <td><span class="badge badge-xs badge-primary"><%=result[5][i].status%></span>
+                                                </td>
+                                               
+                                            </tr>
+
+
+             <% } %>                               
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        
+        
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p><a href="templatespoint.net">Templates Point</a></p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        
+        <!--**********************************
+            Right sidebar start
+        ***********************************-->
+        <div class="sidebar-right">
+            <a class="sidebar-right-trigger gradient-5-x" href="javascript:void(0)">
+                <span><i class="fa fa-cog fa-spin"></i></span>
+            </a>
+            <div class="sidebar-right-inner">
+                <div class="admin-settings">
+                    <h4>Pick your style</h4>
+                    <div>
+                        <p>Background</p>
+                        <select class="form-control" name="theme_version" id="theme_version">
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Layout</p>
+                        <select class="form-control" name="theme_layout" id="theme_layout">
+                            <option value="vertical">Vertical</option>
+                            <option value="horizontal">Horizontal</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Sidebar</p>
+                        <select class="form-control" name="sidebar_style" id="sidebar_style">
+                            <option value="full">Full</option>
+                            <option value="mini">Mini</option>
+                            <option value="compact">Compact</option>
+                            <option value="overlay">Overlay</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Sidebar position</p>
+                        <select class="form-control" name="sidebar_position" id="sidebar_position">
+                            <option value="static">Static</option>
+                            <option value="fixed">Fixed</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Header position</p>
+                        <select class="form-control" name="header_position" id="header_position">
+                            <option value="static">Static</option>
+                            <option value="fixed">Fixed</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Container</p>
+                        <select class="form-control" name="container_layout" id="container_layout">
+                            <option value="wide">Wide</option>
+                            <option value="boxed">Boxed</option>
+                            <option value="wide-boxed">Wide Boxed</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Direction</p>
+                        <select class="form-control" name="theme_direction" id="theme_direction">
+                            <option value="ltr">LTR</option>
+                            <option value="rtl">RTL</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Navigation Header</p>
+                        <div>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_1" class="filled-in chk-col-primary" id="nav_header_bg_1">
+                                <label for="nav_header_bg_1"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_2" class="filled-in chk-col-primary" id="nav_header_bg_2">
+                                <label for="nav_header_bg_2"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_3" class="filled-in chk-col-primary" id="nav_header_bg_3">
+                                <label for="nav_header_bg_3"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_4" class="filled-in chk-col-primary" id="nav_header_bg_4">
+                                <label for="nav_header_bg_4"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_5" class="filled-in chk-col-primary" id="nav_header_bg_5">
+                                <label for="nav_header_bg_5"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_6" class="filled-in chk-col-primary" id="nav_header_bg_6">
+                                <label for="nav_header_bg_6"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_7" class="filled-in chk-col-primary" id="nav_header_bg_7">
+                                <label for="nav_header_bg_7"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_8" class="filled-in chk-col-primary" id="nav_header_bg_8">
+                                <label for="nav_header_bg_8"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_9" class="filled-in chk-col-primary" id="nav_header_bg_9">
+                                <label for="nav_header_bg_9"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_10" class="filled-in chk-col-primary" id="nav_header_bg_10">
+                                <label for="nav_header_bg_10"></label>
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <p>Header</p>
+                        <div>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_1" class="filled-in chk-col-primary" id="header_bg_1">
+                                <label for="header_bg_1"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_2" class="filled-in chk-col-primary" id="header_bg_2">
+                                <label for="header_bg_2"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_3" class="filled-in chk-col-primary" id="header_bg_3">
+                                <label for="header_bg_3"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_4" class="filled-in chk-col-primary" id="header_bg_4">
+                                <label for="header_bg_4"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_5" class="filled-in chk-col-primary" id="header_bg_5">
+                                <label for="header_bg_5"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_6" class="filled-in chk-col-primary" id="header_bg_6">
+                                <label for="header_bg_6"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_7" class="filled-in chk-col-primary" id="header_bg_7">
+                                <label for="header_bg_7"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_8" class="filled-in chk-col-primary" id="header_bg_8">
+                                <label for="header_bg_8"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_9" class="filled-in chk-col-primary" id="header_bg_9">
+                                <label for="header_bg_9"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_10" class="filled-in chk-col-primary" id="header_bg_10">
+                                <label for="header_bg_10"></label>
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <p>Sidebar</p>
+                        <div>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_1" class="filled-in chk-col-primary" id="sidebar_bg_1">
+                                <label for="sidebar_bg_1"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_2" class="filled-in chk-col-primary" id="sidebar_bg_2">
+                                <label for="sidebar_bg_2"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_3" class="filled-in chk-col-primary" id="sidebar_bg_3">
+                                <label for="sidebar_bg_3"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_4" class="filled-in chk-col-primary" id="sidebar_bg_4">
+                                <label for="sidebar_bg_4"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_5" class="filled-in chk-col-primary" id="sidebar_bg_5">
+                                <label for="sidebar_bg_5"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_6" class="filled-in chk-col-primary" id="sidebar_bg_6">
+                                <label for="sidebar_bg_6"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_7" class="filled-in chk-col-primary" id="sidebar_bg_7">
+                                <label for="sidebar_bg_7"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_8" class="filled-in chk-col-primary" id="sidebar_bg_8">
+                                <label for="sidebar_bg_8"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_9" class="filled-in chk-col-primary" id="sidebar_bg_9">
+                                <label for="sidebar_bg_9"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_10" class="filled-in chk-col-primary" id="sidebar_bg_10">
+                                <label for="sidebar_bg_10"></label>
+                            </span>
+                            <!-- <span>
+                                <input type="radio" name="sidebar_bg" value="color_11" class="filled-in chk-col-primary" id="sidebar_bg_11">
+                                <label for="sidebar_bg_11"></label>
+                            </span> -->
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_12" class="filled-in chk-col-primary" id="sidebar_bg_12">
+                                <label for="sidebar_bg_12"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_13" class="filled-in chk-col-primary" id="sidebar_bg_13">
+                                <label for="sidebar_bg_13"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_14" class="filled-in chk-col-primary" id="sidebar_bg_14">
+                                <label for="sidebar_bg_14"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_15" class="filled-in chk-col-primary" id="sidebar_bg_15">
+                                <label for="sidebar_bg_15"></label>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Right sidebar end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="../../assets/plugins/common/common.min.js"></script>
+    <script src="../Admin/main/./js/custom.min.js"></script>
+    <script src="../Admin/main/./js/settings.js"></script>
+    <script src="../Admin/main/./js/quixnav.js"></script>
+    <script src="../Admin/main/./js/styleSwitcher.js"></script>
+    
+    <!-- Datamap -->
+    <script src="../../assets/plugins/d3v3/index.js"></script>
+    <script src="../../assets/plugins/topojson/topojson.min.js"></script>
+    <script src="../../assets/plugins/datamaps/datamaps.world.min.js"></script>
+    <!-- Calender -->
+    <script src="../../assets/plugins/jqueryui/js/jquery-ui.min.js"></script>
+    <script src="../../assets/plugins/moment/moment.min.js"></script>
+    <script src="../../assets/plugins/fullcalendar/js/fullcalendar.min.js"></script>
+    <!-- ChartJS -->
+    <script src="../../assets/plugins/chart.js/Chart.bundle.min.js"></script>
+    <!-- MorrisJS -->
+    <script src="../../assets/plugins/raphael/raphael.min.js"></script>
+    <script src="../../assets/plugins/morris/morris.min.js"></script>
+    <!-- Owl carousel -->
+    <script src="../../assets/plugins/owl.carousel/dist/js/owl.carousel.min.js"></script>
+    <!-- Chartist -->
+    <script src="../../assets/plugins/chartist/js/chartist.min.js"></script>
+    <script src="../../assets/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
+
+
+    <!-- Init files -->
+    <script src="../Admin/main/./js/plugins-init/fullcalendar-init.js"></script>
+    <script src="../Admin/main/./js/dashboard/dashboard-1.js"></script>
+
+</body>
+
+</html>

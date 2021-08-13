@@ -1,0 +1,187 @@
+
+<%- include ('./header.ejs') %>
+	
+		<section class="flat-shop-cart">
+			<div class="container">
+				<div class="row">
+					
+
+					<% if(result[0]) { %>
+						<div class="col-lg-4"></div>
+						<div class="col-lg-4">
+							<img src='/images/emptycart.png' style="text-align: center;justify-content: center;">
+
+						</div>
+						<div class="col-lg-4"></div>
+            
+						<% } else { %>
+					<div class="col-lg-8">
+
+
+
+
+
+						<div class="flat-row-title style1">
+							<h3>Shopping Cart</h3>
+						</div>
+						<div class="table-cart">
+							<table>
+								<thead>
+									<tr>
+										<th>Product</th>
+										<th>Quantity</th>
+										<th>Total</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+
+
+
+                                    <% for(i=0;i<result[1].length;i++) { %>
+
+
+									<tr>
+										<td>
+											<div class="img-product">
+												<img src="/images/<%=result[1][i].image%>" alt="">
+											</div>
+											<div class="name-product">
+												<%=result[1][i].bookingname%>
+											</div>
+											<div class="price">
+												Rs. <%=result[1][i].oneprice%>
+											</div>
+											<div class="clearfix"></div>
+										</td>
+										<td>
+											<div class="quanlity">
+                                                <button type="button" class="btn btn-light minus" booking_id = "<%=result[1][i].booking_id%>" number="<%=result[1][i].number%>" value="<%=result[1][i].quantity%>" price="<%=result[1][i].oneprice%>"> - </button>
+                                                <span style="margin-right: 10px;margin-left:10px;"><%=result[1][i].quantity%></span>
+        
+                                                <button type="button" class="btn btn-light add" booking_id = "<%=result[1][i].booking_id%>" number="<%=result[1][i].number%>"  value="<%=result[1][i].quantity%>" price="<%=result[1][i].oneprice%>">+</button>
+                                              
+											</div>
+										</td>
+										<td>
+											<div class="total">
+												Rs. <%=result[1][i].price%>
+											</div>
+										</td>
+										<td>
+											<a href="/delete?id=<%=result[1][i].id%>" title="">
+												<img src="images/icons/delete.png" alt="">
+											</a>
+										</td>
+									</tr>
+
+                                    <% } %>
+									
+								</tbody>
+							</table>
+							
+						</div><!-- /.table-cart -->
+					
+					</div><!-- /.col-lg-8 -->
+					<div class="col-lg-4" style="margin-top:30px">
+						<div class="cart-totals">
+							<h3>Cart Totals</h3>
+							<form action="#" method="get" accept-charset="utf-8">
+								<table>
+									<tbody>
+										<tr>
+											<td>Total</td>
+											<td class="subtotal">Rs. <%=result[2][0].totalprice%></td>
+										</tr>
+									
+										
+									</tbody>
+								</table>
+								<div class="btn-cart-totals">
+									<!-- <a href="#" class="update" title="">Update Cart</a> -->
+									<a href="/checkout" class="checkout" title="">Proceed to Checkout</a>
+								</div><!-- /.btn-cart-totals -->
+							</form><!-- /form -->
+						</div><!-- /.cart-totals -->
+					</div><!-- /.col-lg-4 -->
+					<% } %>
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section><!-- /.flat-shop-cart -->
+
+	
+
+	
+
+		
+	</div><!-- /.boxed -->
+
+		<!-- Javascript -->
+		<script type="text/javascript" src="javascript/jquery.min.js"></script>
+		<script type="text/javascript" src="javascript/tether.min.js"></script>
+		<script type="text/javascript" src="javascript/bootstrap.min.js"></script>
+		<script type="text/javascript" src="javascript/waypoints.min.js"></script>
+		<script type="text/javascript" src="javascript/jquery.circlechart.js"></script>
+		<script type="text/javascript" src="javascript/easing.js"></script>
+<script type="text/javascript" src="javascript/jquery.zoom.min.js"></script>
+		<script type="text/javascript" src="javascript/jquery.flexslider-min.js"></script>
+		<script type="text/javascript" src="javascript/owl.carousel.js"></script>
+		
+		<script type="text/javascript" src="javascript/jquery-ui.js"></script>
+		<script type="text/javascript" src="javascript/jquery.mCustomScrollbar.js"></script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&region=GB"></script>
+	   	<script type="text/javascript" src="javascript/gmap3.min.js"></script>
+	   	<script type="text/javascript" src="javascript/waves.min.js"></script>
+		<script type="text/javascript" src="javascript/jquery.countdown.js"></script>
+
+		<script type="text/javascript" src="javascript/main.js"></script>
+
+
+
+
+        <script>
+            $('.add').click(function(){
+         let value = $(this).attr('value')
+         let price = $(this).attr('price')
+         let booking_id = $(this).attr('booking_id');
+         let number = $(this).attr('number');
+        
+        
+        
+         let quantity = (+value)+1;
+        
+            $.post('/add-to-cart',{quantity,price,booking_id,number},data=>{
+                    window.location.href = '/mycart'
+              })
+        
+             
+            })
+        
+        
+        
+        
+        
+            $('.minus').click(function(){
+         let value = $(this).attr('value')
+         let price = $(this).attr('price')
+         let booking_id = $(this).attr('booking_id');
+         let number = $(this).attr('number');
+        
+        
+         let quantity = (+value)-1;
+        
+        
+        
+        $.post('/add-to-cart',{quantity,price,booking_id,number},data=>{
+                    window.location.href = '/mycart'
+              })
+        
+             
+            })
+        
+        
+        </script>
+
+
+</body>	
+</html>

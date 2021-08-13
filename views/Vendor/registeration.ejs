@@ -1,0 +1,88 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Gleek - Bootstrap Admin Dashboard HTML Template</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
+    <!-- Custom Stylesheet -->
+    <link href="/Admin/main/./css/style.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css" integrity="sha512-QKC1UZ/ZHNgFzVKSAhV5v5j73eeL9EEN289eKAEFaAjgAiobVAnVv/AGuPbXsKl1dNoel3kNr6PYnSiTzVVBCw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.css" integrity="sha512-9Tu/Gu0+bXW+oGrTGJOeNz2RG4MaF52FznXCciXFrXehFTLF6phJnJFNVOU2mmj9FWIXk9ap0H1ocygu1ZTRqg==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   
+</head>
+
+<body class="h-100">
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <div class="h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100">
+                <div class="col-md-5">
+                    <div class="form-input-content">
+                        <div class="card card-login">
+                            <div class="card-header text-center">
+                                <div class="nav-header position-relative  text-center w-100">
+                                    <div class="brand-logo">
+                                        <a href="index.html">
+                                            <b class="logo-abbr">D</b>
+                                            <span class="brand-title"><b>Drora</b></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form action="/vendor-registeration/verification" method="post">
+            <h5 style="color: red;"><%=msg%></h5>
+
+                                    <div class="form-group mb-4">
+                                        <input type="text" class="form-control rounded-0 bg-transparent" name="business_name" placeholder="Business Name" required>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <input type="text" class="form-control rounded-0 bg-transparent" name="name" placeholder="Store Name" required>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <select id="categoryid" name="categoryid" class="form-control rounded-0 bg-transparent" required></select>
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <input type="text" name="number" class="form-control rounded-0 bg-transparent" placeholder="Mobile Number" required>
+                                    </div>
+                                    <div class="form-group ml-3 mb-5">
+                                        <input id="checkbox1" type="checkbox" checked readonly>
+                                        <label class="label-checkbox ml-2 mb-0" for="checkbox1">I accept the <a href="#">Terms and conditions</a></label>
+                                    </div>
+                                    <button class="btn-primary btn-lg btn-block border-0" type="submit">Register</button>
+                                </form>
+                            </div>
+                            <div class="card-footer text-center border-0 pt-0">
+                                <p class="mb-1">Already have an account?</p>
+                                <h6><a href="/vendor-login">Click me to Log in</a></h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #/ container -->
+    <!-- Common JS -->
+    <script src="../../assets/plugins/common/common.min.js"></script>
+
+    <!-- Custom script -->
+    <script src="/Admin/main/./js/custom.min.js"></script>
+    <script src="/Admin/main/./js/settings.js"></script>
+    <script src="/Admin/main/./js/quixnav.js"></script>
+    <script src="/javascripts/subcategory.js"></script>
+</body>
+
+</html>

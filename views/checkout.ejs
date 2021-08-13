@@ -1,0 +1,240 @@
+<%- include ('./header.ejs') %>
+
+
+
+
+		<section class="flat-checkout">
+			<div class="container">
+							<form action="/order-now" method="post" class="checkout" accept-charset="utf-8">
+
+				<div class="row">
+                    
+					<div class="col-md-7">
+						<div class="box-checkout">
+							<h3 class="title">Checkout</h3>
+						
+								<div class="billing-fields">
+									<div class="fields-title">
+										<h3>Billing details</h3>
+										<span></span>
+										<div class="clearfix"></div>
+									</div><!-- /.fields-title -->
+									<div class="fields-content">
+										<div class="field-row">
+											<p class="field-one-half">
+												<label for="first-name">First Name *</label>
+												<input type="text" id="first-name" name="first_name" required placeholder="Ali">
+											</p>
+											<p class="field-one-half">
+												<label for="last-name">Last Name *</label>
+												<input type="text" id="last-name" name="last_name" required placeholder="Tufan">
+											</p>
+											<div class="clearfix"></div>
+										</div>
+									
+										<!-- <div class="field-row">
+											<p class="field-one-half">
+												<label for="email-address">Email Address *</label>
+												<input type="email" id="email-address" name="email-address">
+											</p>
+											<p class="field-one-half">
+												<label for="phone">Phone *</label>
+												<input type="text" id="phone" name="phone">
+											</p>
+											<div class="clearfix"></div>
+										</div> -->
+										
+										<div class="field-row">
+											<label for="address">Address *</label>
+											<input type="text" id="address" name="address1" placeholder="Street address">
+											<input type="text" id="address-2" name="address2" placeholder="Apartment, suite, unit etc. (optional)">
+										</div>
+										<div class="field-row">
+											<label for="town-city">Town / City *</label>
+											<input type="text" id="town-city" name="city">
+										</div>
+										<div class="field-row">
+											<p class="field-one-half">
+												<label for="state-country">State / County *</label>
+												<input type="text" id="state-country" name="state">
+											</p>
+											<p class="field-one-half">
+												<label for="post-code">Postcode / ZIP *</label>
+												<input type="text" id="post-code" name="pincode">
+											</p>
+											<div class="clearfix"></div>
+										</div>
+									
+									</div><!-- /.fields-content -->
+								</div><!-- /.billing-fields -->
+							
+						
+						</div><!-- /.box-checkout -->
+					</div><!-- /.col-md-7 -->
+					<div class="col-md-5">
+						<div class="cart-totals style2">
+							<h3>Your Order</h3>
+					
+								<table class="product">
+									<thead>
+										<tr>
+											<th>Product</th>
+											<th>Total</th>
+										</tr>
+									</thead>
+									<tbody>
+  <% for(i=0;i<result[1].length;i++) { %>
+
+										<tr>
+											<td><%=result[1][i].bookingname%></td>
+											<td>Rs. <%=result[1][i].price%></td>
+										</tr>
+                                        <% } %>
+									</tbody>
+								</table><!-- /.product -->
+								<table>
+									<tbody>
+										
+									
+										<tr>
+											<td>Total</td>
+											<td class="price-total">Rs. <%=result[2][0].totalprice%></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="btn-radio style2">
+									<!-- <div class="radio-info">
+										<input type="radio" id="flat-payment" checked name="radio-cash-2">
+										<label for="flat-payment">Check Payments</label>
+										<p>Please send a check to Store Name, Store Street, Store <br />Town, Store State / County, Store Postcode.</p>
+									</div>
+									<div class="radio-info">
+										<input type="radio" id="bank-transfer" name="radio-cash-2">
+										<label for="bank-transfer">Direct Bank Transfer</label>
+									</div> -->
+									<div class="radio-info">
+										<input type="radio" id="cash-delivery" checked >
+										<label for="cash-delivery">Cash on Delivery</label>
+									</div>
+									<!-- <div class="radio-info">
+										<input type="radio" id="paypal" name="radio-cash-2">
+										<label for="paypal">Paypal</label>
+									</div> -->
+								</div><!-- /.btn-radio style2 -->
+								<div class="checkbox">
+									<input type="checkbox" id="checked-order" name="checked-order" checked>
+									<label for="checked-order">I’ve read and accept the terms & conditions *</label>
+								</div><!-- /.checkbox -->
+								<div class="btn-order">
+                                    <!-- <a  class="order" title="">Place Order</a> -->
+									<button type="submit" class="btn btn-warning btn-block">Place Order</button>
+								</div><!-- /.btn-order -->
+							
+						</div><!-- /.cart-totals style2 -->
+					</div><!-- /.col-md-5 -->
+				</div><!-- /.row -->
+            </form>
+			</div><!-- /.container -->
+		</section><!-- /.flat-checkout -->
+
+		<section class="flat-row flat-iconbox style5">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 col-md-6">
+						<div class="iconbox style1">
+							<div class="box-header">
+								<div class="image">
+									<img src="images/icons/car.png" alt="">
+								</div>
+								<div class="box-title">
+									<h3>Worldwide Shipping</h3>
+								</div>
+								<div class="clearfix"></div>
+							</div><!-- /.box-header -->
+						</div><!-- /.iconbox -->
+					</div><!-- /.col-lg-3 col-md-6 -->
+					<div class="col-lg-3 col-md-6">
+						<div class="iconbox style1">
+							<div class="box-header">
+								<div class="image">
+									<img src="images/icons/order.png" alt="">
+								</div>
+								<div class="box-title">
+									<h3>Order Online Service</h3>
+								</div>
+								<div class="clearfix"></div>
+							</div><!-- /.box-header -->
+						</div><!-- /.iconbox -->
+					</div><!-- /.col-lg-3 col-md-6 -->
+					<div class="col-lg-3 col-md-6">
+						<div class="iconbox style1">
+							<div class="box-header">
+								<div class="image">
+									<img src="images/icons/payment.png" alt="">
+								</div>
+								<div class="box-title">
+									<h3>Payment</h3>
+								</div>
+								<div class="clearfix"></div>
+							</div><!-- /.box-header -->
+						</div><!-- /.iconbox -->
+					</div><!-- /.col-lg-3 col-md-6 -->
+					<div class="col-lg-3 col-md-6">
+						<div class="iconbox style1">
+							<div class="box-header">
+								<div class="image">
+									<img src="images/icons/return.png" alt="">
+								</div>
+								<div class="box-title">
+									<h3>Return 30 Days</h3>
+								</div>
+								<div class="clearfix"></div>
+							</div><!-- /.box-header -->
+						</div><!-- /.iconbox -->
+					</div><!-- /.col-lg-3 col-md-6 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section><!-- /.flat-iconbox -->
+
+		<%- include ('./footer.ejs') %>
+
+
+		<section class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<p class="copyright"> All Rights Reserved © Techno Store 2017</p>
+						<p class="btn-scroll">
+							<a href="#" title="">
+								<img src="images/icons/top.png" alt="">
+							</a>
+						</p>
+					</div><!-- /.col-md-12 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section><!-- /.footer-bottom -->
+
+	</div><!-- /.boxed -->
+
+		<!-- Javascript -->
+		<script type="text/javascript" src="javascript/jquery.min.js"></script>
+		<script type="text/javascript" src="javascript/tether.min.js"></script>
+		<script type="text/javascript" src="javascript/bootstrap.min.js"></script>
+		<script type="text/javascript" src="javascript/waypoints.min.js"></script>
+		<script type="text/javascript" src="javascript/jquery.circlechart.js"></script>
+		<script type="text/javascript" src="javascript/easing.js"></script>
+<script type="text/javascript" src="javascript/jquery.zoom.min.js"></script>
+		<script type="text/javascript" src="javascript/jquery.flexslider-min.js"></script>
+		<script type="text/javascript" src="javascript/owl.carousel.js"></script>
+		
+		<script type="text/javascript" src="javascript/jquery-ui.js"></script>
+		<script type="text/javascript" src="javascript/jquery.mCustomScrollbar.js"></script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&region=GB"></script>
+	   	<script type="text/javascript" src="javascript/gmap3.min.js"></script>
+	   	<script type="text/javascript" src="javascript/waves.min.js"></script>
+		<script type="text/javascript" src="javascript/jquery.countdown.js"></script>
+
+		<script type="text/javascript" src="javascript/main.js"></script>
+
+</body>	
+</html>
