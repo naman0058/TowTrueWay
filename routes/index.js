@@ -482,7 +482,7 @@ router.get('/search',(req,res)=>{
  
 })
 
-<<<<<<< HEAD
+
 
 
 
@@ -574,7 +574,4 @@ router.get('/view-all-product',(req,res)=>{
 
 
 
-
-=======
->>>>>>> e89b4ff3898fbfc4826c7461dcba2d136994439a
 module.exports = router;
