@@ -1,11 +1,10 @@
 var express = require('express');
 const pool = require('../routes/pool');
 var router = express.Router();
-<<<<<<< HEAD
+
 const fetch = require("node-fetch");
 
-=======
->>>>>>> e89b4ff3898fbfc4826c7461dcba2d136994439a
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
