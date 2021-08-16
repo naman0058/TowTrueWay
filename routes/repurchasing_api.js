@@ -197,9 +197,9 @@ pool.query(`select id from talent where date = CURDATE()`,(err,result)=>{
 
 
 
-router.get('/getAllTalent',(req,res)=>{
+router.post('/getAllTalent',(req,res)=>{
     pool.query(`select t.* , 
-    (select l.id from like_post l where l.postid = t.id) as isUserLike
+    (select l.id from like_post l where l.postid = t.id and l.number = '${req.body.number}') as isUserLike
     from talent t order by id desc;`,(err,result)=>{
        err ? console.log(err) : res.json(result)
    })
