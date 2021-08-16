@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
+
 <html lang="en">
 
 
@@ -48,6 +48,11 @@
 
     <!-- Default CSS -->
     <link rel="stylesheet" type="text/css" href="/wolmart/assets/css/demo2.min.css">
+
+
+
+
+	
 </head>
 
 <body class="home">
@@ -796,189 +801,3 @@
             </div>
         </header>
         <!-- End of Header -->
-=======
-<!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"><!--<![endif]-->
-	<head>
-		<!-- Basic Page Needs -->
-		<meta charset="UTF-8">
-		<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-		<title>Techno Store - Home 3</title>
-
-		<meta name="author" content="CreativeLayers">
-
-		<!-- Mobile Specific Metas -->
-	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-		<!-- Boostrap style -->
-		<link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.min.css">
-
-		<!-- Theme style -->
-		<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-
-		<!-- Reponsive -->
-		<link rel="stylesheet" type="text/css" href="stylesheets/responsive.css">
-
-		<link rel="shortcut icon" href="/images/logo.jpeg">
-
-	</head>
-	<body class="header_sticky">
-		<div class="boxed style1">
-
-			<div class="overlay"></div>
-
-			<!-- Preloader -->
-			<div class="preloader">
-				<div class="clear-loading loading-effect-2">
-					<span></span>
-				</div>
-			</div><!-- /.preloader -->
-
-			
-			
-			<section id="header" class="header">
-				<div class="header-top style3">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-4">
-								<ul class="flat-support">
-									<li>
-									<a href="#" title="">Support</a>
-								</li>
-								
-								<li>
-									<a href="#" title="">Track Your Order</a>
-								</li>
-								</ul><!-- /.flat-support -->
-							</div><!-- /.col-md-4 -->
-							<div class="col-md-4">
-								
-							</div><!-- /.col-md-4 -->
-							<div class="col-md-4">
-								<ul class="flat-unstyled">
-									<li class="account">
-										<a href="#" title="">My Account<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-										<ul class="unstyled">
-											
-										<li>
-											<a href="/myorders" title="">My Orders</a>
-										</li>
-										<li>
-											<a href="/logout" title="">Logout</a>
-										</li>
-										</ul>
-									</li>
-									
-								
-								</ul><!-- /.flat-unstyled -->
-							</div><!-- /.col-md-4 -->
-						</div><!-- /.row -->
-					</div><!-- /.container -->
-				</div><!-- /.header-top -->
-				<div class="header-middle">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-12">
-								<div id="logo" class="logo style1">
-									<a href="/" title="">
-										<img src="/images/logo.jpeg" alt="" style="width: 100px;">
-									</a>
-								</div><!-- /#logo -->
-								
-								
-								<ul class="flat-infomation style1">
-									<li class="phone">
-										<img src="images/icons/call-3.png" alt="">
-										Call Us: <a href="#" title="">(888) 1234 56789</a>
-									</li>
-								</ul><!-- /.flat-infomation -->
-							</div><!-- /.col-md-12 -->
-						</div><!-- /.row -->
-					</div><!-- /.container -->
-				</div><!-- /.header-middle -->
-				<div class="header-bottom">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-3 col-2">
-								<div id="mega-menu">
-									<div class="btn-mega"><span></span>ALL CATEGORIES</div>
-									<ul class="menu">
-
-
-<% for(i=0;i<result[0].length;i++) { %>
-
-										<li>
-											<a href="/shop?categoryid=<%=result[0][i].id%>" title="">
-												<span class="menu-img">
-													<img src="/images/<%=result[0][i].icon%>" alt="" style="width: 30px;height:30px">
-												</span3
-												<span class="menu-title">
-													<%=result[0][i].name%>
-												</span>
-											</a>
-										
-										</li>
-
-
-<% } %>
-
-									
-									</ul><!-- /.menu -->
-								</div>
-							</div><!-- /.col-md-3 col-2 -->
-							<div class="col-md-9 col-10">
-								<div class="top-search style1">
-									<form action="/search" method="get" class="form-search" accept-charset="utf-8">
-										<div class="cat-wrap cat-wrap-v1">
-											<select >
-											<option hidden value="">All Category</option>
-											<option hidden value="">Cameras</option>
-											<option hidden value="">Computer</option>
-											<option hidden value="">Laptops</option>
-										</select>
-											<span><i class="fa fa-angle-down" aria-hidden="true"></i></span>
-											<div class="all-categories">
-
-                                                <% for(i=0;i<result[0].length;i++) { %>
-												<div class="cat-list-search">
-													<div class="title">
-                                                       <a href="/shop?categoryid=<%=result[0][i].id%>"><%=result[0][i].name%></a>
-													</div>
-													
-												</div><!-- /.cat-list-search -->
-                                                <% } %>
-												
-											</div><!-- /.all-categories -->
-										</div><!-- /.cat-wrap -->
-										<div class="box-search">
-											<input type="text" name="search" placeholder="Search what you looking for ?">
-											<span class="btn-search">
-												<button type="submit" class="waves-effect"><img src="images/icons/search-2.png" alt=""></button>
-											</span>
-										
-										</div><!-- /.box-search -->
-									</form><!-- /.form-search -->
-								</div><!-- /.top-search -->
-								<span class="show-search">
-									<button></button>
-								</span><!-- /.show-search -->
-								<div class="box-cart style1">
-									
-									<div class="inner-box">
-										<a href="/mycart" title="">
-											<div class="icon-cart">
-												<img src="images/icons/add-cart.png" alt="">
-												<!-- <span>4</span> -->
-											</div>
-											
-										</a>
-										
-									</div><!-- /.inner-box -->
-								</div><!-- /.box-cart -->
-							</div><!-- /.col-md-9 col-10 -->
-						</div><!-- /.row -->
-					</div><!-- /.container -->
-				</div><!-- /.header-bottom -->
-			</section><!-- /#header -->
->>>>>>> e89b4ff3898fbfc4826c7461dcba2d136994439a

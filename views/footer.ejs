@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
       <!-- Start of Footer -->
       <footer class="footer appear-animate" data-animation-options="{
         'name': 'fadeIn'
@@ -885,7 +885,7 @@
 <script src="/wolmart/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
 <script src="/wolmart/assets/vendor/owl-carousel/owl.carousel.min.js"></script>
 <script src="/wolmart/assets/vendor/jquery.countdown/jquery.countdown.min.js"></script>
-<script src="/wolmart/assets/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+<!-- <script src="/wolmart/assets/vendor/magnific-popup/jquery.magnific-popup.min.js"></script> -->
 <script src="/wolmart/assets/vendor/floating-parallax/parallax.min.js"></script>
 
 <!-- Main Js -->
@@ -893,164 +893,51 @@
 </body>
 
 
+
+<script>
+
+    $('.addToCart').click(function(){
+                
+                // id="<%=result[1][0].id%>" price="<%=result[1][0].net_amount%>" categoryid = '<%=result[1][0].categoryid%>' vendorid = '<%=result[1][0].vendorid%>' 
+                let quantity = $('#userquantity').val()
+                let booking_id = $(this).attr('booking_id');
+                let price = $(this).attr('price');
+                let oneprice = $(this).attr('price');
+                let categoryid = $(this).attr('categoryid');
+                let subcategoryid = $(this).attr('subcategoryid');
+                let totalquantity = $(this).attr('totalquantity');
+                let categoryname = $(this).attr('categoryname')
+
+    
+                // let vendorid = $(this).attr('vendorid');
+    
+    
+                if(quantity > totalquantity){
+                    
+                    alert(`We have only ${totalquantity} stock availbale`)
+                }
+            
+                else {
+                    price = price*quantity
+            
+            $.post('/cart-handler',{booking_id,price,categoryid,oneprice,quantity,subcategoryid},data=>{
+                alert('done')
+
+            })  
+                }
+            
+                 
+                
+            })
+    
+    
+    
+    
+           
+              
+    
+    </script>
+    
+
 <!-- Mirrored from portotheme.com/html/wolmart/demo2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 30 Jun 2021 06:18:08 GMT -->
 </html>
-=======
-<footer class="style1">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="widget-ft widget-about">
-                    <div class="logo logo-ft">
-                        <a href="index.html" title="">
-                            <img src="images/logos/logo-ft.png" alt="">
-                        </a>
-                    </div><!-- /.lgo-ft -->
-                    <div class="widget-content">
-                        <div class="icon">
-                            <img src="images/icons/call.png" alt="">
-                        </div>
-                        <div class="info">
-                            <p class="questions">Got Questions ? Call us 24/7!</p>
-                            <p class="phone">Call Us: (888) 1234 56789</p>
-                            <p class="address">
-                                PO Box CT16122 Collins Street West, Victoria 8007,<br />Australia.
-                            </p>
-                        </div>
-                    </div><!-- /.widget-content -->
-                    <ul class="social-list">
-                        <li>
-                            <a href="#" title="">
-                                <i class="fa fa-facebook" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <i class="fa fa-twitter" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <i class="fa fa-instagram" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <i class="fa fa-pinterest" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <i class="fa fa-dribbble" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                <i class="fa fa-google" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                    </ul><!-- /.social-list -->
-                </div><!-- /.widget-about -->
-            </div><!-- /.col-lg-3 col-md-6 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="widget-ft widget-categories-ft">
-                    <div class="widget-title">
-                        <h3>Find By Categories</h3>
-                    </div><!-- /.widget-title -->
-                    <ul class="cat-list-ft">
-                        <% for(i=0;i<result[0].length;i++) { %>
-                        
-                        <li>
-                            <a href="/shop?categoryid=<%=result[0][i].id%>" title=""><%=result[0][i].name%></a>
-                        </li>
-                       <% } %>
-                       
-                    </ul><!-- /.cat-list-ft -->
-                </div><!-- /.widget-categries-ft -->
-            </div><!-- /.col-lg-3 col-md-6 -->
-            <div class="col-lg-4 col-md-6">
-                <div class="widget-ft widget-menu">
-                    <div class="widget-title">
-                        <h3>Customer Care</h3>
-                    </div><!-- /.widget-title -->
-                    <ul>
-                      
-                        <li>
-                            <a href="#" title="">
-                                My Orders
-                            </a>
-                        </li>
-                     
-                        <li>
-                            <a href="#" title="">
-                                Delivery Information
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                Privacy Policy
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" title="">
-                                Terms & Conditions
-                            </a>
-                        </li>
-                    </ul>
-                </div><!-- /.widget-menu -->
-            </div><!-- /.col-lg-2 col-md-6 -->
-         
-        </div><!-- /.row -->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="widget widget-apps">
-                    <div class="widget-title">
-                        <h3>Mobile Apps</h3>
-                    </div><!-- /.widget-title -->
-                    <ul class="app-list">
-                        <li class="app-store">
-                            <a href="#" title="">
-                                <div class="img">
-                                    <img src="images/icons/app-store.png" alt="">
-                                </div>
-                                <div class="text">
-                                    <h4>App Store</h4>
-                                    <p>Available now on the</p>
-                                </div>
-                            </a>
-                        </li><!-- /.app-store -->
-                        <li class="google-play">
-                            <a href="#" title="">
-                                <div class="img">
-                                    <img src="images/icons/google-play.png" alt="">
-                                </div>
-                                <div class="text">
-                                    <h4>Google Play</h4>
-                                    <p>Get in on</p>
-                                </div>
-                            </a>	
-                        </li><!-- /.google-play -->
-                    </ul><!-- /.app-list -->
-                </div><!-- /.widget-apps -->
-            </div><!-- /.col-md-12 -->
-        </div><!-- /.row -->
-    </div><!-- /.container -->
-</footer><!-- /footer -->
-
-
-
-<section class="footer-bottom style1">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <p class="copyright">All Rights Reserved © Tou True Way</p>
-                <p class="btn-scroll">
-                    <a href="#" title="">
-                        <img src="images/icons/top.png" alt="">
-                    </a>
-                </p>
-            </div><!-- /.col-md-12 -->
-        </div><!-- /.row -->
-    </div><!-- /.container -->
-</section><!-- /.footer-bottom -->
->>>>>>> e89b4ff3898fbfc4826c7461dcba2d136994439a

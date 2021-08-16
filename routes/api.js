@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var pool =  require('./pool');
+var upload = require('./multer');
 
 
 
@@ -507,5 +508,242 @@ pool.query(`delete from cart where number = '${req.body.usernumber}'`,(err,resul
 //     })
 // })
 
+
+
+
+
+
+
+
+router.get('/view-all-product',(req,res)=>{
+    console.log('que',req.query)
+    var query = `select t.* ,   
+      (select p.name from product p where p.id = t.productid) as productname,
+      (select p.price from product p where p.id = t.productid) as productprice,
+      (select p.quantity from product p where p.id = t.productid) as productquantity,
+      (select p.discount from product p where p.id = t.productid) as productdiscount,
+      (select p.image from product p where p.id = t.productid) as productimage,
+      (select p.categoryid from product p where p.id = t.productid) as productcategoryid,
+      (select p.subcategoryid from product p where p.id = t.productid) as productsubcategoryid,
+      (select p.net_amount from product p where p.id = t.productid) as productnetamount ,
+    (select c.quantity from cart c where c.booking_id = t.productid and c.usernumber = '${req.query.number}'  ) as userquantity
+  
+      from banner_manage t where t.bannerid = '${req.query.id}' `
+      pool.query(query,(err,result)=>{
+        if(err) throw err;
+       else res.json(result)
+      })
+  })
+  
+  
+  
+  
+  router.get('/view-all-text-product',(req,res)=>{
+    console.log('que',req.query)
+    var query = `select t.* ,   
+      (select p.name from product p where p.id = t.productid) as productname,
+      (select p.price from product p where p.id = t.productid) as productprice,
+      (select p.quantity from product p where p.id = t.productid) as productquantity,
+      (select p.discount from product p where p.id = t.productid) as productdiscount,
+      (select p.image from product p where p.id = t.productid) as productimage,
+      (select p.categoryid from product p where p.id = t.productid) as productcategoryid,
+      (select p.subcategoryid from product p where p.id = t.productid) as productsubcategoryid,
+      (select p.net_amount from product p where p.id = t.productid) as productnetamount ,
+    (select c.quantity from cart c where c.booking_id = t.productid and c.usernumber = '${req.query.number}'  ) as userquantity
+  
+      from promotional_text_management t where t.bannerid = '${req.query.id}' `
+      pool.query(query,(err,result)=>{
+        if(err) throw err;
+       else res.json(result)
+      })
+  })
+  
+  
+  
+  
+  router.get('/show-all-promotional-text',(req,res)=>{
+    pool.query(`select * from promotional_text order by id desc`,(err,result)=>{
+      if(err) throw err;
+      else res.json(result)
+    })
+  })
+  
+  
+  
+  
+  
+  router.get('/promotional/text/delete', (req, res) => {
+    let body = req.body
+    pool.query(`delete from promotional_text where id = ${req.query.id}`, (err, result) => {
+        if(err) {
+            res.json({
+                status:500,
+                type : 'error',
+                description:err
+            })
+        }
+        else {
+            res.json({
+                status:200,
+                type : 'success',
+                description:'successfully delete'
+            })
+        }
+    })
+  })
+  
+  
+  router.post('/promotional/text/update', (req, res) => {
+    pool.query(`update promotional_text set ? where id = ?`, [req.body, req.body.id], (err, result) => {
+        if(err) {
+            res.json({
+                status:500,
+                type : 'error',
+                description:err
+            })
+        }
+        else {
+            res.json({
+                status:200,
+                type : 'success',
+                description:'successfully update'
+            })
+  
+            
+        }
+    })
+  })
+  
+  
+  
+  
+  
+  
+  
+  router.post('/promotional/text/update_image',upload.single('image'), (req, res) => {
+    let body = req.body;
+    body['image'] = req.file.filename
+  
+  
+  pool.query(`update promotional_text set ? where id = ?`, [req.body, req.body.id], (err, result) => {
+        if(err) {
+            res.json({
+                status:500,
+                type : 'error',
+                description:err
+            })
+        }
+        else {
+            // res.json({
+            //     status:200,
+            //     type : 'success',
+            //     description:'successfully update'
+            // })
+  
+            res.redirect('/banner/new-promotional-text')
+        }
+    })
+  
+  
+  
+  
+   
+  })
+  
+  
+  
+  
+  router.get('/get-faq',(req,res)=>{
+    pool.query(`select * from faq order by id desc`,(err,result)=>{
+      if(err) throw err;
+      else res.json(result)
+    })
+  })
+  
+  
+  router.get('/get-faq/delete',(req,res)=>{
+    pool.query(`delete from faq where id = '${req.query.id}'`,(err,result)=>{
+      if(err) throw err;
+      else res.json(result)
+    })
+  })
+  
+  
+  
+  
+  router.post('/update-faq', (req, res) => {
+    pool.query(`update faq set ? where id = ?`, [req.body, req.body.id], (err, result) => {
+        if(err) {
+            res.json({
+                status:500,
+                type : 'error',
+                description:err
+            })
+        }
+        else {
+            res.json({
+                status:200,
+                type : 'success',
+                description:'successfully update'
+            })
+  
+            
+        }
+    })
+  })
+  
+  
+  
+  
+  
+  router.get('/all-website-customize',(req,res)=>{
+    pool.query(`select * from website_customize`,(err,result)=>{
+      if(err) throw err;
+      else res.json(result)
+    })
+  })
+  
+  
+  
+  
+  
+  
+  
+  
+  router.get('/get-faq/website',(req,res)=>{
+    pool.query(`delete from website_customize where id = '${req.query.id}'`,(err,result)=>{
+      if(err) throw err;
+      else res.json(result)
+    })
+  })
+  
+  
+  
+  
+  router.post('/update-website', (req, res) => {
+    pool.query(`update website_customize set ? where id = ?`, [req.body, req.body.id], (err, result) => {
+        if(err) {
+            res.json({
+                status:500,
+                type : 'error',
+                description:err
+            })
+        }
+        else {
+            res.json({
+                status:200,
+                type : 'success',
+                description:'successfully update'
+            })
+  
+            
+        }
+    })
+  })
+  
+  
+  
+  
+  
 
 module.exports = router;

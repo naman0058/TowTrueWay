@@ -1,0 +1,566 @@
+<%- include ('./Admin/storeListingHeader.ejs') %>
+
+
+        <!--**********************************
+            Content body start
+        ***********************************-->
+        <div class="content-body">
+
+            
+            <!-- row -->
+
+            <div class="container-fluid">
+              
+                <div class="row" id='insertdiv'>
+                    <div class="col-12">
+                        <h3 class="content-heading mt-3">New Banner    <span style="float: right;cursor: pointer;color:#1f5ab0;" id="show">Show All</span></h3>
+
+                    </div>
+                   
+                    <div class="col-xl-12 col-xxl-12">
+                        <div class="card">
+                            <div class="card-body">    
+                                    <div class="basic-form">
+                                        <form action="/banner/insert" method="POST" enctype="multipart/form-data" class="uploadImage">
+                                            <div class="card-body">
+                                            
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                                      <div class="form-group">
+                                                          <label>Banner Type</label>
+                          <select class="form-control" name='type' class="form-control">
+                              <option value="Front Banner">Front Banner</option>
+                              <option value="Bottom Banner">Bottom Banner</option>
+                          </select>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                                      <div class="form-group">
+                                                          <label>Banner Name</label>
+                                                          <input type="text" class="form-control" name="name" required>
+                                                        </div>
+                                                        
+                                                    </div>
+                          
+                          
+                                                    <div class="col-lg-4 col-md-4 col-sm-12">
+                                                      <div class="form-group">
+                                                          <label>Banner Image</label>
+                                                          <input type="file" class="form-control" name="image" required>
+                                                        </div>
+                                                        
+                                                    </div>
+                          
+                          
+                                                </div>
+                                            
+                                        
+                                            
+                                            </div>
+                                            <div class="card-footer text-right">
+                                              <button class="btn btn-primary mr-1" type="submit">Submit</button>
+                                            </div>
+                                            </form>
+                                    </div>
+                                    
+                                  
+                                    
+                                   
+                                    
+                             
+                                    
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                   
+                    
+                    <div class="col-xl-12 col-xxl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- <h4 class="card-title">Table Bordered</h4> -->
+                                <div class="table-responsive">
+                                   <div id="result"></div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+                            <div class="card mb-4" id='editdiv'>
+                                <h6 class="card-header"><span><button type="button" class="btn btn-primary show" id="back1" style="margin:10px">Back</button></span>Edit Data</h6>
+                                <div class="card-body">
+                                
+                                    <form>
+                                        <div class="form-row">
+                                
+                                
+                                            <div class="form-group col-md-4">
+                                                <label class="form-label">ID</label>
+                                                <input type="text" class="form-control" placeholder="Email" id="pid" readonly>
+                                                <div class="clearfix"></div>
+                                                </div>
+                                
+                            
+                                                <div class="form-group col-md-4">
+                                                  <label class="form-label">Banner Name</label>
+                                                 <input type="text" id="pname" class="form-control">
+                                               
+                                                  <div class="clearfix"></div>
+                                                  </div>
+                            
+                                        <div class="form-group col-md-4">
+                                        <label class="form-label">Type</label>
+                                        <select class="form-control" id='ptype'>
+                                            <option value="Front Banner">Front Banner</option>
+                                            <option value="Bottom Banner">Bottom Banner</option>
+                                        </select>
+                                     
+                                        <div class="clearfix"></div>
+                                        </div>
+                            
+                            
+                            
+                                     
+                                     
+                                        </div>
+                                        
+                                        
+                                        <button type="button" id='update' class="btn btn-primary">Submit</button>
+                                        </form>
+                                </div>
+                                </div>
+                                
+                                
+                                
+                                <div class="card mb-4" id="updateimagediv">
+                                <h6 class="card-header"><span><button type="button" class="btn btn-primary show" id="back2" style="margin:10px">Back</button></span> Upload Image</h6>
+                                <div class="card-body">
+                                
+                                    <form action="/banner/update_image" method="POST" enctype="multipart/form-data">
+                                        <div class="form-row">
+                                   
+                                            <div class="form-group col-md-6">
+                                                <label class="form-label">ID</label>
+                                                <input type="text" class="form-control" placeholder="Email" id="peid" name="id" readonly>
+                                                <div class="clearfix"></div>
+                                                </div>
+                                
+                                
+                                        <div class="form-group col-md-6">
+                                        <label class="form-label">Image</label>
+                                        <input type="file" class="form-control" name='image' placeholder="Password">
+                                        <div class="clearfix"></div>
+                                        </div>
+                                        </div>
+                                        
+                                        
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form>
+                                </div>
+                                </div>
+
+
+                        </div>
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                    
+                </div>
+               
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+        
+        
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+            <div class="copyright">
+                <p><a href="templatespoint.net">Templates Point</a></p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        
+        <!--**********************************
+            Right sidebar start
+        ***********************************-->
+        <div class="sidebar-right">
+            <a class="sidebar-right-trigger gradient-5-x" href="javascript:void(0)">
+                <span><i class="fa fa-cog fa-spin"></i></span>
+            </a>
+            <div class="sidebar-right-inner">
+                <div class="admin-settings">
+                    <h4>Pick your style</h4>
+                    <div>
+                        <p>Background</p>
+                        <select class="form-control" name="theme_version" id="theme_version">
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Layout</p>
+                        <select class="form-control" name="theme_layout" id="theme_layout">
+                            <option value="vertical">Vertical</option>
+                            <option value="horizontal">Horizontal</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Sidebar</p>
+                        <select class="form-control" name="sidebar_style" id="sidebar_style">
+                            <option value="full">Full</option>
+                            <option value="mini">Mini</option>
+                            <option value="compact">Compact</option>
+                            <option value="overlay">Overlay</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Sidebar position</p>
+                        <select class="form-control" name="sidebar_position" id="sidebar_position">
+                            <option value="static">Static</option>
+                            <option value="fixed">Fixed</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Header position</p>
+                        <select class="form-control" name="header_position" id="header_position">
+                            <option value="static">Static</option>
+                            <option value="fixed">Fixed</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Container</p>
+                        <select class="form-control" name="container_layout" id="container_layout">
+                            <option value="wide">Wide</option>
+                            <option value="boxed">Boxed</option>
+                            <option value="wide-boxed">Wide Boxed</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Direction</p>
+                        <select class="form-control" name="theme_direction" id="theme_direction">
+                            <option value="ltr">LTR</option>
+                            <option value="rtl">RTL</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Navigation Header</p>
+                        <div>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_1" class="filled-in chk-col-primary" id="nav_header_bg_1">
+                                <label for="nav_header_bg_1"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_2" class="filled-in chk-col-primary" id="nav_header_bg_2">
+                                <label for="nav_header_bg_2"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_3" class="filled-in chk-col-primary" id="nav_header_bg_3">
+                                <label for="nav_header_bg_3"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_4" class="filled-in chk-col-primary" id="nav_header_bg_4">
+                                <label for="nav_header_bg_4"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_5" class="filled-in chk-col-primary" id="nav_header_bg_5">
+                                <label for="nav_header_bg_5"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_6" class="filled-in chk-col-primary" id="nav_header_bg_6">
+                                <label for="nav_header_bg_6"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_7" class="filled-in chk-col-primary" id="nav_header_bg_7">
+                                <label for="nav_header_bg_7"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_8" class="filled-in chk-col-primary" id="nav_header_bg_8">
+                                <label for="nav_header_bg_8"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_9" class="filled-in chk-col-primary" id="nav_header_bg_9">
+                                <label for="nav_header_bg_9"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="navigation_header" value="color_10" class="filled-in chk-col-primary" id="nav_header_bg_10">
+                                <label for="nav_header_bg_10"></label>
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <p>Header</p>
+                        <div>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_1" class="filled-in chk-col-primary" id="header_bg_1">
+                                <label for="header_bg_1"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_2" class="filled-in chk-col-primary" id="header_bg_2">
+                                <label for="header_bg_2"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_3" class="filled-in chk-col-primary" id="header_bg_3">
+                                <label for="header_bg_3"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_4" class="filled-in chk-col-primary" id="header_bg_4">
+                                <label for="header_bg_4"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_5" class="filled-in chk-col-primary" id="header_bg_5">
+                                <label for="header_bg_5"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_6" class="filled-in chk-col-primary" id="header_bg_6">
+                                <label for="header_bg_6"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_7" class="filled-in chk-col-primary" id="header_bg_7">
+                                <label for="header_bg_7"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_8" class="filled-in chk-col-primary" id="header_bg_8">
+                                <label for="header_bg_8"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_9" class="filled-in chk-col-primary" id="header_bg_9">
+                                <label for="header_bg_9"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="header_bg" value="color_10" class="filled-in chk-col-primary" id="header_bg_10">
+                                <label for="header_bg_10"></label>
+                            </span>
+                        </div>
+                    </div>
+                    <div>
+                        <p>Sidebar</p>
+                        <div>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_1" class="filled-in chk-col-primary" id="sidebar_bg_1">
+                                <label for="sidebar_bg_1"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_2" class="filled-in chk-col-primary" id="sidebar_bg_2">
+                                <label for="sidebar_bg_2"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_3" class="filled-in chk-col-primary" id="sidebar_bg_3">
+                                <label for="sidebar_bg_3"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_4" class="filled-in chk-col-primary" id="sidebar_bg_4">
+                                <label for="sidebar_bg_4"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_5" class="filled-in chk-col-primary" id="sidebar_bg_5">
+                                <label for="sidebar_bg_5"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_6" class="filled-in chk-col-primary" id="sidebar_bg_6">
+                                <label for="sidebar_bg_6"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_7" class="filled-in chk-col-primary" id="sidebar_bg_7">
+                                <label for="sidebar_bg_7"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_8" class="filled-in chk-col-primary" id="sidebar_bg_8">
+                                <label for="sidebar_bg_8"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_9" class="filled-in chk-col-primary" id="sidebar_bg_9">
+                                <label for="sidebar_bg_9"></label>
+                            </span>
+                            <span>
+                                <input type="radio" name="sidebar_bg" value="color_10" class="filled-in chk-col-primary" id="sidebar_bg_10">
+                                <label for="sidebar_bg_10"></label>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Right sidebar end
+        ***********************************-->
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="../../assets/plugins/common/common.min.js"></script>
+    <script src="/Admin/main/./js/custom.min.js"></script>
+    <script src="/Admin/main/./js/settings.js"></script>
+    <script src="/Admin/main/./js/quixnav.js"></script>
+    <script src="/Admin/main/./js/styleSwitcher.js"></script>
+    
+    <!-- Jquery Validation -->
+    <script src="../../assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <!-- Form step -->
+    <script src="../../assets/plugins/jquery-steps/build/jquery.steps.min.js"></script>
+    <script src="../../assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <!-- Form validate init -->
+    <script src="/Admin/main/./js/plugins-init/jquery.validate-init.js"></script>
+    <!-- Dropify -->
+    <script src="../../assets/plugins/dropify/dist/js/dropify.min.js"></script>
+    <!-- Typeahead -->
+    <script src="../../assets/plugins/typeahead.js/dist/typeahead.jquery.min.js"></script>
+    <script src="../../assets/plugins/typeahead.js/dist/typeahead.bundle.min.js"></script>
+    <script src="../../assets/plugins/typeahead.js/dist/bloodhound.min.js"></script>
+    <!-- Tagsinput -->
+    <script src="../../assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js"></script>
+    <!-- Switchery -->
+    <script src="../../assets/plugins/innoto-switchery/dist/switchery.min.js"></script>
+    <!-- Select 2 -->
+    <script src="../../assets/plugins/select2/js/select2.full.min.js"></script>
+    <!-- Touchspinner -->
+    <script src="../../assets/plugins/bootstrap-touchspin/js/jquery.bootstrap-touchspin.min.js"></script>
+    <!-- Input mask -->
+    <script src="../../assets/plugins/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
+    <!-- x-editable -->
+    <script src="../../assets/plugins/moment/moment.min.js"></script>
+    <script src="../../assets/plugins/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+    <!-- Summernote -->
+    <script src="../../assets/plugins/summernote/js/summernote.min.js"></script>
+    <!-- Daterangepicker -->
+    <!-- momment js is must -->
+    <!-- <script src="../../assets/plugins/moment/moment.min.js"></script> -->
+    <script src="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- clockpicker -->
+    <script src="../../assets/plugins/moment/moment.min.js"></script>
+    <script src="../../assets/plugins/clockpicker/js/bootstrap-clockpicker.min.js"></script>
+    <!-- asColorPicker -->
+    <!-- momment js is must -->
+    <!-- <script src="../../assets/plugins/moment/moment.min.js"></script> -->
+    <script src="../../assets/plugins/jquery-asColor/jquery-asColor.min.js"></script>
+    <script src="../../assets/plugins/jquery-asGradient/jquery-asGradient.min.js"></script>
+    <script src="../../assets/plugins/jquery-asColorPicker/js/jquery-asColorPicker.min.js"></script>
+    <!-- Material color picker -->
+    <!-- momment js is must -->
+    <!-- <script src="../../assets/plugins/moment/moment.min.js"></script> -->
+    <script src="../../assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <!-- pickdate -->
+    <script src="../../assets/plugins/pickadate/picker.js"></script>
+    <script src="../../assets/plugins/pickadate/picker.time.js"></script>
+    <script src="../../assets/plugins/pickadate/picker.date.js"></script>
+
+
+
+
+    <!-- Form step init -->
+    <script src="/Admin/main/./js/plugins-init/jquery-steps-init.js"></script>
+    <!-- Dropify init -->
+    <script src="/Admin/main/./js/plugins-init/dropify-init.js"></script>
+    <!-- Typeahead init -->
+    <script src="/Admin/main/./js/plugins-init/typehead.js-init.js"></script>
+    <!-- Tagsinput init -->
+    <script src="/Admin/main/./js/plugins-init/bootstrap-tagsinput-init.js"></script>
+    <!-- Switchery init -->
+    <script src="/Admin/main/./js/plugins-init/switchery-init.js"></script>
+    <!-- Select 2 init -->
+    <script src="/Admin/main/./js/plugins-init/select2-init.js"></script>
+    <!-- Touchspinner init -->
+    <script src="/Admin/main/./js/plugins-init/bootstrap-touchpin-init.js"></script>
+    <!-- x-editable init -->
+    <script src="/Admin/main/./js/plugins-init/bootstrap-editable-init.js"></script>
+    <!-- Summernote init -->
+    <script src="/Admin/main/./js/plugins-init/summernote-init.js"></script>
+    <!-- Daterangepicker -->
+    <script src="/Admin/main/./js/plugins-init/bs-daterange-picker-init.js"></script>
+    <!-- Clockpicker init -->
+    <script src="/Admin/main/./js/plugins-init/clock-picker-init.js"></script>
+    <!-- asColorPicker init -->
+    <script src="/Admin/main/./js/plugins-init/jquery-asColorPicker.init.js"></script>
+    <!-- Material color picker init -->
+    <script src="/Admin/main/./js/plugins-init/material-date-picker-init.js"></script>
+    <!-- Pickdate -->
+    <script src="/Admin/main/./js/plugins-init/pickadate-init.js"></script>
+
+    <script src="/javascripts/banner.js"></script>
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+    <script>
+    
+      $('.uploadImage').submit(function (e) {
+        e.preventDefault();
+    
+        // var title = $('#title').val(); 
+    
+        $(this).ajaxSubmit({
+          // data: {title: title},
+          contentType: 'application/json',
+          success: function (response) {
+            alert('successfully')
+
+          }
+        });
+        return false;
+      });
+    
+    
+    
+    </script>
+
+
+
+
+
+
+
+
+
+
+<script src="/javascripts/category.js"></script>
+
+
+
+
+
+
+</body>
+
+
+</html>
