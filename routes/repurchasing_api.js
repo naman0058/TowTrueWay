@@ -219,6 +219,8 @@ router.get('/myTalent',(req,res)=>{
 
 
 router.post('/like',(req,res)=>{
+        let body = req.body
+
     pool.query(`select * from like_post where postid = '${req.body.postid}' and number = '${req.body.number}'`,(err,result)=>{
         if(err) throw err;
         else if(result[0]){
