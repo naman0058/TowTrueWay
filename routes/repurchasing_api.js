@@ -9,11 +9,8 @@ var upload = require('./multer');
 
 router.post('/photoUpload',upload.single('image'),(req,res)=>{
     let body = req.body
- 
-
     body['image'] = req.file.filename;
-   
- console.log(req.body)
+  console.log(req.body)
    pool.query(`insert into photo_wallet_images set ?`,body,(err,result)=>{
        err ? console.log(err) : res.json({msg : 'success'})
    })
@@ -178,9 +175,7 @@ router.post('/talentHuntInsert',upload.single('image'),(req,res)=>{
 
 pool.query(`select id from talent where date = CURDATE()`,(err,result)=>{
     if(err) throw err;
-    else if(result[0]){
-         res.json({msg:'limit exceed'})
-    }
+  
     else{
         pool.query(`insert into talent set ?`,body,(err,result)=>{
             err ? console.log(err) : res.json({msg : 'success'})

@@ -14,7 +14,7 @@ router.get('/',(req,res)=>{
         var query4 = `select sum(amount) as talent_hunt_earning from transaction where type = 'talent_hunt' and date = CURDATE();`
         var query5 = `select id from talent_hunt_return where date = CURDATE();`
         var query6 = `select date from talent_hunt_return order by id desc limit 1;`
-        var query7 = `select distinct(t.date) as recent_dates , (select tr.date from talent_hunt_return tr where tr.date = recent_dates) as sent_date t from talent t order by date desc limit 10;`
+        var query7 = `select distinct(t.date) as recent_dates  from talent t order by date desc limit 10;`
         pool.query(query+query1+query2+query3+query4+query5+query6+query7,(err,result)=>{
             if(err) throw err;
              else res.render('talent-hunt',{result})
