@@ -219,7 +219,7 @@ router.get('/myTalent',(req,res)=>{
 
 
 router.post('/like',(req,res)=>{
-    let body = req.body
+   
 
         let body = req.body
 
