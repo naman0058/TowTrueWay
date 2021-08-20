@@ -3,8 +3,8 @@ var router = express.Router();
 var pool =  require('./pool');
 
 
-const SendOtp = require('sendotp');
-const sendOtp = new SendOtp(`300563AFuzfOZn9ESb5db12f8f`);
+// const SendOtp = require('sendotp');
+// const sendOtp = new SendOtp(`300563AFuzfOZn9ESb5db12f8f`);
 
 
 
@@ -22,20 +22,20 @@ router.post('/verification',(req,res)=>{
     body['number'] = 91+req.body.number
     //   console.log(req.body)
 
-pool.query(`select * from user where number = '${req.body.number}'`,(err,result)=>{
+pool.query(`select * from users where number = '${req.body.number}'`,(err,result)=>{
   if(err) throw err;
   else if(result[0]) {
     req.session.numberverify = 91+req.body.number
     var otp =   Math.floor(100000 + Math.random() * 9000);
     req.session.reqotp = otp;
 
-
-    sendOtp.send(req.body.number, "DELOTM", otp,(err,result)=>{
-        if(err) throw err;
-        else{
-          res.render('otp',{msg : '' , anothermsg:''})
-   }
-       })
+    res.render('otp',{msg : otp , anothermsg:''})
+  //   sendOtp.send(req.body.number, "DELOTM", otp,(err,result)=>{
+  //       if(err) throw err;
+  //       else{
+  //         res.render('otp',{msg : '' , anothermsg:''})
+  //  }
+  //      })
 
     
     
@@ -64,12 +64,12 @@ router.post('/add-user',(req,res)=>{
 
   
 
-  sendOtp.send(req.body.number, "DELOTM", otp,(err,result)=>{
-    if(err) throw err;
-    else{
-      res.render('otp',{msg : '' , anothermsg:''})
-}
-   })
+//   sendOtp.send(req.body.number, "DELOTM", otp,(err,result)=>{
+//     if(err) throw err;
+//     else{
+//       res.render('otp',{msg : '' , anothermsg:''})
+// }
+//    })
  
   res.render('otp',{msg : '' , anothermsg:''})
 
@@ -86,7 +86,7 @@ router.post('/new-user',(req,res)=>{
 
 
 
-pool.query(`select * from user where number = '${req.session.numberverify}'`,(err,result)=>{
+pool.query(`select * from users where number = '${req.session.numberverify}'`,(err,result)=>{
   if(err) throw err;
   else if(result[0]) {
 
@@ -109,7 +109,7 @@ pool.query(`select * from user where number = '${req.session.numberverify}'`,(er
   }
   else {
 
-    pool.query(`insert into user set ?`,body,(err,result)=>{
+    pool.query(`insert into users set ?`,body,(err,result)=>{
       if(err) throw err;
       else {
        

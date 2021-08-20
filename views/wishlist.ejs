@@ -2,7 +2,7 @@
 <html lang="en">
 
 
-<!-- Mirrored from portotheme.com/html/wolmart/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 30 Jun 2021 06:20:00 GMT -->
+<!-- Mirrored from portotheme.com/html/wolmart/wishlist.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 30 Jun 2021 06:20:00 GMT -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
@@ -21,12 +21,12 @@
         WebFontConfig = {
             google: { families: ['Poppins:400,500,600,700'] }
         };
-        ( function ( d ) {
-            var wf = d.createElement( 'script' ), s = d.scripts[0];
+        (function (d) {
+            var wf = d.createElement('script'), s = d.scripts[0];
             wf.src = '/wolmart/assets/js/webfont.js';
             wf.async = true;
-            s.parentNode.insertBefore( wf, s );
-        } )( document );
+            s.parentNode.insertBefore(wf, s);
+        })(document);
     </script>
 
     <link rel="preload" href="/wolmart/assets/vendor/fontawesome-free/webfonts/fa-regular-400.woff2" as="font" type="font/woff2"
@@ -39,9 +39,11 @@
 
     <!-- Vendor CSS -->
     <link rel="stylesheet" type="text/css" href="/wolmart/assets/vendor/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/wolmart/assets/vendor/magnific-popup/magnific-popup.min.css">
 
     <!-- Plugin CSS -->
     <link rel="stylesheet" type="text/css" href="/wolmart/assets/vendor/magnific-popup/magnific-popup.min.css">
+    <link rel="stylesheet" type="text/css" href="/wolmart/assets/vendor/owl-carousel/owl.carousel.min.css">
 
     <!-- Default CSS -->
     <link rel="stylesheet" type="text/css" href="/wolmart/assets/css/style.min.css">
@@ -50,7 +52,7 @@
 <body>
     <div class="page-wrapper">
         <!-- Start of Header -->
-        <header class="header header-border">
+        <header class="header">
             <div class="header-top">
                 <div class="container">
                     <div class="header-left">
@@ -803,14 +805,21 @@
 
 
         <!-- Start of Main -->
-        <main class="main cart">
-            <!-- Start of Breadcrumb -->
-            <nav class="breadcrumb-nav">
+        <main class="main wishlist-page">
+            <!-- Start of Page Header -->
+            <div class="page-header">
                 <div class="container">
-                    <ul class="breadcrumb shop-breadcrumb bb-no">
-                        <li class="active"><a href="cart.html">Shopping Cart</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
-                        <li><a href="order.html">Order Complete</a></li>
+                    <h1 class="page-title mb-0">Wishlist</h1>
+                </div>
+            </div>
+            <!-- End of Page Header -->
+
+            <!-- Start of Breadcrumb -->
+            <nav class="breadcrumb-nav mb-10">
+                <div class="container">
+                    <ul class="breadcrumb">
+                        <li><a href="demo1.html">Home</a></li>
+                        <li>Wishlist</li>
                     </ul>
                 </div>
             </nav>
@@ -819,102 +828,57 @@
             <!-- Start of PageContent -->
             <div class="page-content">
                 <div class="container">
-                    <div class="row gutter-lg mb-10">
-                        <div class="col-lg-8 pr-lg-4 mb-6">
-                            <table class="shop-table cart-table">
-                                <thead>
-                                    <tr>
-                                        <th class="product-name"><span>Product</span></th>
-                                        <th></th>
-                                        <th class="product-price"><span>Price</span></th>
-                                        <th class="product-quantity"><span>Quantity</span></th>
-                                        <th class="product-subtotal"><span>Subtotal</span></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                    <h3 class="wishlist-title">My wishlist</h3>
+                    <table class="shop-table wishlist-table">
+                        <thead>
+                            <tr>
+                                <th class="product-name"><span>Product</span></th>
+                                <th></th>
+                                <th class="product-price"><span>Price</span></th>
+                               
+                                <th class="wishlist-action">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                                    <% for(i=0;i<result[1].length;i++) { %>
-                                    <tr>
-                                        <td class="product-thumbnail">
-                                            <div class="p-relative">
-                                                <a href="/product?id=<%=result[1][i].booking_id%>">
-                                                    <figure>
-                                                        <img src="/images/<%=result[1][i].bookingimage%>" alt="product"
-                                                            width="300" height="338">
-                                                    </figure>
-                                                </a>
-                                             <button type="submit" class="btn btn-close">
-                                                <a href="/delete?id=<%=result[1][i].id%>"> 
-                                                <i class="fas fa-times"></i>
-                                            </a>
-                                            </button>
-                                            </div>
-                                        </td>
-                                        <td class="product-name">
-                                            <a href="/product?id=<%=result[1][i].booking_id%>">
-                                                <%=result[1][i].bookingname%>
-                                            </a>
-                                        </td>
-                                        <td class="product-price"><span class="amount">Rs. <%=result[1][i].oneprice%></span></td>
-                                        <td class="product-quantity">
-                                            <div class="input-group">
-                                                <input class=" form-control" type="text" value="<%=result[1][i].quantity%>" readonly>
-                                                <button class="quantity-plus w-icon-plus add" categoryid="<%=result[1][i].categoryid%>" booking_id = "<%=result[1][i].booking_id%>" number="<%=result[1][i].number%>" availablequantity="<%=result[1][i].availablequantity%>"  value="<%=result[1][i].quantity%>" price="<%=result[1][i].oneprice%>"></button>
-                                                <button class="quantity-minus w-icon-minus minus" categoryid="<%=result[1][i].categoryid%>" availablequantity="<%=result[1][i].availablequantity%>" booking_id = "<%=result[1][i].booking_id%>" number="<%=result[1][i].number%>" value="<%=result[1][i].quantity%>" price="<%=result[1][i].oneprice%>"></button>
-                                            </div>
-                                        </td>
-                                        <td class="product-subtotal">
-                                            <span class="amount">Rs. <%=result[1][i].price%></span>
-                                        </td>
-                                    </tr>
-                                    <% } %>
-                                   
-                                </tbody>
-                            </table>
 
-                            <div class="cart-action mb-6">
-                                <a href="/" class="btn btn-dark btn-rounded btn-icon-left btn-shopping mr-auto"><i class="w-icon-long-arrow-left"></i>Continue Shopping</a>
-                                <!-- <button type="submit" class="btn btn-rounded btn-default btn-clear" name="clear_cart" value="Clear Cart">Clear Cart</button>  -->
-                                <!-- <button type="submit" class="btn btn-rounded btn-update disabled" name="update_cart" value="Update Cart">Update Cart</button> -->
-                            </div>
+                            <% for(i=0;i<result[1].length;i++) { %>
 
-                            <form class="coupon">
-                                <h5 class="title coupon-title font-weight-bold text-uppercase">Coupon Discount</h5>
-                                <input type="text" class="form-control mb-4" placeholder="Enter coupon code here..." required />
-                                <button class="btn btn-dark btn-outline btn-rounded">Apply Coupon</button>
-                            </form>
-                        </div>
-                        <div class="col-lg-4 sticky-sidebar-wrapper">
-                            <div class="sticky-sidebar">
-                                <div class="cart-summary mb-4">
-                                    <h3 class="cart-title text-uppercase">Cart Totals</h3>
-                                    <div class="cart-subtotal d-flex align-items-center justify-content-between">
-                                        <label class="ls-25">Subtotal</label>
-                                        <span>Rs. <%=result[2][0].totalprice%></span>
+                            <tr>
+                                <td class="product-thumbnail">
+                                    <div class="p-relative">
+                                        <a href="/product?id=<%=result[1][i].booking_id%>">
+                                            <figure>
+                                                <img src="/images/<%=result[1][i].productimage%>" alt="product" width="300"
+                                                    height="338">
+                                            </figure>
+                                        </a>
+                                        <button type="submit" class="btn btn-close"><i
+                                                class="fas fa-times"></i></button>
                                     </div>
-
-                                    <div class="cart-subtotal d-flex align-items-center justify-content-between">
-                                        <label class="ls-25">Shipping Charges</label>
-                                        <span>Rs. <%=shipping_charges%></span>
-                                    </div>
-
-                                    <hr class="divider">
-
-                                   
-                                  
-
-                                    <hr class="divider mb-6">
-                                    <div class="order-total d-flex justify-content-between align-items-center">
-                                        <label>Total</label>
-                                        <span class="ls-50">Rs. <%=result[2][0].totalprice + shipping_charges%></span>
-                                    </div>
-                                    <a href="/checkout"
-                                        class="btn btn-block btn-dark btn-icon-right btn-rounded  btn-checkout">
-                                        Proceed to checkout<i class="w-icon-long-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                </td>
+                                <td class="product-name">
+                                    <a href="/product?id=<%=result[1][i].booking_id%>">
+                                        <%=result[1][i].productname%>
+                                    </a>
+                                </td>
+                                <td class="product-price">
+                                    <ins class="new-price">Rs. <%=result[1][i].productprice%></ins>
+                                </td>
+                               
+                                <td class="wishlist-action">
+                                    <div class="d-lg-flex">
+                                        <a href="/product?id=<%=result[1][i].booking_id%>"
+                                            class="btn  btn-outline btn-default btn-rounded btn-sm mb-2 mb-lg-0">Quick
+                                            View</a>
+                                       </div>
+                                </td>
+                            </tr>
+                           
+                            <% } %>
+                        </tbody>
+                    </table>
+                   
                 </div>
             </div>
             <!-- End of PageContent -->
@@ -932,17 +896,20 @@
                                     <i class="w-icon-envelop3"></i>
                                 </div>
                                 <div class="icon-box-content">
-                                    <h4 class="icon-box-title text-white text-uppercase mb-0">Subscribe To  Our Newsletter</h4>
-                                    <p class="text-white">Get all the latest information on Events, Sales and Offers.</p>
+                                    <h4 class="icon-box-title text-white text-uppercase mb-0">Subscribe To Our
+                                        Newsletter</h4>
+                                    <p class="text-white">Get all the latest information on Events, Sales and Offers.
+                                    </p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-7 col-lg-6 col-md-9 mt-4 mt-lg-0 ">
-                            <form action="#" method="get" class="input-wrapper input-wrapper-inline input-wrapper-rounded">
+                            <form action="#" method="get"
+                                class="input-wrapper input-wrapper-inline input-wrapper-rounded">
                                 <input type="email" class="form-control mr-2 bg-white" name="email" id="email"
                                     placeholder="Your E-mail Address" />
-                            <button class="btn btn-dark btn-rounded" type="submit">Subscribe<i
-                                    class="w-icon-long-arrow-right"></i></button>
+                                <button class="btn btn-dark btn-rounded" type="submit">Subscribe<i
+                                        class="w-icon-long-arrow-right"></i></button>
                             </form>
                         </div>
                     </div>
@@ -1142,8 +1109,7 @@
                         </div>
                         <figure class="product-media">
                             <a href="#">
-                                <img src="/wolmart/assets/images/cart/product-1.jpg" alt="product" height="84"
-                                    width="94" />
+                                <img src="/wolmart/assets/images/cart/product-1.jpg" alt="product" height="84" width="94" />
                             </a>
                         </figure>
                         <button class="btn btn-link btn-close">
@@ -1164,8 +1130,7 @@
                         </div>
                         <figure class="product-media">
                             <a href="#">
-                                <img src="/wolmart/assets/images/cart/product-2.jpg" alt="product" width="84"
-                                    height="94" />
+                                <img src="/wolmart/assets/images/cart/product-2.jpg" alt="product" width="84" height="94" />
                             </a>
                         </figure>
                         <button class="btn btn-link btn-close">
@@ -1186,15 +1151,15 @@
             </div>
             <!-- End of Dropdown Box -->
         </div>
-        
+
         <div class="header-search hs-toggle dir-up">
             <a href="#" class="search-toggle sticky-link">
                 <i class="w-icon-search"></i>
                 <p>Search</p>
             </a>
             <form action="#" class="input-wrapper">
-                <input type="text" class="form-control" name="search" autocomplete="off"
-                    placeholder="Search" required />
+                <input type="text" class="form-control" name="search" autocomplete="off" placeholder="Search"
+                    required />
                 <button class="btn btn-search" type="submit">
                     <i class="w-icon-search"></i>
                 </button>
@@ -1202,7 +1167,7 @@
         </div>
     </div>
     <!-- End of Sticky Footer -->
-    
+
     <!-- Start of Scroll Top -->
     <a id="scroll-top" href="#top" title="Top" role="button" class="scroll-top"><i class="fas fa-chevron-up"></i></a>
     <!-- End of Scroll Top -->
@@ -1217,8 +1182,8 @@
 
         <div class="mobile-menu-container scrollable">
             <form action="#" method="get" class="input-wrapper">
-                <input type="text" class="form-control" name="search" autocomplete="off"
-                    placeholder="Search" required />
+                <input type="text" class="form-control" name="search" autocomplete="off" placeholder="Search"
+                    required />
                 <button class="btn btn-search" type="submit">
                     <i class="w-icon-search"></i>
                 </button>
@@ -1247,8 +1212,10 @@
                                         <li><a href="shop-banner-sidebar.html">Banner With Sidebar</a></li>
                                         <li><a href="shop-boxed-banner.html">Boxed Banner</a></li>
                                         <li><a href="shop-fullwidth-banner.html">Full Width Banner</a></li>
-                                        <li><a href="shop-horizontal-filter.html">Horizontal Filter<span class="tip tip-hot">Hot</span></a></li>
-                                        <li><a href="shop-off-canvas.html">Off Canvas Sidebar<span class="tip tip-new">New</span></a></li>
+                                        <li><a href="shop-horizontal-filter.html">Horizontal Filter<span
+                                                    class="tip tip-hot">Hot</span></a></li>
+                                        <li><a href="shop-off-canvas.html">Off Canvas Sidebar<span
+                                                    class="tip tip-new">New</span></a></li>
                                         <li><a href="shop-infinite-scroll.html">Infinite Ajax Scroll</a></li>
                                         <li><a href="shop-right-sidebar.html">Right Sidebar</a></li>
                                         <li><a href="shop-both-sidebar.html">Both Sidebar</a></li>
@@ -1278,13 +1245,15 @@
                                         <li><a href="product-extended.html">Extended Info</a>
                                         </li>
                                         <li><a href="product-without-sidebar.html">Without Sidebar</a></li>
-                                        <li><a href="product-video.html">360<sup>o</sup> &amp; Video<span class="tip tip-new">New</span></a></li>
+                                        <li><a href="product-video.html">360<sup>o</sup> &amp; Video<span
+                                                    class="tip tip-new">New</span></a></li>
                                     </ul>
                                 </li>
                                 <li>
                                     <a href="#">Product Layouts</a>
                                     <ul>
-                                        <li><a href="product-default.html">Default<span class="tip tip-hot">Hot</span></a></li>
+                                        <li><a href="product-default.html">Default<span
+                                                    class="tip tip-hot">Hot</span></a></li>
                                         <li><a href="product-vertical.html">Vertical Thumbs</a></li>
                                         <li><a href="product-grid.html">Grid Images</a></li>
                                         <li><a href="product-masonry.html">Masonry</a></li>
@@ -1357,7 +1326,7 @@
                         <li>
                             <a href="about-us.html">Pages</a>
                             <ul>
-                                
+
                                 <li><a href="about-us.html">About Us</a></li>
                                 <li><a href="become-a-vendor.html">Become A Vendor</a></li>
                                 <li><a href="contact-us.html">Contact Us</a></li>
@@ -1656,7 +1625,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="shop-banner-sidebar.html" class="font-weight-bold text-primary text-uppercase ls-25">
+                            <a href="shop-banner-sidebar.html"
+                                class="font-weight-bold text-primary text-uppercase ls-25">
                                 View All Categories<i class="w-icon-angle-right"></i>
                             </a>
                         </li>
@@ -1667,67 +1637,166 @@
     </div>
     <!-- End of Mobile Menu -->
 
+    <!-- Start of Quick View -->
+    <div class="product product-single product-popup">
+        <div class="row gutter-lg">
+            <div class="col-md-6 mb-4 mb-md-0">
+                <div class="product-gallery product-gallery-sticky mb-0">
+                    <div class="product-single-carousel owl-carousel owl-theme owl-nav-inner row cols-1 gutter-no">
+                        <figure class="product-image">
+                            <img src="/wolmart/assets/images/products/popup/1-440x494.jpg"
+                                data-zoom-image="/wolmart/assets/images/products/popup/1-800x900.jpg"
+                                alt="Water Boil Black Utensil" width="800" height="900">
+                        </figure>
+                        <figure class="product-image">
+                            <img src="/wolmart/assets/images/products/popup/2-440x494.jpg"
+                                data-zoom-image="/wolmart/assets/images/products/popup/2-800x900.jpg"
+                                alt="Water Boil Black Utensil" width="800" height="900">
+                        </figure>
+                        <figure class="product-image">
+                            <img src="/wolmart/assets/images/products/popup/3-440x494.jpg"
+                                data-zoom-image="/wolmart/assets/images/products/popup/3-800x900.jpg"
+                                alt="Water Boil Black Utensil" width="800" height="900">
+                        </figure>
+                        <figure class="product-image">
+                            <img src="/wolmart/assets/images/products/popup/4-440x494.jpg"
+                                data-zoom-image="/wolmart/assets/images/products/popup/4-800x900.jpg"
+                                alt="Water Boil Black Utensil" width="800" height="900">
+                        </figure>
+                    </div>
+                    <div class="product-thumbs-wrap">
+                        <div class="product-thumbs">
+                            <div class="product-thumb active">
+                                <img src="/wolmart/assets/images/products/popup/1-103x116.jpg" alt="Product Thumb" width="103"
+                                    height="116">
+                            </div>
+                            <div class="product-thumb">
+                                <img src="/wolmart/assets/images/products/popup/2-103x116.jpg" alt="Product Thumb" width="103"
+                                    height="116">
+                            </div>
+                            <div class="product-thumb">
+                                <img src="/wolmart/assets/images/products/popup/3-103x116.jpg" alt="Product Thumb" width="103"
+                                    height="116">
+                            </div>
+                            <div class="product-thumb">
+                                <img src="/wolmart/assets/images/products/popup/4-103x116.jpg" alt="Product Thumb" width="103"
+                                    height="116">
+                            </div>
+                        </div>
+                        <button class="thumb-up disabled"><i class="w-icon-angle-left"></i></button>
+                        <button class="thumb-down disabled"><i class="w-icon-angle-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 overflow-hidden p-relative">
+                <div class="product-details scrollable pl-0">
+                    <h2 class="product-title">Electronics Black Wrist Watch</h2>
+                    <div class="product-bm-wrapper">
+                        <figure class="brand">
+                            <img src="/wolmart/assets/images/products/brand/brand-1.jpg" alt="Brand" width="102" height="48" />
+                        </figure>
+                        <div class="product-meta">
+                            <div class="product-categories">
+                                Category:
+                                <span class="product-category"><a href="#">Electronics</a></span>
+                            </div>
+                            <div class="product-sku">
+                                SKU: <span>MS46891340</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="product-divider">
+
+                    <div class="product-price">$40.00</div>
+
+                    <div class="ratings-container">
+                        <div class="ratings-full">
+                            <span class="ratings" style="width: 80%;"></span>
+                            <span class="tooltiptext tooltip-top"></span>
+                        </div>
+                        <a href="#" class="rating-reviews">(3 Reviews)</a>
+                    </div>
+
+                    <div class="product-short-desc">
+                        <ul class="list-type-check list-style-none">
+                            <li>Ultrices eros in cursus turpis massa cursus mattis.</li>
+                            <li>Volutpat ac tincidunt vitae semper quis lectus.</li>
+                            <li>Aliquam id diam maecenas ultricies mi eget mauris.</li>
+                        </ul>
+                    </div>
+
+                    <hr class="product-divider">
+
+                    <div class="product-form product-variation-form product-color-swatch product-variations">
+                        <label>Color:</label>
+                        <div class="d-flex align-items-center">
+                            <a href="#" class="color" style="background-color: #ffcc01"></a>
+                            <a href="#" class="color" style="background-color: #ca6d00;"></a>
+                            <a href="#" class="color" style="background-color: #1c93cb;"></a>
+                            <a href="#" class="color" style="background-color: #ccc;"></a>
+                            <a href="#" class="color" style="background-color: #333;"></a>
+                        </div>
+                    </div>
+                    <div class="product-form product-variation-form product-size-swatch product-variations">
+                        <label>Size:</label>
+                        <div class="flex-wrap d-flex align-items-center">
+                            <a href="#" class="size">Small</a>
+                            <a href="#" class="size">Medium</a>
+                            <a href="#" class="size">Large</a>
+                            <a href="#" class="size">Extra Large</a>
+                        </div>
+                    </div>
+
+                    <div class="product-variation-price">
+                        <span></span>
+                    </div>
+
+                    <div class="product-form">
+                        <div class="product-qty-form">
+                            <div class="input-group">
+                                <input class="quantity form-control" type="number" min="1" max="10000000">
+                                <button class="quantity-plus w-icon-plus"></button>
+                                <button class="quantity-minus w-icon-minus"></button>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-cart">
+                            <i class="w-icon-cart"></i>
+                            <span>Add to Cart</span>
+                        </button>
+                    </div>
+
+                    <div class="social-links-wrapper">
+                        <div class="social-links">
+                            <div class="social-icons social-no-color border-thin">
+                                <a href="#" class="social-icon social-facebook w-icon-facebook"></a>
+                                <a href="#" class="social-icon social-twitter w-icon-twitter"></a>
+                                <a href="#" class="social-icon social-instagram w-icon-instagram"></a>
+                                <a href="#" class="social-icon social-youtube w-icon-youtube"></a>
+                                <a href="#" class="social-icon social-pinterest w-icon-pinterest"></a>
+                            </div>
+                        </div>
+                        <span class="divider d-xs-show"></span>
+                        <div class="product-link-wrapper d-flex">
+                            <a href="#" class="btn-product-icon btn-wishlist w-icon-heart"><span></span></a>
+                            <a href="#"
+                                class="btn-product-icon btn-compare btn-icon-left w-icon-compare"><span></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Quick view -->
+
     <!-- Plugin JS File -->
     <script src="/wolmart/assets/vendor/jquery/jquery.min.js"></script>
-    <script src="/wolmart/assets/vendor/sticky/sticky.min.js"></script>
+    <script src="/wolmart/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="/wolmart/assets/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="/wolmart/assets/vendor/owl-carousel/owl.carousel.min.js"></script>
     <script src="/wolmart/assets/js/main.min.js"></script>
 </body>
 
-<script>
-    $('.add').click(function(){
- let value = $(this).attr('value')
- let price = $(this).attr('price')
- let booking_id = $(this).attr('booking_id');
- let usernumber = $(this).attr('number');
- let categoryid = $(this).attr('categoryid');
- let availablequantity = $(this).attr('availablequantity')
 
-
-
-
- let quantity = (+value)+1;
-
-
- if(quantity>availablequantity){
-  alert(`We have only ${availablequantity} stocks available`)
- }
- else{
-    $.post('/cart-handler',{quantity,price,booking_id,usernumber,categoryid},data=>{
-            window.location.href = '/mycart'
-      })
- }
-
- 
-
-     
-    })
-
-
-
-
-
-    $('.minus').click(function(){
- let value = $(this).attr('value')
- let price = $(this).attr('price')
- let booking_id = $(this).attr('booking_id');
- let usernumber = $(this).attr('number');
- let categoryid = $(this).attr('categoryid');
-
-
- let quantity = (+value)-1;
-
- 
-
-
-$.post('/cart-handler',{quantity,price,booking_id,usernumber,categoryid},data=>{
-            window.location.href = '/mycart'
-      })
-
-     
-    })
-
-
-</script>
-<!-- Mirrored from portotheme.com/html/wolmart/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 30 Jun 2021 06:20:00 GMT -->
+<!-- Mirrored from portotheme.com/html/wolmart/wishlist.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 30 Jun 2021 06:20:00 GMT -->
 </html>

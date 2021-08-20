@@ -288,76 +288,77 @@ router.get('/product',(req,res)=>{
 
 
 
-  router.get('/mycart',(req,res)=>{
+ 
+router.get('/mycart',(req,res)=>{
 
-    console.log(req.session.ipaddress)
-   
-     if(req.session.usernumber){
-       var query = `select * from category order by id desc;`
-       var query1 = `select c.* , 
-       (select p.name from products p where p.id = c.booking_id) as bookingname,
-       (select p.image from products p where p.id = c.booking_id) as bookingimage,
-       (select p.quantity from products p where p.id = c.booking_id) as availablequantity
-       
-   
-       
-        from cart c where c.usernumber = '${req.session.usernumber}';`
-      var query2 = `select sum(price) as totalprice from cart where usernumber = '${req.session.usernumber}';`              
-   
-   
-       pool.query(query+query1+query2,(err,result)=>{
-         if(err) throw err;
-         else{
-   
-   if(result[2][0].totalprice > 500) {
-     res.render('cart', { title: 'Express',login:true,result , shipping_charges : 0 });
-   
+  console.log(req.session.ipaddress)
+ 
+   if(req.session.usernumber){
+     var query = `select * from category order by id desc;`
+     var query1 = `select c.* , 
+     (select p.name from products p where p.id = c.booking_id) as bookingname,
+     (select p.image from products p where p.id = c.booking_id) as bookingimage,
+     (select p.quantity from products p where p.id = c.booking_id) as availablequantity
+     
+ 
+     
+      from cart c where c.usernumber = '${req.session.usernumber}';`
+    var query2 = `select sum(price) as totalprice from cart where usernumber = '${req.session.usernumber}';`              
+ 
+ 
+     pool.query(query+query1+query2,(err,result)=>{
+       if(err) throw err;
+       else{
+ 
+ if(result[2][0].totalprice > 500) {
+   res.render('cart', { title: 'Express',login:true,result , shipping_charges : 0 });
+ 
+ }
+ else {
+   res.render('cart', { title: 'Express',login:true,result , shipping_charges : 500 });
+ 
+ }
+ 
+    
+       }
+    
+    
+        })
+ 
    }
-   else {
-     res.render('cart', { title: 'Express',login:true,result , shipping_charges : 500 });
-   
+   else{
+     var query = `select * from category order by id desc;`
+     var query1 = `select c.* , 
+     (select p.name from products p where p.id = c.booking_id) as bookingname,
+     (select p.image from products p where p.id = c.booking_id) as bookingimage,
+     (select p.quantity from products p where p.id = c.booking_id) as availablequantity
+ 
+     
+      from cart c where c.usernumber = '${req.session.ipaddress}';`
+    var query2 = `select sum(price) as totalprice from cart where usernumber = '${req.session.ipaddress}';`              
+ 
+     pool.query(query+query1+query2,(err,result)=>{
+       if(err) throw err;
+       else{
+      
+ 
+         if(result[2][0].totalprice > 500) {
+           res.render('cart', { title: 'Express',login:false,result , shipping_charges : 0 });
+         
+         }
+         else {
+           res.render('cart', { title: 'Express',login:false,result , shipping_charges : 500 });
+         
+         }
+         
+    
+       }
+    
+    
+        })
+ 
    }
-   
-      
-         }
-      
-      
-          })
-   
-     }
-     else{
-       var query = `select * from category order by id desc;`
-       var query1 = `select c.* , 
-       (select p.name from products p where p.id = c.booking_id) as bookingname,
-       (select p.image from products p where p.id = c.booking_id) as bookingimage,
-       (select p.quantity from products p where p.id = c.booking_id) as availablequantity
-   
-       
-        from cart c where c.usernumber = '${req.session.ipaddress}';`
-      var query2 = `select sum(price) as totalprice from cart where usernumber = '${req.session.ipaddress}';`              
-   
-       pool.query(query+query1+query2,(err,result)=>{
-         if(err) throw err;
-         else{
-        
-   
-           if(result[2][0].totalprice > 500) {
-             res.render('cart', { title: 'Express',login:false,result , shipping_charges : 0 });
-           
-           }
-           else {
-             res.render('cart', { title: 'Express',login:false,result , shipping_charges : 500 });
-           
-           }
-           
-      
-         }
-      
-      
-          })
-   
-     }
-   })
+ })
    
 
 
@@ -540,21 +541,24 @@ router.get('/delete',(req,res)=>{
 
 
 router.get('/checkout',(req,res)=>{
+
+console.log('hd',req.session.usernumber)
+
   if(req.session.usernumber){
 
 
     pool.query(`select email from users where number = '${req.session.usernumber}'`,(err,result)=>{
       if(err) throw err;
-      else if(result[0].email==null || result[0].email == ''){
-        req.session.newuser = '1';
-        var query = `select * from category order by id desc;`
-        var query1 = `select * from users where number = '${req.session.usernumber}';`
+      // else if(result[0].email==null || result[0].email == ''){
+      //   req.session.newuser = '1';
+      //   var query = `select * from category order by id desc;`
+      //   var query1 = `select * from users where number = '${req.session.usernumber}';`
     
-        pool.query(query+query1,(err,result)=>{
-          if(err) throw err;
-          else res.render('myaccount',{result:result,login:true,msg:'Please Update Your Profile To Checkout'})
-        })
-      }
+      //   pool.query(query+query1,(err,result)=>{
+      //     if(err) throw err;
+      //     else res.render('myaccount',{result:result,login:true,msg:'Please Update Your Profile To Checkout'})
+      //   })
+      // }
       else {
         var query = `select * from category order by id desc;`
    
@@ -595,8 +599,7 @@ router.get('/checkout',(req,res)=>{
   }
   else{
     req.session.page = '1'
-    // res.redirect('/login')
-    res.render('checkout')
+    res.redirect('/login')
   }
 })
 
@@ -613,108 +616,171 @@ router.post('/order-now',(req,res)=>{
 // console.log('body',req.body)
   let cartData = req.body
 
+  console.log('CardData',cartData)
+  if(req.body.payment_mode == 'online') {
 
-//  console.log('CardData',cartData)
-
-   body['status'] = 'pending'
-    
-
-  var today = new Date();
-var dd = today.getDate();
-
-var mm = today.getMonth()+1; 
-var yyyy = today.getFullYear();
-if(dd<10) 
-{
-  dd='0'+dd;
-} 
-
-if(mm<10) 
-{
-  mm='0'+mm;
-} 
-today = yyyy+'-'+mm+'-'+dd;
-
-
-body['date'] = today
-
-
-
-  var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var result = '';
-  for ( var i = 0; i < 12; i++ ) {
-      result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
-  }
- orderid = result;
-
-
-    body['address'] = req.body.address1 + ',' + req.body.address2 + ',' + req.body.city + ',' + req.body.state + ',' + req.body.pincode;
-    body['name'] = req.body.first_name + ' ' + req.body.last_name ;
-
-
-//  console.log(req.body)
-
-
- pool.query(`select * from cart where number = '${req.session.usernumber}'`,(err,result)=>{
-     if(err) throw err;
-     else {
-
-     let data = result
-
-     for(i=0;i<result.length;i++){
-      data[i].name = req.body.name
-      data[i].date = today
-      data[i].orderid = orderid
-      data[i].status = 'pending'
-      data[i].number = req.session.usernumber
-      data[i].usernumber = req.session.usernumber
-      data[i].payment_mode = 'cash'
-      data[i].address = req.body.address
-      data[i].id = null
-
-
-     }
-
-
+    req.session.userfirstname =  req.body.first_name;
+  
+    req.session.address1 = req.body.address1;
+    req.session.address2 = req.body.address2;
+    req.session.city = req.body.city;
+    req.session.state = req.body.state;
+    req.session.pincode = req.body.pincode;
+    // req.session.time = req.body.time;
+    req.session.payment_mode = req.body.payment_mode;
    
+   
+    if((+req.session.totalprice) > 500) {
+      amount = req.session.totalprice
+    }
+    else {
+     amount = (+req.session.totalprice) + 500
+    }
 
-for(i=0;i<data.length;i++) {
-  console.log('quantity1',data[i].quantity)
 
-let quantity = data[i].quantity;
-let booking_id = data[i].booking_id;
+    const url = `https://rzp_live_wdTkjI7Ba4b5qN:rxR0Prlwb9Gz7HctbrpukFOe@api.razorpay.com/v1/orders/`;
+    const data = {
+      amount: amount* 100, // amount in the smallest currency unit
+      //amount:100,
+      currency: "INR",
+      payment_capture: true,
+    };
+    console.log("data", data);
+    const options = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    fetch(url, options)
+      .then((res) => res.json())
+      .then((resu) => {
+          //  res.render('open',{resu : resu.id})
+          res.json(resu)
+      })
 
- pool.query(`insert into booking set ?`,data[i],(err,result)=>{
+  }
+  else{
+
+
+    console.log('CardData',cartData)
+
+       body['status'] = 'pending'
+        
+    
+      var today = new Date();
+    var dd = today.getDate();
+    
+    var mm = today.getMonth()+1; 
+    var yyyy = today.getFullYear();
+    if(dd<10) 
+    {
+      dd='0'+dd;
+    } 
+    
+    if(mm<10) 
+    {
+      mm='0'+mm;
+    } 
+    today = yyyy+'-'+mm+'-'+dd;
+    
+    
+    body['date'] = today
+    
+    
+    
+      var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      var result = '';
+      for ( var i = 0; i < 12; i++ ) {
+          result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+      }
+     orderid = result;
+    
+    
+        body['address'] = req.body.address1 + ',' + req.body.address2 + ',' + req.body.city + ',' + req.body.state + ',' + req.body.pincode;
+        body['name'] = req.body.first_name  ;
+    
+    
+     console.log(req.body)
+    
+    
+     pool.query(`select * from cart where usernumber = '${req.session.usernumber}'`,(err,result)=>{
          if(err) throw err;
          else {
     
+         let data = result
+    
+         for(i=0;i<result.length;i++){
+          data[i].name = req.body.name
+          data[i].date = today
+          data[i].orderid = orderid
+          data[i].status = 'pending'
+          data[i].number = req.session.usernumber
+          data[i].usernumber = req.session.usernumber
+          data[i].payment_mode = 'cash'
+          data[i].address = req.body.address
+          data[i].id = null
+          data[i].pincode = req.body.pincode
+          data[i].order_date = today
+          // data[i].time = req.body.time
 
-pool.query(`update products set quantity = quantity - ${quantity} where id = '${booking_id}'`,(err,result)=>{
- if(err) throw err;
- else {
-
- }
-
-})
-
+          if((+data[i].price) > 500){
+            data[i].price = data[i].price
+            data[i].shipping_charges = 0
+          }
+          else{
+          data[i].price = (+data[i].price) + 500;
+          data[i].shipping_charges = 500
+          }
+    
+    
          }
+    
+    
+       
+    
+    for(i=0;i<data.length;i++) {
+      console.log('quantity1',data[i])
+    
+    let quantity = data[i].quantity;
+    let booking_id = data[i].booking_id;
+    
+     pool.query(`insert into booking set ?`,data[i],(err,result)=>{
+             if(err) throw err;
+             else {
+        
+    
+    pool.query(`update products set quantity = quantity - ${quantity} where id = '${booking_id}'`,(err,result)=>{
+     if(err) throw err;
+     else {
+    
+     }
+    
     })
-}
+    
+             }
+        })
+    }
+    
+    
+      
+    
+    
+    pool.query(`delete from cart where usernumber = '${req.session.usernumber}'`,(err,result)=>{
+      if(err) throw err;
+      else {
+         res.redirect('/confirmation')
+      }
+    })
+    
+    
+         }
+     })
 
+  }
 
   
-
-
-pool.query(`delete from cart where number = '${req.session.usernumber}'`,(err,result)=>{
-  if(err) throw err;
-  else {
-     res.redirect('/myorder')
-  }
-})
-
-
-     }
- })
 
  
 })
@@ -722,13 +788,20 @@ pool.query(`delete from cart where number = '${req.session.usernumber}'`,(err,re
 
 
 
-router.get('/myorder',(req,res)=>{
+router.get('/my-account',(req,res)=>{
   if(req.session.usernumber){
     req.session.page = null;
-    pool.query(`select b.* , (select p.name from products p where p.id = b.booking_id) as bookingname
-               from booking b where usernumber = '${req.session.usernumber}' order by id desc `,(err,result)=>{
+    var query = `select * from category order by id desc;`
+    var query1 = `select b.* , (select p.name from products p where p.id = b.booking_id) as bookingname,
+    (select p.image from products p where p.id = b.booking_id) as bookingimage
+    from booking b where usernumber = '${req.session.usernumber}' order by id desc ;`
+    var query2 = `select * from users where number = '${req.session.usernumber}';`
+    var query3 = `select * from address where usernumber = '${req.session.usernumber}';`
+    var query4 = `select email from users where number = '${req.session.usernumber}';`
+
+    pool.query(query+query1+query2+query3+query4,(err,result)=>{
       if(err) throw err;
-      else res.render('myorder',{result:result,login:'true'})
+      else res.render('myaccount',{result:result,login:true})
     })
   }
   else{
@@ -737,6 +810,7 @@ router.get('/myorder',(req,res)=>{
   }
  
 })
+
 
 
 
@@ -855,6 +929,144 @@ router.get('/view-all-product',(req,res)=>{
  
 })
 
+
+
+
+
+
+
+
+
+
+
+
+router.post('/myaccount-update', (req, res) => {
+  console.log(req.body)
+  pool.query(`update users set ? where number = ?`, [req.body, req.body.number], (err, result) => {
+      if(err) {
+          res.json({
+              status:500,
+              type : 'error',
+              description:err
+          })
+      }
+      else {
+
+  if(req.session.newuser){
+    req.session.newuser = null;
+        res.redirect('/checkout')
+  }
+  else {
+    res.redirect('/my-account#account-details')
+
+  }
+
+
+          
+      }
+  })
+})
+
+
+
+
+router.get('/wishlist',(req,res)=>{
+  if(req.session.usernumber){
+    var query = `select * from category order by id desc;`
+    var query1 = `select t.*,
+    (select p.name from products p where p.id = t.booking_id) as productname,
+    (select p.price from products p where p.id = t.booking_id) as productprice,
+    (select p.quantity from products p where p.id = t.booking_id) as productquantity,
+    (select p.discount from products p where p.id = t.booking_id) as productdiscount,
+    (select p.image from products p where p.id = t.booking_id) as productimage,
+    (select p.categoryid from products p where p.id = t.booking_id) as productcategoryid,
+    (select p.subcategoryid from products p where p.id = t.booking_id) as productsubcategoryid,
+    (select p.net_amount from products p where p.id = t.booking_id) as productnetamount ,
+    (select c.quantity from cart c where c.booking_id = t.booking_id and c.usernumber = '${req.session.usernumber}'  ) as userquantity
+    from wishlist t where usernumber = '${req.session.usernumber}';`
+    pool.query(query+query1,(err,result)=>{
+      if(err) throw err;
+      else res.render('wishlist',{result})
+    })
+  }
+ 
+  else{
+   res.redirect('/login')
+  }
+ 
+ 
+})
+
+
+
+
+router.get('/logout',(req,res)=>{
+  req.session.usernumber = null;
+  req.session.ipaddress = null;
+  res.redirect('/login')
+})
+ 
+
+router.get('/edit/address',(req,res)=>{
+  pool.query(`select * from address where id ='${req.query.id}'`,(err,result)=>{
+    if(err) throw err;
+    else res.render('edit-address',{result})
+  })
+})
+
+
+
+
+
+
+
+
+
+
+router.get('/website-customization',(req,res)=>{
+  res.render('website_customization')
+})
+
+
+
+router.get('/faq-customization',(req,res)=>{
+  res.render('faq_customization')
+})
+
+
+
+
+router.post('/faq-insert',(req,res)=>{
+  let body = req.body
+  pool.query(`insert into faq set ?`,body,(err,result)=>{
+    if(err) throw err;
+    else res.json({
+      msg : 'success'
+    })
+  })
+})
+
+
+
+router.post('/website-customization-insert',(req,res)=>{
+  let body = req.body   
+  pool.query(`select * from website_customize where name = '${req.body.name}'`,(err,result)=>{
+    if(err) throw err;
+    else if(result[0]){
+      res.json({
+        msg : 'Already Inserted'
+      })
+    }
+    else {
+      pool.query(`insert into website_customize set ?`,body,(err,result)=>{
+        if(err) throw err;
+        else res.json({
+          msg : 'success'
+        })
+      })
+    }
+  })
+})
 
 
 module.exports = router;

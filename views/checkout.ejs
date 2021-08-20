@@ -1,4 +1,30 @@
 <!DOCTYPE html>
+
+<style>
+    #customers {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    #customers td, #customers th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
+    
+    #customers tr:hover {background-color: #ddd;}
+    
+    #customers th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #04AA6D;
+      color: white;
+    }
+    </style>
+
 <html lang="en">
 
 
@@ -819,36 +845,49 @@
             <!-- Start of PageContent -->
             <div class="page-content">
                 <div class="container">
-                    <div class="login-toggle">
-                        Returning customer? <a href="#"
-                            class="show-login font-weight-bold text-uppercase text-dark">Login</a>
-                    </div>
-                    <form class="login-content">
-                        <p>If you have shopped with us before, please enter your details below. 
-                            If you are a new customer, please proceed to the Billing section.</p>
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <div class="form-group">
-                                    <label>Username or email *</label>
-                                    <input type="text" class="form-control form-control-md" name="name"
-                                        required>
-                                </div>
+                
+                    <h4>Saved Address</h4>
+                  
+<div class="row">
+    <div class="col-lg-8 col-md-12">
+						
+        <div class="table-responsive mb-3">
+            <table id="customers" class="table table-bordered table-sm table-hover mb-0" style="border: #9F9888;">
+              
+                <tbody>
+
+          <% for(i=0;i<result[3].length;i++) { %>
+
+                    <tr>
+                        
+                        <td>
+                            <div class="radio">
+                                <input   class="custom-control-input saved_address" 
+                                username = '<%=result[3][i].name%>'
+                                state = '<%=result[3][i].state%>'
+                                city = '<%=result[3][i].city%>'
+                                pincode = '<%=result[3][i].pincode%>'
+                                landmark = '<%=result[3][i].landmark%>'
+                                area = '<%=result[3][i].area%>'
+                                email = '<%=result[3][i].email%>'
+                                 id="<%=result[3][i].id%>" type="radio"
+                                 name="oldaddress"
+                                 >
+                                <label class="custom-control-label text-body text-nowrap" for="<%=result[3][i].id%>"><%=result[3][i].name%></label>
                             </div>
-                            <div class="col-xs-6">
-                                <div class="form-group">
-                                    <label>Password *</label>
-                                    <input type="text" class="form-control form-control-md" name="password"
-                                        required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group checkbox">
-                            <input type="checkbox" class="custom-checkbox" id="remember" name="remember">
-                            <label for="remember" class="mb-0 lh-2">Remember me</label>
-                            <a href="#" class="ml-3">Last your password?</a>
-                        </div>
-                        <button class="btn btn-rounded btn-login">Login</button>
-                    </form>
+                        </td>
+                        <td><%=result[3][i].area%> , <%=result[3][i].landmark%>  , <%=result[3][i].state%> ,  <%=result[3][i].pincode%></td>
+                    
+                    </tr>
+                
+                    <% } %>
+                
+                </tbody>
+            </table>
+        </div>
+</div>
+
+                    
                     <div class="coupon-toggle">
                         Have a coupon? <a href="#"
                             class="show-coupon font-weight-bold text-uppercase text-dark">Enter your
@@ -861,7 +900,8 @@
                             <button type="submit" class="btn button btn-rounded btn-coupon mb-2" name="apply_coupon" value="Apply coupon">Apply Coupon</button>
                         </div>
                     </div>
-                    <form class="form checkout-form" action="#" method="post">
+                    <!-- <form action='/order-now' method='post'> -->
+                    <form class="form checkout-form"action='/order-now' method="post">
                         <div class="row mb-9">
                             <div class="col-lg-7 pr-lg-4 mb-4">
                                 <h3 class="title billing-title text-uppercase ls-10 pt-1 pb-3 mb-0">
@@ -870,151 +910,55 @@
                                 <div class="row gutter-sm">
                                     <div class="col-xs-6">
                                         <div class="form-group">
-                                            <label>First name *</label>
-                                            <input type="text" class="form-control form-control-md" name="firstname"
-                                                required>
+                                            <label>Full name *</label>
+                                            <input  class="form-control form-control-md" id="checkoutBillingFirstName" name="first_name" type="text" value="<%=result[4][0].name%>" placeholder="First Name" required="">
                                         </div>
                                     </div>
                                     <div class="col-xs-6">
                                         <div class="form-group">
-                                            <label>Last name *</label>
-                                            <input type="text" class="form-control form-control-md" name="lastname"
-                                                required>
+                                            <label>Email Address *</label>
+                                            <input class="form-control form-control-md" id="checkoutBillingEmail" name="email" type="email" placeholder="Email" value="<%=result[4][0].email%>" required="">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Company name (optional)</label>
-                                    <input type="text" class="form-control form-control-md" name="company-name">
-                                </div>
-                                <div class="form-group">
-                                    <label>Country / Region *</label>
-                                    <div class="select-box">
-                                        <select name="country" class="form-control form-control-md">
-                                            <option value="default" selected="selected">United States
-                                                (US)
-                                            </option>
-                                            <option value="uk">United Kingdom (UK)</option>
-                                            <option value="us">United States</option>
-                                            <option value="fr">France</option>
-                                            <option value="aus">Australia</option>
-                                        </select>
-                                    </div>
-                                </div>
+                              
                                 <div class="form-group">
                                     <label>Street address *</label>
-                                    <input type="text" placeholder="House number and street name"
-                                        class="form-control form-control-md mb-2" name="street-address-1" required>
-                                    <input type="text" placeholder="Apartment, suite, unit, etc. (optional)"
-                                        class="form-control form-control-md" name="street-address-2" required>
+                                    <input  placeholder="House number and street name"
+                                        class="form-control form-control-md mb-2" id="checkoutBillingAddress" name="address1" type="text"required>  
+
+
+                                    <input placeholder="Apartment, suite, unit, etc. (optional)"
+                                        class="form-control form-control-md" id="checkoutBillingAddressTwo" name="address2" type="text"   required>
                                 </div>
                                 <div class="row gutter-sm">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Town / City *</label>
-                                            <input type="text" class="form-control form-control-md" name="town" required>
+                                            <input class="form-control form-control-md" id="checkoutBillingTown" name="city" type="text" required>
                                         </div>
                                         <div class="form-group">
                                             <label>ZIP *</label>
-                                            <input type="text" class="form-control form-control-md" name="zip" required>
+                                            <input type="text" class="form-control form-control-md" name='pincode' id="pincode" required>
                                         </div>
+                                        
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label>State *</label>
-                                            <div class="select-box">
-                                                <select name="country" class="form-control form-control-md">
-                                                    <option value="default" selected="selected">California</option>
-                                                    <option value="uk">United Kingdom (UK)</option>
-                                                    <option value="us">United States</option>
-                                                    <option value="fr">France</option>
-                                                    <option value="aus">Australia</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Phone *</label>
-                                            <input type="text" class="form-control form-control-md" name="phone" required>
-                                        </div>
+                                              <input class="form-control form-control-sm" id="checkoutBillingState" name="state" type="text" placeholder="State" required="">
+   </div>
+   <div class="form-group">
+    <label>Alternate Mobile Number (Optional)</label>
+      <input class="form-control form-control-sm" id="alternate_number" name="alternate_number" type="text"  >
+</div>
+                                      
                                     </div>
                                 </div>
-                                <div class="form-group mb-7">
-                                    <label>Email address *</label>
-                                    <input type="email" class="form-control form-control-md" name="email" required>
-                                </div>
-                                <div class="form-group checkbox-toggle pb-2">
-                                    <input type="checkbox" class="custom-checkbox" id="shipping-toggle"
-                                        name="shipping-toggle">
-                                    <label for="shipping-toggle">Ship to a different address?</label>
-                                </div>
-                                <div class="checkbox-content">
-                                    <div class="row gutter-sm">
-                                        <div class="col-xs-6">
-                                            <div class="form-group">
-                                                <label>First name *</label>
-                                                <input type="text" class="form-control form-control-md" name="firstname"
-                                                    required>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <div class="form-group">
-                                                <label>Last name *</label>
-                                                <input type="text" class="form-control form-control-md" name="lastname"
-                                                    required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Company name (optional)</label>
-                                        <input type="text" class="form-control form-control-md" name="company-name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Country / Region *</label>
-                                        <div class="select-box">
-                                            <select name="country" class="form-control form-control-md">
-                                                <option value="default" selected="selected">United States
-                                                    (US)
-                                                </option>
-                                                <option value="uk">United Kingdom (UK)</option>
-                                                <option value="us">United States</option>
-                                                <option value="fr">France</option>
-                                                <option value="aus">Australia</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Street address *</label>
-                                        <input type="text" placeholder="House number and street name"
-                                            class="form-control form-control-md mb-2" name="street-address-1" required>
-                                        <input type="text" placeholder="Apartment, suite, unit, etc. (optional)"
-                                            class="form-control form-control-md" name="street-address-2" required>
-                                    </div>
-                                    <div class="row gutter-sm">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Town / City *</label>
-                                                <input type="text" class="form-control form-control-md" name="town" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Postcode *</label>
-                                                <input type="text" class="form-control form-control-md" name="postcode" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Country (optional)</label>
-                                                <input type="text" class="form-control form-control-md" name="zip" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                              
+                               
 
-                                <div class="form-group mt-3">
-                                    <label for="order-notes">Order notes (optional)</label>
-                                    <textarea class="form-control mb-0" id="order-notes" name="order-notes" cols="30"
-                                        rows="4"
-                                        placeholder="Notes about your order, e.g special notes for delivery"></textarea>
-                                </div>
+                                
                             </div>
                             <div class="col-lg-5 mb-4 sticky-sidebar-wrapper">
                                 <div class="order-summary-wrapper sticky-sidebar">
@@ -1029,125 +973,69 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr class="bb-no">
-                                                    <td class="product-name">Palm Print Jacket <i
-                                                            class="fas fa-times"></i> <span
-                                                            class="product-quantity">1</span></td>
-                                                    <td class="product-total">$40.00</td>
-                                                </tr>
-                                                <tr class="bb-no">
-                                                    <td class="product-name">Brown Backpack <i class="fas fa-times"></i>
-                                                        <span class="product-quantity">1</span></td>
-                                                    <td class="product-total">$60.00</td>
-                                                </tr>
+                                               
                                                 <tr class="cart-subtotal bb-no">
                                                     <td>
                                                         <b>Subtotal</b>
                                                     </td>
                                                     <td>
-                                                        <b>$100.00</b>
+                                                        <b>Rs. <%=result[2][0].totalprice%></b>
+                                                    </td>
+                                                </tr>
+                                                <tr class="cart-subtotal bb-no">
+                                                    <td>
+                                                        <b>Shipping Charges</b>
+                                                    </td>
+                                                    <td>
+                                                        <b>Rs. <%=shipping_charges%></b>
                                                     </td>
                                                 </tr>
                                             </tbody>
                                             <tfoot>
-                                                <tr class="shipping-methods">
-                                                    <td colspan="2" class="text-left">
-                                                        <h4 class="title title-simple bb-no mb-1 pb-0 pt-3">Shipping
-                                                        </h4>
-                                                        <ul id="shipping-method" class="mb-4">
-                                                            <li>
-                                                                <div class="custom-radio">
-                                                                    <input type="radio" id="free-shipping"
-                                                                        class="custom-control-input" name="shipping">
-                                                                    <label for="free-shipping"
-                                                                        class="custom-control-label color-dark">Free
-                                                                        Shipping</label>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="custom-radio">
-                                                                    <input type="radio" id="local-pickup"
-                                                                        class="custom-control-input" name="shipping">
-                                                                    <label for="local-pickup"
-                                                                        class="custom-control-label color-dark">Local
-                                                                        Pickup</label>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="custom-radio">
-                                                                    <input type="radio" id="flat-rate"
-                                                                        class="custom-control-input" name="shipping">
-                                                                    <label for="flat-rate"
-                                                                        class="custom-control-label color-dark">Flat
-                                                                        rate: $5.00</label>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </td>
-                                                </tr>
+                                              
                                                 <tr class="order-total">
                                                     <th>
                                                         <b>Total</b>
                                                     </th>
                                                     <td>
-                                                        <b>$100.00</b>
+                                                        <b>Rs. <%=result[2][0].totalprice + shipping_charges%></b>
                                                     </td>
                                                 </tr>
                                             </tfoot>
                                         </table>
 
-                                        <div class="payment-methods" id="payment_method">
-                                            <h4 class="title font-weight-bold ls-25 pb-0 mb-1">Payment Methods</h4>
-                                            <div class="accordion payment-accordion">
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <a href="#cash-on-delivery" class="collapse">Direct Bank Transfor</a>
-                                                    </div>
-                                                    <div id="cash-on-delivery" class="card-body expanded">
-                                                        <p class="mb-0">
-                                                            Make your payment directly into our bank account. 
-                                                            Please use your Order ID as the payment reference. 
-                                                            Your order will not be shipped until the funds have cleared in our account.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <a href="#payment" class="expand">Check Payments</a>
-                                                    </div>
-                                                    <div id="payment" class="card-body collapsed">
-                                                        <p class="mb-0">
-                                                            Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <a href="#delivery" class="expand">Cash on delivery</a>
-                                                    </div>
-                                                    <div id="delivery" class="card-body collapsed">
-                                                        <p class="mb-0">
-                                                            Pay with cash upon delivery.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="card p-relative">
-                                                    <div class="card-header">
-                                                        <a href="#paypal" class="expand">Paypal</a>
-                                                    </div>
-                                                    <a href="https://www.paypal.com/us/webapps/mpp/paypal-popup" class="text-primary paypal-que" 
-                                                        onclick="javascript:window.open('https://www.paypal.com/us/webapps/mpp/paypal-popup','WIPaypal',
-                                                        'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); 
-                                                        return false;">What is PayPal?
-                                                    </a>
-                                                    <div id="paypal" class="card-body collapsed">
-                                                        <p class="mb-0">
-                                                            Pay via PayPal, you can pay with your credit cart if you
-                                                            don't have a PayPal account.
-                                                        </p>
-                                                    </div>
+                                        <h4 class="mb-3">Payment</h4>
+
+                                        <!-- List group -->
+                                        <div class="list-group list-group-sm mb-5">
+                                            <div class="list-group-item">
+                                                <!-- Radio -->
+                                                <div class="custom-control custom-radio">
+                                                    <!-- Input -->
+                                                    <input class="custom-control-input" id="checkoutPaymentCard" name="payment_mode" value="online" type="radio" >
+                                                    <!-- Label -->
+                                                    <label class="custom-control-label font-size-sm text-body text-nowrap" for="checkoutPaymentCard">Pay Online <img class="ml-2" src="assets/img/card.png" alt="..."></label>
                                                 </div>
                                             </div>
+        
+        
+        
+        
+                                          
+        
+                                            
+                                            <div class="list-group-item">
+                                                <!-- Radio -->
+                                                <div class="custom-control custom-radio">
+                                                    <!-- Input -->
+                                                    <input class="custom-control-input" id="checkoutPaymentPaypal" name="payment_mode" value="cash" type="radio" required data-toggle="collapse" data-action="hide" data-target="#checkoutPaymentCardCollapse">
+                                                    <!-- Label -->
+                                                    <label class="custom-control-label font-size-sm text-body text-nowrap" for="checkoutPaymentPaypal">Cash On Delivery</label>
+                                                </div>
+                                            </div>
+                                            
+                                        
+                                            
                                         </div>
 
                                         <div class="form-group place-order pt-6">
@@ -1917,6 +1805,76 @@
     <script src="/wolmart/assets/js/main.min.js"></script>
 </body>
 
+
+
+<script>
+    
+
+    $.getJSON(`/api/time`, data => {
+        categories1 = data
+        fillDropDown('time', data, 'Choose Time Slot', 0)
+      
+    })
+    
+    
+    $.getJSON(`/api/pincode`, data => {
+        pincode = data
+        fillDropDown1('pincode', data, 'Choose Time Slot', 0)
+      
+    })
+    
+    
+    function fillDropDown(id, data, label, selectedid = 0) {
+        $(`#${id}`).empty()
+        // $(`#${id}`).append($('<option>').val("null").text(label))
+    
+        $.each(data, (i, item) => {
+            if (item.id == selectedid) {
+                $(`#${id}`).append($('<option selected>').val(`${item.date} at ${item.time}`).text(`${item.date} at ${item.time}`))
+            } else {
+                $(`#${id}`).append($('<option>').val(`${item.date} at ${item.time}`).text(`${item.date} at ${item.time}`))
+            }
+        })
+    }
+    
+    
+    
+    
+    function fillDropDown1(id, data, label, selectedid = 0) {
+        $(`#${id}`).empty()
+        // $(`#${id}`).append($('<option>').val("null").text(label))
+    
+        $.each(data, (i, item) => {
+            if (item.id == selectedid) {
+                $(`#${id}`).append($('<option selected>').val(`${item.area} - ${item.name}`).text(`${item.area} - ${item.name}`))
+            } else {
+                $(`#${id}`).append($('<option>').val(`${item.area} - ${item.name}`).text(`${item.area} - ${item.name}`))
+            }
+        })
+    }
+    
+    
+    $('.saved_address').click(function(){
+        let username = $(this).attr('username')
+        let state = $(this).attr('state')
+        let city = $(this).attr('city')
+        let pincode = $(this).attr('pincode')
+        let area = $(this).attr('area')
+        let landmark = $(this).attr('landmark')
+        let email = $(this).attr('email')
+    
+    
+        $('#checkoutBillingFirstName').val(username)
+        $('#checkoutBillingAddress').val(area)
+        $('#checkoutBillingAddressTwo').val(landmark)
+        $('#checkoutBillingTown').val(city)
+        $('#checkoutBillingState').val(state)
+        $('#pincode').val(pincode)
+        $('#checkoutBillingEmail').val(email)
+    
+    })
+    
+    </script>
 
 <!-- Mirrored from portotheme.com/html/wolmart/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 30 Jun 2021 06:20:01 GMT -->
 </html>

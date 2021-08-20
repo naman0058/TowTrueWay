@@ -196,7 +196,7 @@ router.post('/save-user',(req,res)=>{
     let body =  req.body;
 
 
-    pool.query(`select * from user where number = '${req.body.number}'`,(err,result)=>{
+    pool.query(`select * from users where number = '${req.body.number}'`,(err,result)=>{
         if(err) throw err;
         else if(result[0]){
          res.json({
@@ -205,7 +205,7 @@ router.post('/save-user',(req,res)=>{
          })
         }
         else {
-            pool.query(`insert into user set ?`,body,(err,result)=>{
+            pool.query(`insert into users set ?`,body,(err,result)=>{
                 if(err) throw err;
                 else res.json({
                     msg : 'success'
@@ -741,6 +741,67 @@ router.get('/view-all-product',(req,res)=>{
     })
   })
   
+  
+  
+  
+router.post("/payment-initiate", (req, res) => {
+    const url = `https://rzp_live_wdTkjI7Ba4b5qN:rxR0Prlwb9Gz7HctbrpukFOe@api.razorpay.com/v1/orders/`;
+    const data = {
+      amount: req.body.amount * 100, // amount in the smallest currency unit
+      //amount:100,
+      currency: "INR",
+      payment_capture: true,
+    };
+    console.log("data", data);
+    const options = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    fetch(url, options)
+      .then((res) => res.json())
+      .then((resu) => res.send(resu));
+  });
+  
+  router.get("/demo", (req, res) => {
+    res.render("dem");
+  });
+  
+  router.get("/demo1", (req, res) => {
+    console.log(req.query);
+    res.send(req.query);
+  });
+  
+  router.post("/razorpay-response", (req, res) => {
+    let body = req.body;
+    console.log("response recieve", body);
+  
+    if (body.razorpay_signature) {
+      res.redirect("/api/success_razorpay");
+    } else {
+      res.redirect("/api/failed_payment");
+    }
+  });
+  
+  router.get("/success_razorpay", (req, res) => {
+    res.json({
+      msg: "success",
+    });
+  });
+  
+  router.get("/failed_payment", (req, res) => {
+    res.json({
+      msg: "failed",
+    });
+  });
+  
+  router.post("/failed_payment", (req, res) => {
+    res.json({
+      msg: "failed",
+    });
+  });
   
   
   

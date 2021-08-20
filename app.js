@@ -16,7 +16,8 @@ var vendor_registeration = require('./routes/Vendor/registeration')
 var vendor_dashboard = require('./routes/Vendor/vendorDashboard');
 var vendorLogin = require('./routes/Vendor/login');
 var banner = require('./routes/banner');
-var repurchasingapi = require('./routes/repurchasing_api')
+var repurchasingapi = require('./routes/repurchasing_api');
+var talentHunt = require('./routes/talentHunt');
 
 var app = express();
 
@@ -61,7 +62,8 @@ app.use('/vendor-registeration',vendor_registeration);
 app.use('/vendor-dashboard',vendor_dashboard);
 app.use('/vendor-login',vendorLogin);
 app.use('/banner',banner);
-app.use('/repurchasing-api',repurchasingapi)
+app.use('/repurchasing-api',repurchasingapi);
+app.use('/talent-hunt',talentHunt)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
