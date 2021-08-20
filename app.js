@@ -15,9 +15,13 @@ var adminDashboard = require('./routes/Admin/Dashboard')
 var vendor_registeration = require('./routes/Vendor/registeration')
 var vendor_dashboard = require('./routes/Vendor/vendorDashboard');
 var vendorLogin = require('./routes/Vendor/login');
+<<<<<<< HEAD
 var banner = require('./routes/banner');
 var repurchasingapi = require('./routes/repurchasing_api');
 var talentHunt = require('./routes/talentHunt');
+=======
+var repurchasingapi = require('./routes/repurchasing_api')
+>>>>>>> 47c4f5dd7e67dd5b23d9e1347191d75162270d1a
 
 var app = express();
 
@@ -61,9 +65,14 @@ app.use('/api',api);
 app.use('/vendor-registeration',vendor_registeration);
 app.use('/vendor-dashboard',vendor_dashboard);
 app.use('/vendor-login',vendorLogin);
+<<<<<<< HEAD
 app.use('/banner',banner);
 app.use('/repurchasing-api',repurchasingapi);
 app.use('/talent-hunt',talentHunt)
+=======
+app.use('/repurchasing-api',repurchasingapi)
+
+>>>>>>> 47c4f5dd7e67dd5b23d9e1347191d75162270d1a
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
