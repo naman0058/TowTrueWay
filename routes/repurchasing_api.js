@@ -94,9 +94,26 @@ router.post('/getAllSelfie',(req,res)=>{
 
 router.post('/listingInsert',upload.single('image'),(req,res)=>{
     let body = req.body
- 
+    let body = req.body
+    var today = new Date();
+    var dd = today.getDate();
+    
+    var mm = today.getMonth()+1; 
+    var yyyy = today.getFullYear();
+    if(dd<10) 
+    {
+        dd='0'+dd;
+    } 
+    
+    if(mm<10) 
+    {
+        mm='0'+mm;
+    } 
+    today = yyyy+'-'+mm+'-'+dd;
 
     body['image'] = req.file.filename;
+    body['date'] = today;
+
    
  console.log(req.body)
    pool.query(`insert into listing set ?`,body,(err,result)=>{
