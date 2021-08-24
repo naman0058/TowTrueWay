@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var pool =  require('../pool');
 var upload = require('../multer');
+const { PayloadTooLarge } = require('http-errors');
 
 
 
@@ -46,6 +47,16 @@ router.get('/store-listing/:name',(req,res)=>{
 
 
 
+router.get('/listing-category',(req,res)=>{
+    if(req.session.adminid){
+    res.render('Admin/listing-category')
+    }
+    else {
+        res.render('Admin/login',{msg : '* Invalid Credentials'})
+
+    }
+})
+
 
 router.post('/store-listing/:name/insert',upload.fields([{ name: 'image', maxCount: 1 }, { name: 'icon', maxCount: 8 }]),(req,res)=>{
     let body = req.body
@@ -74,6 +85,38 @@ else {
    
 })
 
+
+
+
+
+
+
+router.post('/listing-category/insert',upload.fields([{ name: 'image', maxCount: 1 }, { name: 'icon', maxCount: 8 }]),(req,res)=>{
+    let body = req.body
+ 
+    console.log(req.files)
+
+if(req.files.icon){
+    body['image'] = req.files.image[0].filename;
+    body['icon'] = req.files.icon[0].filename;
+ console.log(req.body)
+   pool.query(`insert into listing_category set ?`,body,(err,result)=>{
+       err ? console.log(err) : res.json({msg : 'success'})
+   })
+}
+else {
+    body['image'] = req.files.image[0].filename;
+    // body['icon'] = req.files.icon[0].filename;
+ console.log(req.body)
+   pool.query(`insert into listing_category set ?`,body,(err,result)=>{
+       err ? console.log(err) : res.json({msg : 'success'})
+   })
+}
+
+
+    
+   
+})
 
 
 
@@ -126,6 +169,27 @@ router.get('/vendor/details/:id',(req,res)=>{
 
 
 
+router.get('/listing/list/:type',(req,res)=>{
+    pool.query(`select v.* , (select c.name from category c where c.id = v.categoryid) as categoryname from listing v where v.status = '${req.params.type}' order by id desc`,(err,result)=>{
+        err ? console.log(err) : res.render('Admin/listing-list',{result})
+    })
+})
+
+
+
+
+router.get('/listing/details/:id',(req,res)=>{
+    var query = `select v.* , (select c.name from category c where c.id = v.categoryid) as categoryname from listing v where v.id = '${req.params.id}';`
+    var query1 = `select * from portfolio where listingid = '${req.params.id}';`
+    
+    pool.query(query+query1,(err,result)=>{
+        if(err) throw err;
+        else res.render('Admin/listing-details',{result})
+    })
+})
+
+
+
 router.post('/vendor/update-status',(req,res)=>{
     
    pool.query(`update vendor set status = '${req.body.status}' where id = '${req.body.id}'`,(err,result)=>{
@@ -139,7 +203,17 @@ router.post('/vendor/update-status',(req,res)=>{
 
 
 
-
+router.post('/listing/update-status',(req,res)=>{
+    
+    pool.query(`update listing set status = '${req.body.status}' where id = '${req.body.id}'`,(err,result)=>{
+        if(err) throw err;
+        else {
+            console.log('result',result)
+            res.send('success')
+        }
+    })
+ })
+ 
 
 
 router.get('/orders/:type',(req,res)=>{

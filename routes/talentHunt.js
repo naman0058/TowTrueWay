@@ -63,4 +63,107 @@ router.post('/send/amount',(req,res)=>{
 })
 
 
+
+
+router.get('/post',(req,res)=>{
+
+if(req.session.usernumber){
+    var query = `select * from category order by id desc;`
+    var query1 = `select * from talent order by id desc;`
+    pool.query(query+query1,(err,result)=>{
+        if(err) throw err;
+        else res.render('talent_hunt',{result})
+    })
+}
+else{
+res.redirect('/login')
+}
+
+
+router.get('/all-talent',(req,res)=>{
+    var query1 = `select t.*,
+    (select l.id from like_post l where l.postid = t.id and l.number = '${req.session.usernumber}') as isUserLike
+    from talent t order by id desc;`
+    pool.query(query1,(err,result)=>{
+        if(err) throw err;
+        else res.json(result)
+    })
+
+})
+
+  
+    
+})
+
+
+
+router.post('/like',(req,res)=>{
+   
+
+    if(req.session.usernumber){
+        let body = req.body
+   let id = req.body.id
+
+        body['number'] = req.session.usernumber
+      pool.query(`select * from like_post where postid = '${req.body.id}' and number = '${req.session.usernumber}'`,(err,result)=>{
+          if(err) throw err;
+          else if(result[0]){
+      pool.query(`delete from like_post where postid = '${req.body.id}' and number = '${req.session.usernumber}'`,(err,result)=>{
+          if(err) throw err;
+          else {
+            pool.query(`update talent set likes = likes-1 where id = '${id}'`,(err,result)=>{
+                if(err) throw err;
+                else  res.json({msg:'success'})
+            })
+          }
+      })
+          }
+          else{
+            body['postid'] = req.body.id
+              body['id'] = null
+      pool.query(`insert into like_post set ?`,body,(err,result)=>{
+          if(err) throw err;
+          else {
+      pool.query(`update talent set likes = likes+1 where id = '${id}'`,(err,result)=>{
+          if(err) throw err;
+          else  res.json({msg:'success'})
+      })
+      
+               }
+      })
+          }
+      })
+    }
+    else{
+    res.redirect('/login')
+    }
+
+  
+})
+
+
+
+
+router.post('/comment',(req,res)=>{
+    if(req.session.usernumber){
+        let body = req.body
+        body['number'] = req.session.usernumber
+        body['postid'] = req.body.id
+        body['id'] = null;
+       pool.query(`insert into comment set ?`,body,(err,result)=>{
+           err ? console.log(err) : res.json({msg : 'success'})
+       })
+    }
+    else{
+    res.redirect('/login')
+    }
+  
+
+})
+
+
+router.get('/post/single',(req,res)=>{
+    res.send('hi')
+})
+
 module.exports = router;

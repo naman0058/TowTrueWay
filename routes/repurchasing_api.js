@@ -21,12 +21,10 @@ router.post('/photoUpload',upload.single('image'),(req,res)=>{
 
 
 router.get('/getUploadedPhoto',(req,res)=>{
-   
-   pool.query(`select * from photo_wallet_image where number = '${req.query.number}'`,(err,result)=>{
+   pool.query(`select * from photo_wallet_images where number = '${req.query.number}'`,(err,result)=>{
        err ? console.log(err) : res.json(result)
    })
 
-   
 })
 
 
@@ -78,9 +76,8 @@ router.post('/uploadSelfie',upload.fields([{ name: 'image', maxCount: 1 }, { nam
 
 
 
-router.get('/getAllSelfie',(req,res)=>{
-   
-    pool.query(`select * from selfie where number = '${req.body.number}'`,(err,result)=>{
+router.post('/getAllSelfie',(req,res)=>{
+     pool.query(`select * from selfie where number = '${req.body.number}'`,(err,result)=>{
         err ? console.log(err) : res.json(result)
     })
  
@@ -119,13 +116,22 @@ router.post('/getAllListing',(req,res)=>{
 
 
 
-
 router.get('/getAllListingCategory',(req,res)=>{
     pool.query(`select * from listing_category;`,(err,result)=>{
        err ? console.log(err) : res.json(result)
    })
 })
 
+
+
+router.post('/single-listing-details',(req,res)=>{
+   var query = `select * from listing where id = '${req.body.id}';`
+   var query1 = `select * from portfolio where listingid = '${req.body.id}';`
+   pool.query(query+query1,(err,result)=>{
+       if(err) throw err;
+       else res.json(result)
+   })
+})
 
 
 
@@ -139,7 +145,7 @@ router.post('/mlmregister',(req,res)=>{
    
  console.log(req.body)
  pool.query(`update users set ? where number = ?`,[req.body,req.body.number],(err,result)=>{
-    err ? console.log(err) : res.json(result)
+    err ? console.log(err) : res.json({msg:'success'})
 })
 
    
@@ -194,6 +200,7 @@ pool.query(`select id from talent where date = CURDATE()`,(err,result)=>{
 
 router.post('/getAllTalent',(req,res)=>{
     pool.query(`select t.* , 
+    (select u.name from users u where u.number =  '${req.body.number}') as username,
     (select l.id from like_post l where l.postid = t.id and l.number = '${req.body.number}') as isUserLike
     from talent t order by id desc;`,(err,result)=>{
        err ? console.log(err) : res.json(result)
@@ -230,7 +237,13 @@ router.post('/like',(req,res)=>{
         else{
     pool.query(`insert into like_post set ?`,body,(err,result)=>{
         if(err) throw err;
-        else res.json({msg:'success'})
+        else {
+    pool.query(`update post set likes = likes+1 where id = '${req.body.postid}'`,(err,result)=>{
+        if(err) throw err;
+        else  res.json({msg:'success'})
+    })
+
+             }
     })
         }
     })
@@ -252,7 +265,9 @@ router.post('/comment',(req,res)=>{
 
 
 router.post('/get-comment',(req,res)=>{
-    pool.query(`select * from comment where postid = '${req.body.postid}'`,(err,result)=>{
+    pool.query(`select c.*, 
+    (select u.name from users u where u.number = c.number) as username
+     from comment c where c.postid = '${req.body.postid}'`,(err,result)=>{
         if(err) throw err;
         else res.json(result)
     })
