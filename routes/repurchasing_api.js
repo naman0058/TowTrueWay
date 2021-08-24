@@ -94,7 +94,7 @@ router.post('/getAllSelfie',(req,res)=>{
 
 router.post('/listingInsert',upload.single('image'),(req,res)=>{
     let body = req.body
-    let body = req.body
+    // let body = req.body
     var today = new Date();
     var dd = today.getDate();
     
