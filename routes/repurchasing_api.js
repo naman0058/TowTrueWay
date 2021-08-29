@@ -158,11 +158,35 @@ router.post('/single-listing-details',(req,res)=>{
 
 router.post('/mlmregister',(req,res)=>{
     let body = req.body
- 
+    console.log(req.body)
+    pool.query(`update users set ? where number = ?`,[req.body,req.body.number],(err,result)=>{
+        if(err) throw err;
+        else {
+
+        
+    pool.query(`select * from users where sponserid = '${req.body.sponserid}' and placement = 'left' and reward != 'done'`,(err,result)=>{
+        if(err) throw err;
+        else if(result[0]){
+         let leftdata = result;
+    pool.query(`select * from users where sponserid = '${req.body.sponserid}' and placement = 'right' and reward != 'done'`,(err,result)=>{
+         if(err) throw err;
+         else if(result[0]){
+         let rightdata = result;
+         res.json({leftdata:leftdata,rightdata:rightdata})
+         }
+         else {
+             res.json({msg:'no user in rght remainning'})
+         }
+
+    })
+        }
+        else{
+            res.json({msg:'no user in left remaning'})
+        }
+    })
    
- console.log(req.body)
- pool.query(`update users set ? where number = ?`,[req.body,req.body.number],(err,result)=>{
-    err ? console.log(err) : res.json({msg:'success'})
+}
+      
 })
 
    
