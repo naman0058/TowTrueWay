@@ -537,7 +537,7 @@ router.post('/like',(req,res)=>{
     pool.query(`insert into like_post set ?`,body,(err,result)=>{
         if(err) throw err;
         else {
-    pool.query(`update post set likes = likes+1 where id = '${req.body.postid}'`,(err,result)=>{
+    pool.query(`update talent set likes = likes+1 where id = '${req.body.postid}'`,(err,result)=>{
         if(err) throw err;
         else  res.json({msg:'success'})
     })
