@@ -373,22 +373,31 @@
                     <div class="container">
                         <div class="row gutter-lg mb-10">
                             <div class="main-content">
-                                <article class="post post-classic overlay-zoom mb-4">
-                                    <form>
-                                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                                        <a href="telent_hunt_addpost.jsp"> 
-                                        <div class="col-md-12 col-xs-12 col-xl-12">
-                                            <img  width="100%" height="100%" src="/images/post.jpeg" />
-                                        </div>
-                                    </a>
-                                    </form>
-                                 
-                                </article>
-
-                                <div id="talent-post"></div>
 
 
-                           
+                              <div id="talent-post"></div>
+                               
+
+
+
+                                <ul class="pagination justify-content-center pb-2">
+                                    <li class="prev disabled">
+                                        <a href="#" aria-label="Previous" tabindex="-1" aria-disabled="true">
+                                            <i class="w-icon-long-arrow-left"></i>Prev
+                                        </a>
+                                    </li>
+                                    <li class="page-item active">
+                                        <a class="page-link" href="#">1</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">2</a>
+                                    </li>
+                                    <li class="next">
+                                        <a href="#" aria-label="Next">
+                                            Next<i class="w-icon-long-arrow-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                             <aside class="sidebar right-sidebar blog-sidebar sidebar-fixed sticky-sidebar-wrapper">
                                 <div class="sidebar-overlay">
@@ -438,41 +447,47 @@
 
                     if (file1 == "")
                     {
-
+                      
                         document.getElementById("file1").focus();
                     } else {
 
                     }
                 }
-              
+                document.getElementById("social_media1").style.display = 'none';
                 document.getElementById("social_media2").style.display = 'none';
                 document.getElementById("social_media3").style.display = 'none';
                 document.getElementById("social_media4").style.display = 'none';
                 document.getElementById("social_media5").style.display = 'none';
-               
+                function social_media1() {
+                    document.getElementById("social_media1").style.display = 'block';
+                    document.getElementById("social_media2").style.display = 'none';
+                    document.getElementById("social_media3").style.display = 'none';
+                    document.getElementById("social_media4").style.display = 'none';
+                    document.getElementById("social_media5").style.display = 'none';
+                }
                 function social_media2() {
-                    
+                    document.getElementById("social_media1").style.display = 'none';
                     document.getElementById("social_media2").style.display = 'block';
                     document.getElementById("social_media3").style.display = 'none';
                     document.getElementById("social_media4").style.display = 'none';
                     document.getElementById("social_media5").style.display = 'none';
                 }
                 function social_media3() {
-                  
+                    document.getElementById("social_media1").style.display = 'none';
                     document.getElementById("social_media2").style.display = 'none';
                     document.getElementById("social_media3").style.display = 'block';
                     document.getElementById("social_media4").style.display = 'none';
                     document.getElementById("social_media5").style.display = 'none';
                 }
                 function social_media4() {
-                
+                    document.getElementById("social_media1").style.display = 'none';
                     document.getElementById("social_media2").style.display = 'none';
                     document.getElementById("social_media3").style.display = 'none';
                     document.getElementById("social_media4").style.display = 'block';
                     document.getElementById("social_media5").style.display = 'none';
                 }
                 function social_media5() {
-                   
+                    document.getElementById("social_media1").style.display = 'none';
                     document.getElementById("social_media2").style.display = 'none';
                     document.getElementById("social_media3").style.display = 'none';
                     document.getElementById("social_media4").style.display = 'none';
@@ -543,7 +558,7 @@ else{
 
                                                
                                                 
-                                               table+=` <a href = '/talent-hunt/post/single?id=${item.id}'><i class="ml-5  w-icon-comment" style="font-size: 30px;"></i></a>
+                                               table+=` <i class="ml-5  w-icon-comment" style="font-size: 30px;"></i>
                                                 <button onclick="social_media1()" style="border: none;background-color: white" > <span id="share_social">
                                                         <i class="ml-5 id  fa fa-paper-plane text-dark"  data-toggle="modal" data-target="#" style="font-size: 30px;"> </i>
                                                     </span></button>
@@ -567,7 +582,17 @@ else{
                                                 ${item.likes} Likes
                                             </h6>
                                            
-                                          
+                                            <div class="row p-0">
+                                                <div class="col-md-1">
+
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" style="border: none" class="form-control" placeholder="Add comment..">
+                                                </div>
+                                                <div class="col-md-2 text-center">
+                                                    <button type="button" style="border: none" class="btn btn-info btn-sm comment_karo" id='${item.id}' data-toggle="modal" data-target="#">submit</button>
+                                                </div>
+                                            </div>
                                             <!-- Modal -->
                                             <div class="modal fade" id="myModal61" role="dialog">
                                                 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

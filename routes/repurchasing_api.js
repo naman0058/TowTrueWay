@@ -158,36 +158,294 @@ router.post('/single-listing-details',(req,res)=>{
 
 router.post('/mlmregister',(req,res)=>{
     let body = req.body
+    body['carry_forward'] = 0;
     console.log(req.body)
-    pool.query(`update users set ? where number = ?`,[req.body,req.body.number],(err,result)=>{
-        if(err) throw err;
-        else {
 
-        
-    pool.query(`select * from users where sponserid = '${req.body.sponserid}' and placement = 'left' and reward != 'done'`,(err,result)=>{
+    pool.query(`select * from users where unique_code = '${req.body.sponserid}'`,(err,result)=>{
         if(err) throw err;
         else if(result[0]){
-         let leftdata = result;
-    pool.query(`select * from users where sponserid = '${req.body.sponserid}' and placement = 'right' and reward != 'done'`,(err,result)=>{
-         if(err) throw err;
-         else if(result[0]){
-         let rightdata = result;
-         res.json({leftdata:leftdata,rightdata:rightdata})
-         }
-         else {
-             res.json({msg:'no user in rght remainning'})
-         }
+            let sponsersdata = result
+            pool.query(`update users set ? where number = ?`,[req.body,req.body.number],(err,result)=>{
+                if(err) throw err;
+                else {
+        
+                
+            pool.query(`select * from users where sponserid = '${req.body.sponserid}' and placement = 'left' and reward != 'done'`,(err,result)=>{
+                if(err) throw err;
+                else if(result[0]){
+                 let leftdata = result;
+            pool.query(`select * from users where sponserid = '${req.body.sponserid}' and placement = 'right' and reward != 'done'`,(err,result)=>{
+                 if(err) throw err;
+                 else if(result[0]){
+                 let rightdata = result;
+               
+                 if(sponsersdata[0].carry_forward > 0){
+                    //  res.json({msg:'yes carry foward',leftdata,rightdata})
+                    if(leftdata[0].package < rightdata[0].package){
+                
+                        let remaining_amount = rightdata[0].package - leftdata[0].package;
 
-    })
+                        if(sponsersdata[0].carry_forward >= remaining_amount){
+
+
+
+                            let f_wallet_amount = ((rightdata[0].package*2)*12)/100;
+                            let remaining_amount1 = rightdata[0].package - leftdata[0].package;
+
+                            // res.json({carry_forward_amount , f_wallet_amount})
+    
+                            pool.query(`update users set  f_wallet = f_wallet +${f_wallet_amount} , carry_forward = carry_forward - ${remaining_amount1} where number = '${sponsersdata[0].number}'`,(err,result)=>{
+                                if(err) throw err;
+                                else {
+                                    console.log(leftdata[0].number)
+                            pool.query(`update users set reward = 'done' where number = '${leftdata[0].number}'`,(err,result)=>{
+                                // console.log('re',result)
+                                if(err) throw err;
+                                else {
+                            pool.query(`update users set reward = 'done' where number = '${rightdata[0].number}'`,(err,result)=>{
+                               if(err) throw err;
+                               else res.json({msg:'success'})
+                            })
+    
+                                }
+                               
+                            })
+                                }
+                            })
+
+                        }
+                        else{
+                            let f_wallet_amount = ((leftdata[0].package*2)*12)/100;
+                            let remaining_amount1 = rightdata[0].package - leftdata[0].package;
+
+                            // res.json({carry_forward_amount , f_wallet_amount})
+    
+                            pool.query(`update users set  f_wallet = f_wallet +${f_wallet_amount} , carry_forward = carry_forward + ${remaining_amount1} where number = '${sponsersdata[0].number}'`,(err,result)=>{
+                                if(err) throw err;
+                                else {
+                                    console.log(leftdata[0].number)
+                            pool.query(`update users set reward = 'done' where number = '${leftdata[0].number}'`,(err,result)=>{
+                                // console.log('re',result)
+                                if(err) throw err;
+                                else {
+                            pool.query(`update users set reward = 'done' where number = '${rightdata[0].number}'`,(err,result)=>{
+                               if(err) throw err;
+                               else res.json({msg:'success'})
+                            })
+    
+                                }
+                               
+                            })
+                                }
+                            })
+                        }
+                        // let amount_have = 
+                        // let f_wallet_amount = ((leftdata[0].package*2)*12)/100;
+
+                    }
+                    else if(leftdata[0].package > rightdata[0].package){
+                    
+                    let remaining_amount = leftdata[0].package - rightdata[0].package;
+
+                        if(sponsersdata[0].carry_forward >= remaining_amount){
+
+
+                            let f_wallet_amount = ((leftdata[0].package*2)*12)/100;
+                            let remaining_amount1 = leftdata[0].package - rightdata[0].package;
+
+                            // res.json({carry_forward_amount , f_wallet_amount})
+    
+                            pool.query(`update users set  f_wallet = f_wallet +${f_wallet_amount} , carry_forward = carry_forward - ${remaining_amount1} where number = '${sponsersdata[0].number}'`,(err,result)=>{
+                                if(err) throw err;
+                                else {
+                                    console.log(leftdata[0].number)
+                            pool.query(`update users set reward = 'done' where number = '${leftdata[0].number}'`,(err,result)=>{
+                                // console.log('re',result)
+                                if(err) throw err;
+                                else {
+                            pool.query(`update users set reward = 'done' where number = '${rightdata[0].number}'`,(err,result)=>{
+                               if(err) throw err;
+                               else res.json({msg:'success'})
+                            })
+    
+                                }
+                               
+                            })
+                                }
+                            })
+
+                        }
+                        else{
+                            let f_wallet_amount = ((rightdata[0].package*2)*12)/100;
+                            let remaining_amount1 = leftdata[0].package - rightdata[0].package;
+
+                            // res.json({carry_forward_amount , f_wallet_amount})
+    
+                            pool.query(`update users set  f_wallet = f_wallet +${f_wallet_amount} , carry_forward = carry_forward + ${remaining_amount1} where number = '${sponsersdata[0].number}'`,(err,result)=>{
+                                if(err) throw err;
+                                else {
+                                    console.log(leftdata[0].number)
+                            pool.query(`update users set reward = 'done' where number = '${leftdata[0].number}'`,(err,result)=>{
+                                // console.log('re',result)
+                                if(err) throw err;
+                                else {
+                            pool.query(`update users set reward = 'done' where number = '${rightdata[0].number}'`,(err,result)=>{
+                               if(err) throw err;
+                               else res.json({msg:'success'})
+                            })
+    
+                                }
+                               
+                            })
+                                }
+                            })
+     
+                        }
+                    }
+
+                     else{
+                        
+                        let f_wallet_amount = ((rightdata[0].package*2)*12)/100;
+
+                        // res.json({carry_forward_amount , f_wallet_amount})
+
+                        pool.query(`update users set  f_wallet = f_wallet +${f_wallet_amount} where number = '${sponsersdata[0].number}'`,(err,result)=>{
+                            if(err) throw err;
+                            else {
+                                console.log(leftdata[0].number)
+                        pool.query(`update users set reward = 'done' where number = '${leftdata[0].number}'`,(err,result)=>{
+                            // console.log('re',result)
+                            if(err) throw err;
+                            else {
+                        pool.query(`update users set reward = 'done' where number = '${rightdata[0].number}'`,(err,result)=>{
+                           if(err) throw err;
+                           else res.json({msg:'success'})
+                        })
+
+                            }
+                           
+                        })
+                            }
+                        })
+
+
+
+                      }
+
+
+                 }
+                 else{
+                      if(leftdata[0].package < rightdata[0].package){
+                       
+
+                        let carry_forward_amount = rightdata[0].package - leftdata[0].package;
+                        let f_wallet_amount = ((leftdata[0].package*2)*12)/100;
+
+                        // res.json({carry_forward_amount , f_wallet_amount})
+
+                        pool.query(`update users set carry_forward = carry_forward + ${carry_forward_amount} , f_wallet = f_wallet +${f_wallet_amount} where number = '${sponsersdata[0].number}'`,(err,result)=>{
+                            if(err) throw err;
+                            else {
+                                console.log(leftdata[0].number)
+                        pool.query(`update users set reward = 'done' where number = '${leftdata[0].number}'`,(err,result)=>{
+                            // console.log('re',result)
+                            if(err) throw err;
+                            else {
+                        pool.query(`update users set reward = 'done' where number = '${rightdata[0].number}'`,(err,result)=>{
+                           if(err) throw err;
+                           else res.json({msg:'success'})
+                        })
+
+                            }
+                           
+                        })
+                            }
+                        })
+
+
+                      }
+                      else if(leftdata[0].package > rightdata[0].package){
+                        
+                        let carry_forward_amount = leftdata[0].package - rightdata[0].package;
+                        let f_wallet_amount = ((rightdata[0].package*2)*12)/100;
+
+                        // res.json({carry_forward_amount , f_wallet_amount})
+
+                        pool.query(`update users set carry_forward = carry_forward + ${carry_forward_amount} , f_wallet = f_wallet +${f_wallet_amount} where number = '${sponsersdata[0].number}'`,(err,result)=>{
+                            if(err) throw err;
+                            else {
+                                console.log(leftdata[0].number)
+                        pool.query(`update users set reward = 'done' where number = '${leftdata[0].number}'`,(err,result)=>{
+                            // console.log('re',result)
+                            if(err) throw err;
+                            else {
+                        pool.query(`update users set reward = 'done' where number = '${rightdata[0].number}'`,(err,result)=>{
+                           if(err) throw err;
+                           else res.json({msg:'success'})
+                        })
+
+                            }
+                           
+                        })
+                            }
+                        })
+
+
+                      }
+                      else{
+                        
+                        let f_wallet_amount = ((rightdata[0].package*2)*12)/100;
+
+                        // res.json({carry_forward_amount , f_wallet_amount})
+
+                        pool.query(`update users set  f_wallet = f_wallet +${f_wallet_amount} where number = '${sponsersdata[0].number}'`,(err,result)=>{
+                            if(err) throw err;
+                            else {
+                                console.log(leftdata[0].number)
+                        pool.query(`update users set reward = 'done' where number = '${leftdata[0].number}'`,(err,result)=>{
+                            // console.log('re',result)
+                            if(err) throw err;
+                            else {
+                        pool.query(`update users set reward = 'done' where number = '${rightdata[0].number}'`,(err,result)=>{
+                           if(err) throw err;
+                           else res.json({msg:'success'})
+                        })
+
+                            }
+                           
+                        })
+                            }
+                        })
+
+
+
+                      }
+
+                 }
+        
+        
+                 }
+                 else {
+                     res.json({msg:'no user in rght remainning'})
+                 }
+        
+            })
+                }
+                else{
+                    res.json({msg:'no user in left remaning'})
+                }
+            })
+           
+        }
+              
+        })
         }
         else{
-            res.json({msg:'no user in left remaning'})
+            res.json({msg : 'invalid sponserid'})
         }
-    })
-   
-}
-      
-})
+    }) 
+
+  
 
    
 })

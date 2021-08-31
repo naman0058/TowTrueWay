@@ -163,7 +163,17 @@ router.post('/comment',(req,res)=>{
 
 
 router.get('/post/single',(req,res)=>{
-    res.send('hi')
+    var query1 = `select t.*,
+    (select l.id from like_post l where l.postid = t.id and l.number = '${req.session.usernumber}') as isUserLike
+    from talent t where id = '${req.query.id}';`
+    var query2 = `select c.* , 
+    (select u.name from users u where u.number = c.number) as username
+     from comment c where c.id = '${req.query.id}';`
+     pool.query(query1+query2,(err,result)=>{
+         if(err) throw err;
+         else res.render('single-post',{result})
+     })
+    
 })
 
 module.exports = router;
