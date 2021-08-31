@@ -575,6 +575,13 @@ router.post('/get-comment',(req,res)=>{
 
 
 
+router.get('/profile',(req,res)=>{
+    pool.query(`select * from users u where u.number = '${req.query.number}'`,(err,result)=>{
+        if(err) throw err;
+        else res.json(result)
+    })
+})
+
 
 
 module.exports = router;

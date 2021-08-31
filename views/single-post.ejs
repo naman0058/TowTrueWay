@@ -382,8 +382,8 @@
                                     </a>
                                     <figure class="post-media br-sm mt-10">
 
-                                        <a href="post-single.jsp">
-                                            <img src="/wolmart/assets/images/blog/classic/1.jpg" width="930"
+                                        <a href="#">
+                                            <img src="https://towtrueway.com/images/<%=result[0][0].image%>" width="930"
                                                  height="500" alt="blog">
                                         </a>
                                         <div class="post-details" style="border: 2px solid #D6DED7;border-top: none">
@@ -391,7 +391,15 @@
                                                 <a href="#"></a>
                                             </div>
                                             <h4 class="post-title">
-                                                <i class="ml-5 w-icon-heart" style="font-size: 29px;"></i><i class="ml-5  w-icon-comment" style="font-size: 30px;"></i>
+                                               <% if(result[0][0].isUserLike) { %>
+                                                     <i class="ml-5 w-icon-heart like_karo" id="<%=result[0][0].id%>" style="font-size: 29px;color:red"></i>
+                                                   <% } else{ %>
+                                                    
+                                                     <i class="ml-5 w-icon-heart like_karo" id="<%=result[0][0].id%>" style="font-size: 29px;"></i>
+                                                    
+                                                  <%  }  %>
+                                                
+                                                <i class="ml-5  w-icon-comment" style="font-size: 30px;"></i>
                                                 <button onclick="social_media()" style="border: none;background-color: white" > <span id="share_social">
                                                         <i class="ml-5 id  fa fa-paper-plane text-dark"  data-toggle="modal" data-target="#" style="font-size: 30px;"> </i>
                                                     </span></button>
@@ -414,61 +422,19 @@
 
                                             </h4>
                                             <h6 class="" style="margin-left: 15px;">
-                                                6 Likes
+                                                <%=result[0][0].likes%> Likes
                                             </h6><hr>
-                                            <span class="" style="margin-left: 15px;">
-                                                <span style="font-size: 15px;color: black"><b>8080.It.Professional</b> </span> <span style="color: #7B837B;font-size: 15px;color: black ">Nic Pic Dear</span>
-                                            </span>
-                                            <br>
-                                            <span class="" style="margin-left: 15px;">
-                                                <span style="font-size: 15px;color: black"><b></b> </span> <span style="font-size: 12px;color: #D1E0D1">20 Hours AGO</span>
-                                            </span><br><br>
-                                            <span class="" style="margin-left: 15px;">
-                                                <span style="font-size: 15px;color: black"><b>8080.It.Professional</b> </span> <span style="color: #7B837B;font-size: 15px;color: black ">Nic Pic Dear</span>
-                                            </span>
-                                            <br>
-                                            <span class="" style="margin-left: 15px;">
-                                                <span style="font-size: 15px;color: black"><b></b> </span> <span style="font-size: 12px;color: #D1E0D1">20 Hours AGO</span>
-                                            </span><br><br>
-                                            <span class="" style="margin-left: 15px;">
-                                                <span style="font-size: 15px;color: black"><b>8080.It.Professional</b> </span> <span style="color: #7B837B;font-size: 15px;color: black ">Nic Pic Dear</span>
-                                            </span>
-                                            <br>
-                                            <span class="" style="margin-left: 15px;">
-                                                <span style="font-size: 15px;color: black"><b></b> </span> <span style="font-size: 12px;color: #D1E0D1">20 Hours AGO</span>
-                                            </span><br><br>
-                                            <span class="" style="margin-left: 15px;">
-                                                <span style="font-size: 15px;color: black"><b>8080.It.Professional</b> </span> <span style="color: #7B837B;font-size: 15px;color: black ">Nic Pic Dear</span>
-                                            </span>
-                                            <br>
-                                            <span class="" style="margin-left: 15px;">
-                                                <span style="font-size: 15px;color: black"><b></b> </span> <span style="font-size: 12px;color: #D1E0D1">20 Hours AGO</span>
-                                            </span><br><br>
-                                            <span class="" style="margin-left: 15px;">
-                                                <span style="font-size: 15px;color: black"><b>8080.It.Professional</b> </span> <span style="color: #7B837B;font-size: 15px;color: black ">Nic Pic Dear</span>
-                                            </span>
-                                            <br>
-                                            <span class="" style="margin-left: 15px;">
-                                                <span style="font-size: 15px;color: black"><b></b> </span> <span style="font-size: 12px;color: #D1E0D1">20 Hours AGO</span>
-                                            </span><br><br>
-                                            <span class="" style="margin-left: 15px;">
-                                                <span style="font-size: 15px;color: black"><b>8080.It.Professional</b> </span> <span style="color: #7B837B;font-size: 15px;color: black ">Nic Pic Dear</span>
-                                            </span>
-                                            <br>
-                                            <span class="" style="margin-left: 15px;">
-                                                <span style="font-size: 15px;color: black"><b></b> </span> <span style="font-size: 12px;color: #D1E0D1">20 Hours AGO</span>
-                                            </span><br><br>
-                                            <span class="" style="margin-left: 15px;">
-                                                <span style="font-size: 15px;color: black"><b>8080.It.Professional</b> </span> <span style="color: #7B837B;font-size: 15px;color: black ">Nic Pic Dear</span>
-                                            </span>
-                                            <br>
-                                            <span class="" style="margin-left: 15px;">
-                                                <span style="font-size: 15px;color: black"><b></b> </span> <span style="font-size: 12px;color: #D1E0D1">20 Hours AGO</span>
-                                            </span><br><br>
-                                            <span class="" style="margin-left: 15px;">
-                                                <span style="font-size: 15px;color: black"><b>8080.It.Professional</b> </span> <span style="color: #7B837B;font-size: 15px;color: black ">Nic Pic Dear</span>
-                                            </span>
-                                            <br>
+
+
+                                            <% for(i=0;i<result[1].length;i++){ %>
+                                                <span class="" style="margin-left: 15px;">
+                                                    <span style="font-size: 15px;color: black"><b><%=result[1][i].username%></b> </span> <span style="color: #7B837B;font-size: 15px;color: black "><%=result[1][i].comment%>co</span>
+                                                </span>
+                                                <br><br>
+                                            <% } %>
+                                          
+
+                                           
                                             <span class="" style="margin-left: 15px;">
                                                 <span style="font-size: 15px;color: black"><b></b> </span> <span style="font-size: 12px;color: #D1E0D1">20 Hours AGO</span>
                                             </span><br><br>
@@ -944,5 +910,78 @@ function setShareLinks() {
 
     </script>
 
+
+
+<script>
+
+    $('.like_karo').click(function(){
+
+  
+      let id = $(this).attr('id')
+     $.post('/talent-hunt/like',{id},data=>{
+          window.location.reload()
+        })
+    })
+
+
+    $('.comment_karo').click(function(){
+
+      let id = $(this).attr('id')
+        $.post('/talent-hunt/comment',{id},data=>{
+           window.location.reload()
+        })
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+setShareLinks();
+
+function socialWindow(url) {
+var left = (screen.width - 570) / 2;
+var top = (screen.height - 570) / 2;
+var params = "menubar=no,toolbar=no,status=no,width=570,height=570,top=" + top + ",left=" + left;
+// Setting 'params' to an empty string will launch
+// content in a new tab or window rather than a pop-up.
+// params = "";
+window.open(url,"NewWindow",params);
+}
+
+function setShareLinks() {
+var tweet = encodeURIComponent($("meta[property='og:description']").attr("content"));
+
+$('#talent-post').on('click', '.social-share.facebook', function() {
+let pageUrl = $(this).attr('url')
+url = "https://www.facebook.com/sharer.php?u=" + pageUrl;
+socialWindow(url);
+});
+
+$('#talent-post').on('click', '.social-share.twitter', function() {
+let pageUrl = $(this).attr('url')
+
+url = "https://twitter.com/intent/tweet?url=" + pageUrl + "&text=" + tweet;
+socialWindow(url);
+});
+
+$('#talent-post').on('click', '.social-share.linkedin', function() {
+let pageUrl = $(this).attr('url')
+
+url = "https://www.linkedin.com/shareArticle?mini=true&url=" + pageUrl;
+socialWindow(url);
+})
+}
+
+
+</script>
 
 </html>

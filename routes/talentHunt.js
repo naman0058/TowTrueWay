@@ -168,9 +168,10 @@ router.get('/post/single',(req,res)=>{
     from talent t where id = '${req.query.id}';`
     var query2 = `select c.* , 
     (select u.name from users u where u.number = c.number) as username
-     from comment c where c.id = '${req.query.id}';`
+     from comment c where c.postid = '${req.query.id}' order by id desc;`
      pool.query(query1+query2,(err,result)=>{
          if(err) throw err;
+        // else res.json(result)
          else res.render('single-post',{result})
      })
     
