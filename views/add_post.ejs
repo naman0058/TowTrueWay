@@ -375,77 +375,44 @@
                         <div class="row gutter-lg mb-10">
                             <div class="main-content">
                                 <article class="post post-classic overlay-zoom mb-4">
-                                    <a href="telent_hunt_addpost.jsp"> 
+                                    <form>
+                                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
                                         <div class="col-md-12 col-xs-12  col-xl-12">
-                                            <img  width="100%" height="100%" src="/images/post.jpeg" />
+                                            <input type="file"  id="file1" class="form-control file-upload " required="">
                                         </div>
-                                    </a>
-                                    <figure class="post-media br-sm mt-10">
 
-                                        <a href="#">
-                                            <img src="https://towtrueway.com/images/<%=result[0][0].image%>" width="930"
-                                                 height="500" alt="blog">
-                                        </a>
+
+
+                                    </form>
+                                    <br> <br> <br>
+                                    <figure class="post-media br-sm mt-10" id="dynamic_pic" >
+                                        <img class="profile-pic"  src="http://cdn.cutestpaw.com/wp-content/uploads/2012/07/l-Wittle-puppy-yawning.jpg" />
+
                                         <div class="post-details" style="border: 2px solid #D6DED7;border-top: none">
                                             <div class="post-cats text-primary">
                                                 <a href="#"></a>
                                             </div>
                                             <h4 class="post-title">
-                                               <% if(result[0][0].isUserLike) { %>
-                                                     <i class="ml-5 w-icon-heart like_karo" id="<%=result[0][0].id%>" style="font-size: 29px;color:red"></i>
-                                                   <% } else{ %>
-                                                    
-                                                     <i class="ml-5 w-icon-heart like_karo" id="<%=result[0][0].id%>" style="font-size: 29px;"></i>
-                                                    
-                                                  <%  }  %>
-                                                
-                                                <i class="ml-5  w-icon-comment" style="font-size: 30px;"></i>
-                                                <button onclick="social_media()" style="border: none;background-color: white" > <span id="share_social">
-                                                        <i class="ml-5 id  fa fa-paper-plane text-dark"  data-toggle="modal" data-target="#" style="font-size: 30px;"> </i>
-                                                    </span></button>
 
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <div class="" id="social_media1">
+                                                <button onclick="social_media1()" style="border: none;background-color: white" > <span id="share_social">
 
-                                                            <div class="social-icons ml-5 mt-2">
-                                                                <a href="#" class="social-icon social-facebook w-icon-facebook "></a>
-                                                                <a href="#" class="social-icon social-twitter w-icon-twitter"></a>
-                                                                <a href="#" class="social-icon social-instagram w-icon-instagram"></a>
-                                                                <a href="#" class="social-icon social-instagram w-icon-youtube"></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4"></div>
-                                                    <div class="col-md-4"></div>
-                                                </div>
+                                                    </span>
+                                                </button>
+
+
 
                                             </h4>
-                                            <h6 class="" style="margin-left: 15px;">
-                                                <%=result[0][0].likes%> Likes
-                                            </h6><hr>
 
-
-                                            <% for(i=0;i<result[1].length;i++){ %>
-                                                <span class="" style="margin-left: 15px;">
-                                                    <span style="font-size: 15px;color: black"><b><%=result[1][i].username%></b> </span> <span style="color: #7B837B;font-size: 15px;color: black "><%=result[1][i].comment%></span>
-                                                </span>
-                                                <br><br>
-                                            <% } %>
-                                          
-
-                                           
-                                          
 
                                             <div class="row p-0">
                                                 <div class="col-md-1">
 
                                                 </div>
                                                 <div class="col-md-9">
-                                                    <input type="text" id="message" style="border: none" class="form-control" placeholder="Add comment..">
+                                                    <input type="text" style="border: none" class="form-control" placeholder="Add comment..">
                                                 </div>
                                                 <div class="col-md-2 text-center">
-                                                    <button type="button" style="border: none" id="<%=result[0][0].id%>"  class="btn btn-info btn-sm comment_karo" >submit</button>
+                                                    <a href="pricing_table.jsp"> <button type="button" onclick="file1s()" style="border: none" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal61">Submit</button></a>
                                                 </div>
                                             </div>
                                             <!-- Modal -->
@@ -542,48 +509,11 @@
                                             </div>
                                         </div>
                                     </figure>
-                                </article>
+                                </article><br><br>
 
-
-
-                         
+                             
                             </div>
-                            <aside class="sidebar right-sidebar blog-sidebar sidebar-fixed sticky-sidebar-wrapper">
-                                <div class="sidebar-overlay">
-                                    <a href="#" class="sidebar-close">
-                                        <i class="close-icon"></i>
-                                    </a>
-                                </div>
-                                <a href="#" class="sidebar-toggle">
-                                    <i class="fas fa-chevron-left"></i>
-                                </a>
-                                <div class="sidebar-content">
-                                    <div class="sticky-sidebar">
-                                        <div class="widget widget-search-form">
-                                            <div class="widget-body">
-                                                <form action="#" method="GET" class="input-wrapper input-wrapper-inline">
-                                                    <input type="text" class="form-control"
-                                                           placeholder="Search in Blog" autocomplete="off" required>
-                                                    <button class="btn btn-search"><i
-                                                            class                                                                                                                                                                                                        ="w-icon-search"></i></button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- End of Widget search form -->
-                                        <div class="widget widget-categories">
-                                            <h3 class="widget-title bb-no mb-0">Categories</h3>
-                                            <ul class="widget-body filter-items search-ul">
-                                                <li><a href="your_post.jsp"> posts</a></li>
-                                                <li><a href="blog.jsp"> comments</a></li>
-                                                <li><a href="blog.jsp"> share</a></li>
 
-                                                <li><a href="blog.jsp">Technology</a></li>
-                                            </ul>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </aside>
                         </div>
                     </div>
                 </div>

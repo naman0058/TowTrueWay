@@ -105,6 +105,9 @@ router.post('/like',(req,res)=>{
    let id = req.body.id
 
         body['number'] = req.session.usernumber
+
+console.log(req.body)
+
       pool.query(`select * from like_post where postid = '${req.body.id}' and number = '${req.session.usernumber}'`,(err,result)=>{
           if(err) throw err;
           else if(result[0]){
@@ -176,5 +179,84 @@ router.get('/post/single',(req,res)=>{
      })
     
 })
+
+
+
+
+router.get('/add-post',(req,res)=>{
+    var query = `select * from category order by id desc;`
+    var query1 = `select * from talent order by id desc;`
+    pool.query(query+query1,(err,result)=>{
+        if(err) throw err;
+        else res.render('add_post',{result})
+    })
+    
+})
+
+
+
+router.get('/pricing',(req,res)=>{
+    var query = `select * from category order by id desc;`
+    var query1 = `select * from talent order by id desc;`
+    pool.query(query+query1,(err,result)=>{
+        if(err) throw err;
+        else res.render('talent_hunt_pricing',{result})
+    }) 
+})
+
+
+
+
+
+
+
+router.post('/razorpay',(req,res)=>{
+    const url = `https://rzp_live_2AYlv8GRAaT63p:iIzpixX7YsDSUVPtAtbO5SMn@api.razorpay.com/v1/orders/`;
+      const data = {
+          amount:req.body.amount*100,  // amount in the smallest currency unit
+        //amount:100,
+        currency: 'INR',
+          payment_capture: true
+      }
+      
+      const options = {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      }
+      fetch(url, options)
+          .then(res => res.json())
+          .then(
+              resu =>res.json(resu)
+          );
+   })
+
+
+
+
+   
+ router.post('/razorpay_response',(req,res)=>{
+    let body = req.body
+    console.log('response',req.body)
+    req.session.payment_id = req.body.razorpay_payment_id
+    body['name'] = req.session.username
+    body['number'] = req.session.usernumber
+    body['college_name'] = req.session.usercollegename
+    body['projectid'] = req.session.userprojectid
+    body['email'] = req.session.useremail
+    body['date'] = today
+    console.log('data insert',req.body)
+    pool.query(`insert into book set ?`,req.body , (err,result)=>{
+        if(err) throw err;
+        else res.send('success')
+    })
+    
+    
+    
+    
+        })
+
 
 module.exports = router;

@@ -336,6 +336,127 @@
 
 
         </style>
+
+
+<style>
+    /* by Jamal Hassouni*/
+    @import url("https://fonts.googleapis.com/css?family=Roboto:300");
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Roboto", sans-serif !important;
+    }
+    section {
+        width: 100%;
+        height: 100vh;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 140px 0;
+    }
+    .card {
+        position: relative;
+        max-width: 300px;
+        height: auto;
+        background: linear-gradient(-45deg, #fe0847, #feae3f);
+        border-radius: 15px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        -webkit-box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+    }
+    .card:hover {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }
+    .col-sm-4:nth-child(1) .card,
+    .col-sm-4:nth-child(1) .card .title .fa {
+        background: linear-gradient(-45deg, #f403d1, #64b5f6);
+    }
+    .col-sm-4:nth-child(2) .card,
+    .col-sm-4:nth-child(2) .card .title .fa {
+        background: linear-gradient(-45deg, #ffec61, #f321d7);
+    }
+    .col-sm-4:nth-child(3) .card,
+    .col-sm-4:nth-child(3) .card .title .fa {
+        background: linear-gradient(-45deg, #24ff72, #9a4eff);
+    }
+    .card::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 40%;
+        background: rgba(255, 255, 255, 0.1);
+        z-index: 1;
+        -webkit-transform: skewY(-5deg) scale(1.5);
+        transform: skewY(-5deg) scale(1.5);
+    }
+    .title .fa {
+        color: #fff;
+        font-size: 60px;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 100px;
+        -webkit-box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    }
+    .title h2 {
+        position: relative;
+        margin: 20px 0 0;
+        padding: 0;
+        color: #fff;
+        font-size: 28px;
+        z-index: 2;
+    }
+    .price,
+    .option {
+        position: relative;
+        z-index: 2;
+    }
+    .price h4 {
+        margin: 0;
+        padding: 20px 0;
+        color: #fff;
+        font-size: 60px;
+    }
+    .option ul {
+        margin: 0;
+        padding: 0;
+    }
+    .option ul li {
+        margin: 0 0 10px;
+        padding: 0;
+        list-style: none;
+        color: #fff;
+        font-size: 16px;
+    }
+    .card a {
+        position: relative;
+        z-index: 2;
+        background: #fff;
+        color: black;
+        width: 150px;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 40px;
+        display: block;
+        text-align: center;
+        margin: 20px auto 0;
+        font-size: 16px;
+        cursor: pointer;
+        -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+    .card a:hover {
+        text-decoration: none;
+    }
+
+</style>
     </head>
 
     <body>
@@ -374,179 +495,67 @@
                     <div class="container">
                         <div class="row gutter-lg mb-10">
                             <div class="main-content">
-                                <article class="post post-classic overlay-zoom mb-4">
-                                    <a href="telent_hunt_addpost.jsp"> 
-                                        <div class="col-md-12 col-xs-12  col-xl-12">
-                                            <img  width="100%" height="100%" src="/images/post.jpeg" />
-                                        </div>
-                                    </a>
-                                    <figure class="post-media br-sm mt-10">
 
-                                        <a href="#">
-                                            <img src="https://towtrueway.com/images/<%=result[0][0].image%>" width="930"
-                                                 height="500" alt="blog">
-                                        </a>
-                                        <div class="post-details" style="border: 2px solid #D6DED7;border-top: none">
-                                            <div class="post-cats text-primary">
-                                                <a href="#"></a>
-                                            </div>
-                                            <h4 class="post-title">
-                                               <% if(result[0][0].isUserLike) { %>
-                                                     <i class="ml-5 w-icon-heart like_karo" id="<%=result[0][0].id%>" style="font-size: 29px;color:red"></i>
-                                                   <% } else{ %>
+                                <section>
+                                    <div class="container-fluid">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="card text-center">
+                                                        <div class="title">
+                                                            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                                            <h2> DD</h2>
+                                                        </div>
+                                                        <div class="price">
+                                                            <h4><sup>Rs</sup>101</h4>
+                                                        </div>
+                                                        <div class="option">
+                                                            <ul>
+                                                                <li> <i class="fa fa-check" aria-hidden="true"></i> 4800/- BV  </li>
+                                                                <li> <i class="fa fa-check" aria-hidden="true"></i> 24000/- DP </li>
+                                                                <li> <i class="fa fa-check" aria-hidden="true"></i> 90000 Capping </li>
+                                                              
+                                                            </ul>
+                                                        </div>
+                                                        <button type="button" class="btn btn-primary razorpay" price = '101'>Order Now </a>
+                                                    </div>
                                                     
-                                                     <i class="ml-5 w-icon-heart like_karo" id="<%=result[0][0].id%>" style="font-size: 29px;"></i>
+                                                </div>
+
+                                                <!-- END Col one -->
+                                                <div class="col-sm-6">
+                                                    <div class="card text-center">
+                                                        <div class="title">
+                                                            <i class="fa fa-plane" aria-hidden="true"></i>
+                                                            <h2>DD</h2>
+                                                        </div>
+                                                        <div class="price">
+                                                            <h4><sup>Rs</sup>500</h4>
+                                                        </div>
+                                                        <div class="option">
+                                                            <ul>
+                                                                <li> <i class="fa fa-check" aria-hidden="true"></i> 2400/- BV  </li>
+                                                                <li> <i class="fa fa-check" aria-hidden="true"></i> 12000/- DP </li>
+                                                                <li> <i class="fa fa-check" aria-hidden="true"></i> 30000 Capping </li>
+                                                            </ul>
+                                                        </div>
+                                                        <button type="button" class="btn btn-primary razorpay" id="razorpay" price = '500'>Order Now 500</a>
+
+                                                    </div>
                                                     
-                                                  <%  }  %>
-                                                
-                                                <i class="ml-5  w-icon-comment" style="font-size: 30px;"></i>
-                                                <button onclick="social_media()" style="border: none;background-color: white" > <span id="share_social">
-                                                        <i class="ml-5 id  fa fa-paper-plane text-dark"  data-toggle="modal" data-target="#" style="font-size: 30px;"> </i>
-                                                    </span></button>
-
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <div class="" id="social_media1">
-
-                                                            <div class="social-icons ml-5 mt-2">
-                                                                <a href="#" class="social-icon social-facebook w-icon-facebook "></a>
-                                                                <a href="#" class="social-icon social-twitter w-icon-twitter"></a>
-                                                                <a href="#" class="social-icon social-instagram w-icon-instagram"></a>
-                                                                <a href="#" class="social-icon social-instagram w-icon-youtube"></a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4"></div>
-                                                    <div class="col-md-4"></div>
                                                 </div>
+                                                <button type="button" class="btn btn-primary razorpay" id="razorpay" price = '500'>Order Now 500</a>
+                                                    <button type="button" class="btn btn-primary razorpay" id="razorpay" price = '101'>Order Now 101</a>
 
-                                            </h4>
-                                            <h6 class="" style="margin-left: 15px;">
-                                                <%=result[0][0].likes%> Likes
-                                            </h6><hr>
-
-
-                                            <% for(i=0;i<result[1].length;i++){ %>
-                                                <span class="" style="margin-left: 15px;">
-                                                    <span style="font-size: 15px;color: black"><b><%=result[1][i].username%></b> </span> <span style="color: #7B837B;font-size: 15px;color: black "><%=result[1][i].comment%></span>
-                                                </span>
-                                                <br><br>
-                                            <% } %>
-                                          
-
-                                           
-                                          
-
-                                            <div class="row p-0">
-                                                <div class="col-md-1">
-
-                                                </div>
-                                                <div class="col-md-9">
-                                                    <input type="text" id="message" style="border: none" class="form-control" placeholder="Add comment..">
-                                                </div>
-                                                <div class="col-md-2 text-center">
-                                                    <button type="button" style="border: none" id="<%=result[0][0].id%>"  class="btn btn-info btn-sm comment_karo" >submit</button>
-                                                </div>
-                                            </div>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="myModal61" role="dialog">
-                                                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                                                <div class="pricing-table">
-                                                    <div class="ptable-item">
-                                                        <div class="ptable-single">
-                                                            <div class="ptable-header">
-                                                                <div class="ptable-title">
-                                                                    <h2>Silver</h2>
-                                                                </div>
-                                                                <div class="ptable-price">
-                                                                    <h2><small>$</small>99<span>/ M</span></h2>
-                                                                </div>
-                                                            </div>
-                                                            <div class="ptable-body">
-                                                                <div class="ptable-description">
-                                                                    <ul>
-                                                                        <li>Pure HTML & CSS</li>
-                                                                        <li>Responsive Design</li>
-                                                                        <li>Well-commented Code</li>
-                                                                        <li>Easy to Use</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="ptable-footer">
-                                                                <div class="ptable-action">
-                                                                    <a href="https://www.google.com/" style="border-radius: 5px;">Buy Now</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="ptable-item featured-item">
-                                                        <div class="ptable-single">
-                                                            <div class="ptable-header">
-                                                                <div class="ptable-status">
-                                                                    <span>Hot</span>
-                                                                </div>
-                                                                <div class="ptable-title">
-                                                                    <h2>Gold</h2>
-                                                                </div>
-                                                                <div class="ptable-price">
-                                                                    <h2><small>$</small>199<span>/ M</span></h2>
-                                                                </div>
-                                                            </div>
-                                                            <div class="ptable-body">
-                                                                <div class="ptable-description">
-                                                                    <ul>
-                                                                        <li>Pure HTML & CSS</li>
-                                                                        <li>Responsive Design</li>
-                                                                        <li>Well-commented Code</li>
-                                                                        <li>Easy to Use</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="ptable-footer">
-                                                                <div class="ptable-action">
-                                                                    <a href="https://www.google.com/"style="border-radius: 5px;">Buy Now</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="ptable-item">
-                                                        <div class="ptable-single">
-                                                            <div class="ptable-header">
-                                                                <div class="ptable-title">
-                                                                    <h2>Platinum</h2>
-                                                                </div>
-                                                                <div class="ptable-price">
-                                                                    <h2><small>$</small>299<span>/ M</span></h2>
-                                                                </div>
-                                                            </div>
-                                                            <div class="ptable-body">
-                                                                <div class="ptable-description">
-                                                                    <ul>
-                                                                        <li>Pure HTML & CSS</li>
-                                                                        <li>Responsive Design</li>
-                                                                        <li>Well-commented Code</li>
-                                                                        <li>Easy to Use</li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="ptable-footer">
-                                                                <div class="ptable-action">
-                                                                    <a href="https://www.google.com/"style="border-radius: 5px;">Buy Now</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <!-- END Col two -->
+                                              
                                             </div>
                                         </div>
-                                    </figure>
-                                </article>
 
+                                    </div>
 
-
-                         
+                                </section>
+                             
                             </div>
                             <aside class="sidebar right-sidebar blog-sidebar sidebar-fixed sticky-sidebar-wrapper">
                                 <div class="sidebar-overlay">
@@ -557,32 +566,7 @@
                                 <a href="#" class="sidebar-toggle">
                                     <i class="fas fa-chevron-left"></i>
                                 </a>
-                                <div class="sidebar-content">
-                                    <div class="sticky-sidebar">
-                                        <div class="widget widget-search-form">
-                                            <div class="widget-body">
-                                                <form action="#" method="GET" class="input-wrapper input-wrapper-inline">
-                                                    <input type="text" class="form-control"
-                                                           placeholder="Search in Blog" autocomplete="off" required>
-                                                    <button class="btn btn-search"><i
-                                                            class                                                                                                                                                                                                        ="w-icon-search"></i></button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- End of Widget search form -->
-                                        <div class="widget widget-categories">
-                                            <h3 class="widget-title bb-no mb-0">Categories</h3>
-                                            <ul class="widget-body filter-items search-ul">
-                                                <li><a href="your_post.jsp"> posts</a></li>
-                                                <li><a href="blog.jsp"> comments</a></li>
-                                                <li><a href="blog.jsp"> share</a></li>
 
-                                                <li><a href="blog.jsp">Technology</a></li>
-                                            </ul>
-                                        </div>
-
-                                    </div>
-                                </div>
                             </aside>
                         </div>
                     </div>
@@ -1002,5 +986,111 @@ socialWindow(url);
 
 
 </script>
+
+
+
+
+
+
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+
+
+
+
+
+$(document).ready(function(){
+	$('a[href="#search"]').on('click', function(event) {                    
+		$('#search').addClass('open');
+		$('#search > form > input[type="search"]').focus();
+	});            
+	$('#search, #search button.close').on('click keyup', function(event) {
+		if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+			$(this).removeClass('open');
+		}
+	});            
+});
+
+
+
+
+
+
+
+
+
+$('.razorpay').click(function(e){
+
+
+
+
+const price = $(this).attr('price');
+
+
+
+  const amount = price
+
+  $.post('/talent-hunt/razorpay',{amount},data=>{
+
+  console.log('data recieved',data)
+
+    var options1 = {
+    "key": "rzp_live_2AYlv8GRAaT63p", // Enter the Key ID generated from the Dashboard
+    "amount": amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise or INR 500.
+    "currency": "INR",
+    "name": "FileMakr",
+    "description": 'talenthnt',
+    "image": "https://www.filemakr.com/images/filemakr-project-file-creator-logo.png",
+    "order_id": data.id,//This is a sample Order ID. Create an Order using Orders API. (https://razorpay.com/docs/payment-gateway/orders/integration/#step-1-create-an-order). Refer the Checkout form table given below
+    "handler": function (response){
+
+      console.log('response aaya hai',response)
+
+      $.post('/talent-hunt/razorpay_response',response,data=>{
+if(data == 'success'){
+     window.location.href = '/final-year-projects-source-code/download-successfull' 
+}
+else{
+  window.location.href = '/' 
+}
+      })
+    
+      
+    },
+   
+   
+    "theme": {
+        "color": "#507ec0"
+    }
+};
+
+
+var rzp1 = new Razorpay(options1);
+
+    rzp1.open();
+ 
+    e.preventDefault();
+
+
+
+
+
+  })
+
+
+
+ 
+
+
+})
+
+
+
+
+</script>
+
+
 
 </html>
