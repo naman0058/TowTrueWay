@@ -592,7 +592,7 @@ router.post('/like',(req,res)=>{
     pool.query(`delete from like_post where postid = '${req.body.postid}' and number = '${req.body.number}'`,(err,result)=>{
         if(err) throw err;
         else {
-            pool.query(`update talent set likes = likes-1 where id = '${id}'`,(err,result)=>{
+            pool.query(`update talent set likes = likes-1 where id = '${req.body.postid}'`,(err,result)=>{
                 if(err) throw err;
                 else  res.json({msg:'success'})
             })

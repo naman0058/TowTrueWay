@@ -37,99 +37,65 @@
         <div class="content-body">
 
             <div class="row page-titles mx-0">
-                <div class="col-sm-6 p-md-0">
-                    <div class="breadcrumb-range-picker">
-                        <span><i class="icon-calender"></i></span>
-                        <span class="ml-1">August 08, 2017 - August 08, 2017</span>
-                    </div>
-                </div>
-                <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Components</a></li>
-                    </ol>
-                </div>
+                
+                
             </div>
             <!-- row -->
 
             <div class="container-fluid">
-                <div class="row justify-content-between mb-3">
-					<div class="col-12 ">
-						<h2 class="page-heading">Hi,Welcome Back!</h2>
-						<p class="mb-0">Your restaurent admin template</p>
-					</div>
-                </div>
+               
                 <div class="row">
                   
-                    <div class="col-xl-3 col-md-6 col-xxl-6">
+                    <div class="col-xl-6 col-md-6 col-xxl-6">
                         <div class="card">
                             <div class="card-body">
                                 <div class="media align-items-center mb-4">
                                    
                                     <div class="media-body">
-                                        <h5 class="mb-0"><%=result[0][0].name%> </h5>
-                                        <p class="text-muted mb-0"><%=result[0][0].business_name%>
-                                            </p>
+                                        <h5 class="mb-0"><%=result[0][0].name%> (Rs. <%=result[0][0].price%>) </h5>
+                                       
                                     </div>
                                  
-                                      <% if(result[0][0].status =='approved') { %>
-                                           
-                                        <div class="circle"></div>
-
-
-                                        <% } else { %>
-                                            <div class="circle1"></div>
-
-
-                                            <% } %>
+                                    
                                      
                                 </div>
 
-                                <h4>Address</h4>
-                                <p class="text-muted"><%=result[0][0].address%></p>
+                                <h4>Vendor's Details</h4>
+                                <p class="text-muted"><%=result[0][0].vendorname%> (<%=result[0][0].vendornumber%>)</p>
                                 <ul class="card-profile__info">
-                                    <li class="mb-1"><strong class="text-dark mr-4">Mobile</strong> <span><%=result[0][0].number%></span></li>
                                     <li><strong class="text-dark mr-4">Category</strong> <span><%=result[0][0].categoryname%></span></li>
+                                    <li><strong class="text-dark mr-4">SubCategory</strong> <span><%=result[0][0].subcategoryname%></span></li>
                                    
                                 </ul>
 
-                                <ul class="card-profile__info">
-                                    <li class="mb-1"><strong class="text-dark mr-4">GST Number</strong> <span><%=result[0][0].gst_number%></span></li>
-                                   
-                                </ul>
+                             
                             </div>
                           
                         </div>
                     </div>
-                    <div class="col-xl-3 col-md-6 col-xxl-6">
+                    <div class="col-xl-6 col-md-6 col-xxl-6">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Kyc Details (<%=result[0][0].status%>)</h4>
                                 <div id="activity" class="py-2">
-                                    <div class="media-body" style="margin-top:20px;">
-                                        <h5 style="color:#1f5ab0;"> PAN Card </h5>
                                    
-                                    </div>
                                     <div class="media border-bottom py-3">
-                                        <img width="45" src="/images/<%=result[0][0].pan_front_image%>" alt="avatar" class="mr-3">
-                                        <img width="45" src="/images/<%=result[0][0].pan_back_image%>" alt="avatar" class="mr-3">
+                                        <img width="45" src="/images/<%=result[0][0].image%>" alt="avatar" class="mr-3">
+                                        <img width="45" src="/images/<%=result[0][0].thumbnail%>" alt="avatar" class="mr-3">
+
+
                                         
                                        
+
+<% for(i=0;i<result[1].length;i++){ %>
+    <img width="45" src="/images/<%=result[1][i].image%>" alt="avatar" class="mr-3">
+ 
+<% } %>
+
                                     </div>
 
 
 
-                                    <div class="media-body" style="margin-top:20px;">
-
-                                        <h5 style="color:#1f5ab0;">Aadhar Card </h5>
                                    
-                                    </div>
-                                    <div class="media border-bottom py-3">
-                                        <img width="45" src="/images/<%=result[0][0].aadhar_front_image%>" alt="avatar" class="mr-3">
-                                        <img width="45" src="/images/<%=result[0][0].aadhar_back_image%>" alt="avatar" class="mr-3">
-                                        
-                                       
-                                    </div>
 
 
                                     <% if(result[0][0].status == 'approved') { %>
@@ -138,8 +104,11 @@
 
 
                              <% } else { %>
+                                <input type="text" class="form-control" placeholder="Remarks ( If you reject this product )"><br><br/>
 
                                 <div class="media py-3">
+
+
                                     <button type="button" class='btn btn-success change_status' name="approved"  id="<%=result[0][0].id%>">Approved</button>
                                     <div class="media-body">
                                       
@@ -156,68 +125,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-12 col-lg-12 col-xxl-6">
-                        <div class="card">
-                            <div class="card-body">
-                                    <h4 class="card-title">Delivery Orders</h4>
-                                <div class="table-responsive">
-                                    <table class="table mb-0 table-responsive-sm">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Name</th>
-                                                <th>Status</th>
-                                                <th>Address</th>
-                                                <th>Delivery Time</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>1</th>
-                                                <td>Kolor Tea Shirt For Man</td>
-                                                <td><span class="badge badge-warning">Pending</span>
-                                                </td>
-                                                <td>Malibag, Dhaka</td>
-                                                <td class="color-primary">15 min Left</td>
-                                            </tr>
-                                            <tr>
-                                                <th>2</th>
-                                                <td>Kolor Tea Shirt For Women</td>
-                                                <td><span class="badge badge-success">Delivered</span>
-                                                </td>
-                                                <td>Mouchak, Dhaka</td>
-                                                <td class="color-success">2 Hours Left</td>
-                                            </tr>
-                                            <tr>
-                                                <th>2</th>
-                                                <td>Kolor Tea Shirt For Women</td>
-                                                <td><span class="badge badge-success">Delivered</span>
-                                                </td>
-                                                <td>Mouchak, Dhaka</td>
-                                                <td class="color-success">2 Hours Left</td>
-                                            </tr>
-                                            <tr>
-                                                <th>2</th>
-                                                <td>Kolor Tea Shirt For Women</td>
-                                                <td><span class="badge badge-success">Delivered</span>
-                                                </td>
-                                                <td>Mouchak, Dhaka</td>
-                                                <td class="color-success">2 Hours Left</td>
-                                            </tr>
-                                            <tr>
-                                                <th>3</th>
-                                                <td>Blue Backpack For Baby</td>
-                                                <td><span class="badge badge-danger">Cencelled</span>
-                                                </td>
-                                                <td>Mogbajar, Dhaka</td>
-                                                <td class="color-danger">40 min Left</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  
                 </div>
             </div>
         </div>
@@ -473,7 +381,7 @@ $('.change_status').click(function(){
     let status = $(this).attr('name');
     let id = $(this).attr('id')
    
-$.post('/admin/dashboard/vendor/update-status',{id,status},(req,res)=>{
+$.post('/admin/dashboard/product/update-status',{id,status},(req,res)=>{
     location.reload();
 })
 

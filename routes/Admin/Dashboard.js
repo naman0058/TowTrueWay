@@ -204,6 +204,18 @@ router.post('/vendor/update-status',(req,res)=>{
 
 
 
+router.post('/product/update-status',(req,res)=>{
+      pool.query(`update products set status = '${req.body.status}' where id = '${req.body.id}'`,(err,result)=>{
+        if(err) throw err;
+        else {
+            console.log('result',result)
+            res.send('success')
+        }
+    })
+ })
+
+
+
 router.post('/listing/update-status',(req,res)=>{
     
     pool.query(`update listing set status = '${req.body.status}' where id = '${req.body.id}'`,(err,result)=>{
@@ -296,7 +308,13 @@ router.get('/product-request',(req,res)=>{
 
 
 router.get('/product-request/details',(req,res)=>{
-    var query = `select * from products where id = '${req.query.id}';`
+    var query = `select p.* , 
+    (select c.name from category c where c.id = p.categoryid ) as categoryname,
+    (select s.name from subcategory s where s.id = p.categoryid ) as subcategoryname,
+    (select v.name from vendor v where v.id = p.vendorid ) as vendorname,
+    (select v.number from vendor v where v.id = p.vendorid ) as vendornumber
+
+    from products p where id = '${req.query.id}';`
     var query1 = `select * from images where productid = '${req.query.id}';`
     pool.query(query+query1,(err,result)=>{
         if(err) throw err;
@@ -304,6 +322,38 @@ router.get('/product-request/details',(req,res)=>{
         else res.render('Admin/single-product-request',{result})
     })
 })
+
+
+
+
+router.get('/users/normal',(req,res)=>{
+    if(req.session.adminid){
+        pool.query(`select * from users order by id desc`,(err,result)=>{
+            if(err) throw err;
+            else res.render('Admin/Users',{result})
+        })
+       }
+       else{
+       res.redirect('/admin')
+       }
+})
+
+
+
+router.get('/users/listing',(req,res)=>{
+    if(req.session.adminid){
+        pool.query(`select * from listing order by id desc`,(err,result)=>{
+            if(err) throw err;
+            else res.render('Admin/Users',{result})
+        })
+       }
+       else{
+       res.redirect('/admin')
+       }
+})
+
+
+
 
 
 // All Data Found

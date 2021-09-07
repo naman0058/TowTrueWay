@@ -1,34 +1,4 @@
-<%- include ('./Admin/storeListingHeader.ejs') %>
-
-
-
-
-<style>
-
-
-
-.circle {
-    width: 10px;
-    height: 10px;
-    background-color: #62bd19;
-    border-radius: 50%;
-  
-}
-
-
-
-.circle1 {
-    width: 10px;
-    height: 10px;
-    background-color: #bd1919;
-    border-radius: 50%;
-  
-}
-
-
-
-
-</style>
+<%- include ('./storeListingHeader.ejs') %>
 
 
         <!--**********************************
@@ -37,253 +7,59 @@
         <div class="content-body">
 
             <div class="row page-titles mx-0">
-                <div class="col-sm-6 p-md-0">
-                    <div class="breadcrumb-range-picker">
-                        <span><i class="icon-calender"></i></span>
-                        <span class="ml-1">August 08, 2017 - August 08, 2017</span>
-                    </div>
-                </div>
-                <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Components</a></li>
-                    </ol>
-                </div>
+               
+              
             </div>
             <!-- row -->
 
             <div class="container-fluid">
-                <div class="row justify-content-between mb-3">
-					<div class="col-12 ">
-						<h2 class="page-heading">Hi,Welcome Back!</h2>
-						<p class="mb-0">Your restaurent admin template</p>
-					</div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-6">
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-6 col-sm-6 col-xxl-6">
-                                <div class="card">
-                                    <div class="card-body text-center">
-                                        <div class="easy-pie-chart pie-chart-4" data-percent="<%=result[0][0].total_post%>" data-size="100">
-                                            <div class="inner">
-                                                <h5><b><%=result[0][0].total_post%></b><small class="d-block">Post</small></h5>
-                                            </div>
-                                        </div>
-                                        <h5 class="mt-3">Today Post</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-sm-6 col-xxl-6">
-                                <div class="card">
-                                    <div class="card-body text-center">
-                                        <div class="easy-pie-chart pie-chart-4" data-percent="<%=result[1][0].total_likes%>" data-size="100">
-                                            <div class="inner">
-                                                <h5><b><%=result[1][0].total_likes%></b><small class="d-block">Likes</small></h5>
-                                            </div>
-                                        </div>
-                                        <h5 class="mt-3">Total Like</h5>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-12 col-lg-12 col-sm-12 col-xxl-6">
-                                <div class="card">
-                                    <div class="card-body text-center">
-                                        <div class="easy-pie-chart pie-chart-4" data-percent="<%=result[3][0].total_earning%>" data-size="100">
-                                            <div class="inner">
-                                                <% if(result[3][0].total_earning == null) { %>
-                                                <h5><b>0</b><small class="d-block">Earning</small></h5>
-                                                <% } else { %>
-                                                    <h5><b><%=result[3][0].total_earning%></b><small class="d-block">Earning</small></h5>
-
-
-                                                    <% } %>
-                                            </div>
-                                        </div>
-                                        <h5 class="mt-3">Today Company Earning</h5>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        
-                          
-                        </div>
-                    </div>
-                    <div class="col-xl-6">
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-6 col-sm-6 col-xxl-6">
-                                <div class="card">
-                                    <div class="card-body text-center">
-                                        <div class="easy-pie-chart pie-chart-4" data-percent="<%=result[6][0].date%>" data-size="100">
-                                            <div class="inner">
-                                                <h6 class="mt-3"><b><%=result[6][0].date%></b><small class="d-block">Transaction</small></h6>
-                                            </div>
-                                        </div>
-                                        
-                                        <h5 class="mt-3">Last Transaction</h5>
-                                    </div>
-                                </div>
-                            </div>
-                           
-
-                            <div class="col-xl-6 col-lg-6 col-sm-6 col-xxl-6">
-                                <div class="card">
-                                    <div class="card-body text-center">
-                                        <div class="easy-pie-chart pie-chart-4" data-percent="<%=result[3][0].total_earning%>" data-size="100">
-                                            <div class="inner">
-                                                <% if(result[3][0].total_earning == null) { %>
-                                                <h5><b>0</b><small class="d-block">Earning</small></h5>
-                                                <% } else { %>
-                                                    <h5><b><%=(result[3][0].total_earning*1)/100%></b><small class="d-block">Estimate 1% <br/>Per User</small></h5>
-
-
-                                                    <% } %>
-                                            </div>
-                                        </div>
-                                        <h5 class="mt-3">Return Amount</h5>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-xl-6 col-lg-6 col-sm-6 col-xxl-6">
-                                <div class="card">
-                                    <div class="card-body text-center">
-                                        <div class="easy-pie-chart pie-chart-4" data-percent="<%=result[4][0].talent_hunt_earning%>" data-size="100">
-                                            <div class="inner">
-                                                <% if(result[4][0].talent_hunt_earning == null) { %>
-                                                    <h5><b>0</b><small class="d-block">Earning</small></h5>
-                                                    <% } else { %>
-                                                        <h5><b><%=result[4][0].talent_hunt_earning%></b><small class="d-block">Earning</small></h5>
-    
-    
-                                                        <% } %>
-                                               
-                                            </div>
-                                        </div>
-                                        <h5 class="mt-3">Talent Hunt Earning</h5>
-                                    </div>
-                                </div>
-                            </div>
-                          
-
-
-
-
-
-
-
-                            <div class="col-xl-6 col-lg-6 col-sm-6 col-xxl-6">
-                                <div class="card">
-                                    <div class="card-body text-center">
-                                        <div class="easy-pie-chart pie-chart-4" data-percent="<%=result[3][0].total_earning%>" data-size="100">
-                                            <div class="inner">
-                                                <% if(result[3][0].total_earning == null) { %>
-                                                <h5><b>0</b><small class="d-block">Earning</small></h5>
-                                                <% } else { %>
-                                                    <h5><b><%=(result[3][0].total_earning*2)/100%></b><small class="d-block">Estimate 2% <br/>Per User</small></h5>
-
-
-                                                    <% } %>
-                                            </div>
-                                        </div>
-                                        <h5 class="mt-3">Return Amount</h5>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                    </div>
                 
-                    <div class="col-xl-12 col-lg-12 col-xxl-6">
+              
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="content-heading">Vendor's List</h3>
+                    </div>
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                    <h4 class="card-title">Top 10 Post</h4>
-                                    <!-- <h4 class="card-title" style="float: right;"><button class="btn btn-primary flost-right send" company_amount = "<%=result[3][0].total_earning%>">Send Amount</button></h4> -->
                                 <div class="table-responsive">
-                                    <table class="table mb-0 table-responsive-sm">
+                                    <table id="example" class="display" style="min-width: 845px">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
-                                                <th>User</th>
-                                                <th>Likes</th>
-                                                <th>Image</th>
-                                                <th>Description</th>
+                                                <th>Name</th>
+                                                 <th>Number</th>
+                                                <th>Joining Date</th>
+                                                <th>View Details</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 
-<% for(i=0;i<result[2].length;i++) { %>
+<% for(i=0;i<result.length;i++) { %>
 
+                                            <tr>
+                                                <td><%=result[i].name%></td>
+                                                <td><%=result[i].number%></td>
+                                                <td><%=result[i].date%></td>
+                                                <td><a href="/admin/dashboard/listing/details/<%=result[i].id%>"><button type="button" class="btn btn-link">View Details</button></a></td>
+                                            </tr>
 
-    <tr>
-        <th><%=i+1%></th>
-        <td><%=result[2][i].username%></td>
-        <td><span class="badge badge-warning"><%=result[2][i].likes%></span>
-        </td>
-        <td><img src="/images/<%=result[2][i].image%>" style="width: 50px;"></td>
-        <td class="color-primary"><%=result[2][i].remark%></td>
-    </tr>
- 
-
-    <% } %>
-
-                                           
+                                            <% } %>
+                                            
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Name</th>
+                                                 <th>Number</th>
+                                                <th>Joining Date</th>
+                                                <th>View Details</th>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-                    <div class="col-xl-12 col-lg-12 col-xxl-6">
-                        <div class="card">
-                            <div class="card-body">
-                                    <h4 class="card-title">Recent Transaction</h4>
-                                    <!-- <h4 class="card-title" style="float: right;"><button class="btn btn-primary flost-right send" company_amount = "<%=result[3][0].total_earning%>">Send Amount</button></h4> -->
-                                <div class="table-responsive">
-                                    <table class="table mb-0 table-responsive-sm">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Date</th>
-                                                <th>Send Amount</th>
-                                                
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-<% for(i=0;i<result[7].length;i++) { %>
-
-
-    <tr>
-        <th><%=i+1%></th>
-        <td><%=result[7][i].recent_dates%></td>
-        <td><button class="btn btn-primary send" type="button" date= '<%=result[7][i].recent_dates%>'>Send Amount</button>
-        </td>
-       
-    </tr>
- 
-
-    <% } %>
-
-                                           
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                   
                 </div>
             </div>
         </div>
@@ -522,49 +298,26 @@
     <script src="/Admin/main/./js/quixnav.js"></script>
     <script src="/Admin/main/./js/styleSwitcher.js"></script>
 
-
-    <!-- Easy pie chart -->
-    <script src="/Admin/./assets/plugins/easy-pie-chart/jquery.easypiechart.min.js"></script>
-
-
-    <!-- Init file -->
-    <script src="/Admin/main/./js/dashboard/dashboard-3.js"></script>
-
-    
-
-
-<script>
-
-$('.change_status').click(function(){
-    let status = $(this).attr('name');
-    let id = $(this).attr('id')
-   
-$.post('/admin/dashboard/vendor/update-status',{id,status},(req,res)=>{
-    location.reload();
-})
-
-})
-
-</script>
+    <!-- JS Grid -->
+    <script src="/Admin/./assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="/Admin/./assets/plugins/jsgrid/js/jsgrid.min.js"></script>
+    <!-- Footable -->
+    <script src="/Admin/./assets/plugins/footable/js/footable.min.js"></script>
+    <!-- Bootgrid -->
+    <script src="/Admin/./assets/plugins/jquery-bootgrid/dist/jquery.bootgrid.min.js"></script>
+    <!-- Datatable -->
+    <script src="/Admin/./assets/plugins/datatables/js/jquery.dataTables.min.js"></script>
 
 
+    <!-- JS Grid Init -->
+    <script src="/Admin/main/./js/plugins-init/jsgrid-init.js"></script>
+    <script src="/Admin/main/./js/plugins-init/footable-init.js"></script>
+    <script src="/Admin/main/./js/plugins-init/jquery.bootgrid-init.js"></script>
+    <script src="/Admin/main/./js/plugins-init/datatables.init.js"></script>
 
-<script>
 
-    $('.send').click(function(){
-        let date = $(this).attr('date')
-        // alert(date)
-        $.post('/talent-hunt/send/amount',{date},data=>{
-          if(data.msg=='success'){
-         window.location.reload()
-          }
-          else{
-alerT(data.msg)
-          }
-        })
-    })
-</script>
 
 </body>
+
 
 </html>
