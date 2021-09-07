@@ -1,6 +1,8 @@
 var express = require('express');
 const pool = require('../routes/pool');
 var router = express.Router();
+var upload = require('./multer');
+
 
 const fetch = require("node-fetch");
 
@@ -32,13 +34,16 @@ router.get('/',(req,res)=>{
 
 
 router.post('/send/amount',(req,res)=>{
-    pool.query(`select sum(amount) from transaction where date ='${req.body.date}'`,(err,result)=>{
+    console.log(req.body)
+    pool.query(`select sum(amount) as amount from transaction where date ='${req.body.date}'`,(err,result)=>{
         if(err) throw err;
         else if(result[0]){
             let amount = result[0].amount
+            console.log('amount',amount)
     pool.query(`select number , percentage from talent  where date = '${req.body.date}' order by likes desc limit 10`,(err,result)=>{
         if(err) throw err;
         else {
+           
            for(i=0;i<result.length;i++) {
           let send_amount = (amount*result[i].percentage)/100;
           let number = result[i].number;
@@ -50,9 +55,10 @@ router.post('/send/amount',(req,res)=>{
               }
           })
 
-        res.json({msg:'success'})
 
            }
+        // res.json({msg:'success'})
+
         }
     })
         }
@@ -257,6 +263,83 @@ router.post('/razorpay',(req,res)=>{
     
     
         })
+
+
+
+
+
+
+
+
+
+        router.post('/insert-post',upload.single('image'),(req,res)=>{
+            let body = req.body
+            var today = new Date();
+            var dd = today.getDate();
+            
+            var mm = today.getMonth()+1; 
+            var yyyy = today.getFullYear();
+            if(dd<10) 
+            {
+                dd='0'+dd;
+            } 
+            
+            if(mm<10) 
+            {
+                mm='0'+mm;
+            } 
+            today = yyyy+'-'+mm+'-'+dd;
+        
+            body['image'] = req.file.filename;
+            body['date'] = today
+            body['likes'] = 0
+            body['number'] = req.session.usernumber
+            body['percentage'] = 1
+           
+         console.log(req.body)
+        
+        
+        pool.query(`select id from talent where date = CURDATE()`,(err,result)=>{
+            if(err) throw err;
+          
+            else{
+                pool.query(`insert into talent set ?`,body,(err,result)=>{
+                    err ? console.log(err) : res.redirect('/talent-hunt/post')
+                })
+             
+            }
+        })
+        
+         
+           
+        })
+        
+
+
+
+
+        router.get('/transaction',(req,res)=>{
+            pool.query(`select sum(amount) as total_amount,date from talent_hunt_return group by date order by date desc`,(err,result)=>{
+                if(err) throw err;
+               // else res.json(result)
+                 else res.render('Admin/talent-hunt-transaction',{result})
+            })
+        })
+
+
+
+        router.get('/transaction-details-by-date',(req,res)=>{
+            var query = `select sum(amount) as total_amount from talent_hunt_return where date = '${req.query.date}';`
+            var query1 = `select t.* , (select u.name from users u where u.number = t.number) as username from talent_hunt_return t where date = '${req.query.date}';`
+            pool.query(query+query1,(err,result)=>{
+                if(err) throw err;
+                //else res.json(result)
+                 else res.render('Admin/talent-hunt-transaction-details',{result})
+            })
+        })
+
+
+
 
 
 module.exports = router;

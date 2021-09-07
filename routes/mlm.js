@@ -1,16 +1,15 @@
 var express = require('express');
 var router = express.Router();
-var pool =  require('../pool');
-var upload = require('../multer');
+var pool =  require('./pool');
+var upload = require('./multer');
 const { PayloadTooLarge } = require('http-errors');
-const { query } = require('../pool');
 
 
 
 var table = 'admin'
 
 
-router.get('/',(req,res)=>{
+router.get('/dashboard',(req,res)=>{
     if(req.session.adminid){
 
 
@@ -21,7 +20,7 @@ router.get('/',(req,res)=>{
         var query4 = `select * from products order by id desc limit 5;`
         var query5 = `select * from booking where date = curdate() and status !='completed' ;`
         pool.query(query+query1+query2+query3+query4+query5,(err,result)=>{
-            res.render('Admin/Dashboard',{msg : '',result})
+            res.render('MLM/Dashboard',{msg : '',result})
 
 
         })
@@ -32,6 +31,45 @@ router.get('/',(req,res)=>{
         res.render('Admin/login',{msg : '* Invalid Credentials'})
 
     }
+})
+
+
+
+
+router.get('/profile',(req,res)=>{
+    
+    pool.query(`select * from users where number = '${req.session.usernumber}'`,(err,result)=>{
+        if(err) throw err;
+        else res.render('MLM/profile',{result})
+    })
+})
+
+
+
+
+router.get('/bank-details',(req,res)=>{
+    pool.query(`select * from users where number = '${req.session.usernumber}'`,(err,result)=>{
+        if(err) throw err;
+        else res.render('MLM/bank',{result})
+    })
+})
+
+
+
+router.get('/direct-team',(req,res)=>{
+    pool.query(`select * from users where number = '${req.session.usernumber}'`,(err,result)=>{
+        if(err) throw err;
+        else res.render('MLM/DirectTeam',{result})
+    })
+})
+
+
+
+router.get('/downline-team',(req,res)=>{
+    pool.query(`select * from users where number = '${req.session.usernumber}'`,(err,result)=>{
+        if(err) throw err;
+        else res.render('MLM/DownlineTeam',{result})
+    })
 })
 
 
@@ -248,62 +286,8 @@ router.get('/orders/:type',(req,res)=>{
    
       
    })
-
-
-
-   router.get('/transaction/reports',(req,res)=>{
-       if(req.session.adminid){
-        res.render('Admin/transaction-reports')
-       }
-       else{
-       res.redirect('/admin')
-       }
-       
-   })
-
-
-
-
-
-
-
-   router.get('/transaction/reports/bytype',(req,res)=>{
-       var query = `select sum(amount) as total_amount from transaction t where date between '${req.query.from_date}' and '${req.query.to_date}' and t.type = '${req.query.type}';`
-       var query1 = `select t.* , (select u.name from users u where u.number = t.number) as username from transaction t where date between '${req.query.from_date}' and '${req.query.to_date}' and t.type = '${req.query.type}' order by id desc;`
-       pool.query(query+query1,(err,result)=>{
-           if(err) throw err;
-        //    00else res.render('Admin/transaction-talent-hunt',{result})
-    else res.json(result)  
-    })
-   })
-
-
-
-    
    
-router.get('/product-request',(req,res)=>{
-    pool.query(`select p.* ,
-    (select c.name from category c where c.id = p.categoryid ) as categoryname,
-    (select s.name from subcategory s where s.id = p.categoryid ) as subcategoryname,
-    (select v.name from vendor v where v.id = p.vendorid ) as vendorname
-    from products p  where status = 'pending'`,(err,result)=>{
-        if(err) throw err;
-        // else res.json(result)
-        else res.render('Admin/product_request',{result})
-    })
-})
-
-
-
-router.get('/product-request/details',(req,res)=>{
-    var query = `select * from products where id = '${req.query.id}';`
-    var query1 = `select * from images where productid = '${req.query.id}';`
-    pool.query(query+query1,(err,result)=>{
-        if(err) throw err;
-       // else res.json(result)
-        else res.render('Admin/single-product-request',{result})
-    })
-})
+   
 
 
 // All Data Found

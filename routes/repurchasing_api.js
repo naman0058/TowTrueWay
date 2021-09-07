@@ -6,6 +6,67 @@ var upload = require('./multer');
 
 
 
+const fetch = require("node-fetch");
+
+router.post("/payment-initiate", (req, res) => {
+  const url = `https://rzp_live_dzlUpCalsmyFit:MuvUAutY83bcbpHZol6xXrPZ@api.razorpay.com/v1/orders/`;
+  const data = {
+    amount: req.body.amount * 100, // amount in the smallest currency unit
+    //amount:100,
+    currency: "INR",
+    payment_capture: true,
+  };
+  console.log("data", data);
+  const options = {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  fetch(url, options)
+    .then((res) => res.json())
+    .then((resu) => res.send(resu));
+});
+
+router.get("/demo", (req, res) => {
+  res.render("dem");
+});
+
+router.get("/demo1", (req, res) => {
+  console.log(req.query);
+  res.send(req.query);
+});
+
+router.post("/razorpay-response", (req, res) => {
+  let body = req.body;
+  console.log("response recieve", body);
+
+  if (body.razorpay_signature) {
+    res.redirect("/api/success_razorpay");
+  } else {
+    res.redirect("/api/failed_payment");
+  }
+});
+
+router.get("/success_razorpay", (req, res) => {
+  res.json({
+    msg: "success",
+  });
+});
+
+router.get("/failed_payment", (req, res) => {
+  res.json({
+    msg: "failed",
+  });
+});
+
+router.post("/failed_payment", (req, res) => {
+  res.json({
+    msg: "failed",
+  });
+});
+
 
 router.post('/photoUpload',upload.single('image'),(req,res)=>{
     let body = req.body
@@ -530,7 +591,12 @@ router.post('/like',(req,res)=>{
         else if(result[0]){
     pool.query(`delete from like_post where postid = '${req.body.postid}' and number = '${req.body.number}'`,(err,result)=>{
         if(err) throw err;
-        else res.json({msg:'success'})
+        else {
+            pool.query(`update talent set likes = likes-1 where id = '${id}'`,(err,result)=>{
+                if(err) throw err;
+                else  res.json({msg:'success'})
+            })
+          }
     })
         }
         else{
@@ -582,6 +648,14 @@ router.get('/profile',(req,res)=>{
     })
 })
 
+
+
+router.post('/search-listing',(req,res)=>{
+    pool.query(`select * from category where keyboard = '${req.body.search}'`,(err,result)=>{
+        if(err) throw err;
+        else res.json(result);
+    })
+})
 
 
 module.exports = router;
