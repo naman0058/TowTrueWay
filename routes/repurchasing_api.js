@@ -173,9 +173,9 @@ router.post('/listingInsert',upload.fields([{ name: 'image', maxCount: 1 }, { na
     today = yyyy+'-'+mm+'-'+dd;
 
     body['image'] = req.files.image[0].filename;
-    body['aadhar_front'] = req.files.icon[0].aadhar_front;
-    body['aadhar_back'] = req.files.icon[0].aadhar_back;
-    body['pan_card'] = req.files.icon[0].pan_card;
+    body['aadhar_front'] = req.files.aadhar_front[0].filename;
+    body['aadhar_back'] = req.files.aadhar_back[0].filename;
+    body['pan_card'] = req.files.pan_card[0].filename;
 
     body['date'] = today;
 
