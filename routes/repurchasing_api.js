@@ -153,7 +153,7 @@ router.post('/getAllSelfie',(req,res)=>{
 
 
 
-router.post('/listingInsert',upload.single('image'),(req,res)=>{
+router.post('/listingInsert',upload.fields([{ name: 'image', maxCount: 1 }, { name: 'aadhar_front', maxCount: 8 } , { name: 'aadhar_back', maxCount: 8 } , { name: 'pan_card', maxCount: 8 } ]),(req,res)=>{
     let body = req.body
     // let body = req.body
     var today = new Date();
@@ -172,7 +172,11 @@ router.post('/listingInsert',upload.single('image'),(req,res)=>{
     } 
     today = yyyy+'-'+mm+'-'+dd;
 
-    body['image'] = req.file.filename;
+    body['image'] = req.files.image[0].filename;
+    body['aadhar_front'] = req.files.icon[0].aadhar_front;
+    body['aadhar_back'] = req.files.icon[0].aadhar_back;
+    body['pan_card'] = req.files.icon[0].pan_card;
+
     body['date'] = today;
 
    

@@ -280,9 +280,11 @@ router.get('/orders/:type',(req,res)=>{
 
 
    router.get('/transaction/reports/bytype',(req,res)=>{
-       var query = `select sum(amount) as total_amount from transaction t where date between '${req.query.from_date}' and '${req.query.to_date}' and t.type = '${req.query.type}';`
+       var query = `select sum(amount) as total_amount_recieved from transaction t where  date between '${req.query.from_date}' and '${req.query.to_date}' and t.type = '${req.query.type}' and sign = '+';`
        var query1 = `select t.* , (select u.name from users u where u.number = t.number) as username from transaction t where date between '${req.query.from_date}' and '${req.query.to_date}' and t.type = '${req.query.type}' order by id desc;`
-       pool.query(query+query1,(err,result)=>{
+       var query2 = `select sum(amount) as total_amount_sent from transaction t where  date between '${req.query.from_date}' and '${req.query.to_date}' and t.type = '${req.query.type}' and sign = '-';`
+
+       pool.query(query+query1+query2,(err,result)=>{
            if(err) throw err;
         //    00else res.render('Admin/transaction-talent-hunt',{result})
     else res.json(result)  
@@ -353,6 +355,46 @@ router.get('/users/listing',(req,res)=>{
 })
 
 
+
+
+router.get('/commission/list',(req,res)=>{
+    pool.query(`select name , commission from subcategory order by name desc`,(err,result)=>{
+        if(err) throw err;
+        else res.render('Admin/commission',{result})
+    })
+})
+
+
+
+router.get('/ecommerce/payout',(req,res)=>{
+    if(req.session.adminid){
+        res.render('Admin/payout-list')
+       }
+       else{
+       res.redirect('/admin')
+       }
+})
+
+
+
+router.get('/ecommerce/payout/report',(req,res)=>{
+    var query = `select sum(price) as total_amount from booking b where b.payout is null and date between '${req.query.from_date}' and '${req.query.to_date}';`
+    var query1 = `select b.vendorid , b.price , b.date, b.subcategoryid, 
+    (select v.account_holder_name from vendor v where v.id = b.vendorid) as vendor_account_holder_name,
+    (select v.ifsc_code from vendor v where v.id = b.vendorid) as vendor_ifsc_code,
+    (select v.branch_name from vendor v where v.id = b.vendorid) as vendor_branch_name,
+    (select v.account_type from vendor v where v.id = b.vendorid) as vendor_account_type,
+
+    (select v.bank_name from vendor v where v.id = b.vendorid) as vendor_bank_name,
+    (select v.number from vendor v where v.id = b.vendorid) as vendor_mobile_number,
+    (select v.account_number from vendor v where v.id = b.vendorid) as vendor_account_number,
+    (select s.commission from subcategory s where s.id = b.subcategoryid ) as company_commission
+    from booking b where b.payout is null and date between '${req.query.from_date}' and '${req.query.to_date}';`
+    pool.query(query+query1,(err,result)=>{
+        if(err) throw err;
+        else res.json(result)
+    })
+})
 
 
 

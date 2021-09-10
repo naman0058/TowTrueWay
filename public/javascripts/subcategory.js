@@ -51,6 +51,8 @@ function fillDropDown(id, data, label, selectedid = 0) {
     <th>Image</th>
     <th>Category Name</th>
     <th>Name</th>
+    <th>Commission</th>
+
     <th>Options</th>
     </tr>
     </thead>
@@ -63,6 +65,8 @@ function fillDropDown(id, data, label, selectedid = 0) {
     </td>
     <td>${item.categoryname}</td>
     <td>${item.name}</td>
+    <td>${item.commission}</td>
+
     <td>
     <a href="#!" class="btn btn-info btn-sm edits" id="${item.id}"><i class="feather icon-edit"></i>&nbsp;Edit </a>
     <a href="#!" class="btn btn-info btn-sm updateimage"  id="${item.id}"><i class="feather icon-edit"></i>&nbsp;Edit Image </a>
