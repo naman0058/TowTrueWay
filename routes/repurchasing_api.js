@@ -155,6 +155,11 @@ router.post('/getAllSelfie',(req,res)=>{
 
 router.post('/listingInsert',upload.fields([{ name: 'image', maxCount: 1 }, { name: 'aadhar_front', maxCount: 8 } , { name: 'aadhar_back', maxCount: 8 } , { name: 'pan_card', maxCount: 8 } ]),(req,res)=>{
     let body = req.body
+
+ console.log('data come',req.body)
+ console.log('files come',req.files)
+
+
     // let body = req.body
     var today = new Date();
     var dd = today.getDate();
@@ -182,7 +187,7 @@ router.post('/listingInsert',upload.fields([{ name: 'image', maxCount: 1 }, { na
    
  console.log(req.body)
    pool.query(`insert into listing set ?`,body,(err,result)=>{
-       err ? console.log(err) : res.json({msg : 'success'})
+       err ? res.json({msg:err}) : res.json({msg : 'success'})
    })
 
 })
