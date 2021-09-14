@@ -96,6 +96,8 @@ router.post('/uploadSelfie',upload.fields([{ name: 'image', maxCount: 1 }, { nam
     let body = req.body
  
 
+    console.log('body',req.body);
+
     var today = new Date();
     var dd = today.getDate();
     
@@ -113,7 +115,7 @@ router.post('/uploadSelfie',upload.fields([{ name: 'image', maxCount: 1 }, { nam
     today = yyyy+'-'+mm+'-'+dd;
     
 
-    console.log(req.files)
+    console.log('files',req.files)
 
     body['image'] = req.files.image[0].filename;
     body['image1'] = req.files.image1[0].filename;
