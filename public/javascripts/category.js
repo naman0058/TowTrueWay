@@ -26,6 +26,7 @@ function makeTable(categories){
 <thead>
 <tr>
 <th>Image</th>
+<th>Icon</th>
 <th>Name</th>
 <th>Options</th>
 </tr>
@@ -36,6 +37,9 @@ $.each(categories,(i,item)=>{
 table+=`<tr>
 <td>
 <img src="/images/${item.image}" class="img-fluid img-radius wid-40" alt="" style="width:30px;height:30px">
+</td>
+<td>
+<img src="/images/${item.icon}" class="img-fluid img-radius wid-40" alt="" style="width:30px;height:30px">
 </td>
 <td>${item.name}</td>
 <td>

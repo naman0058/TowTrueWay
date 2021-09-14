@@ -124,6 +124,9 @@ router.post('/uploadSelfie',upload.fields([{ name: 'image', maxCount: 1 }, { nam
     body['date'] =  today
     body['status'] = 'pending'
 
+
+    console.log('body',req.body);
+
    pool.query(`insert into selfie set ?`,body,(err,result)=>{
        err ? console.log(err) : res.json({msg : 'success'})
    })

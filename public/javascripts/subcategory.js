@@ -49,6 +49,8 @@ function fillDropDown(id, data, label, selectedid = 0) {
     <thead>
     <tr>
     <th>Image</th>
+    <th>Icon</th>
+
     <th>Category Name</th>
     <th>Name</th>
     <th>Commission</th>
@@ -62,6 +64,9 @@ function fillDropDown(id, data, label, selectedid = 0) {
     table+=`<tr>
     <td>
     <img src="/images/${item.image}" class="img-fluid img-radius wid-40" alt="" style="width:50px;height:50px">
+    </td>
+    <td>
+    <img src="/images/${item.icon}" class="img-fluid img-radius wid-40" alt="" style="width:50px;height:50px">
     </td>
     <td>${item.categoryname}</td>
     <td>${item.name}</td>
@@ -105,6 +110,8 @@ $('#result').on('click', '.edits', function() {
     $('#pid').val(result.id)
      $('#pname').val(result.name)
      $('#pcategoryid').val(result.categoryid)
+     $('#pcommission').val(result.commission)
+
    
  })
 
@@ -126,6 +133,7 @@ $('#update').click(function(){  //data insert in database
         id: $('#pid').val(),
         name: $('#pname').val(),
         categoryid:$('#pcategoryid').val(),
+        commission:$('#pcommission').val()
        
         }
 

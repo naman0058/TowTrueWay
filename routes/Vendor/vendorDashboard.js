@@ -237,4 +237,14 @@ router.get('/orders/:type',(req,res)=>{
 })
 
 
+
+
+
+router.get('/commission/list',(req,res)=>{
+    pool.query(`select name , commission from subcategory order by name desc`,(err,result)=>{
+        if(err) throw err;
+        else res.render('Vendor/commission',{result})
+    })
+})
+
 module.exports = router;

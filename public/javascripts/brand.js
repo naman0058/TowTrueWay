@@ -63,6 +63,8 @@ function makeTable(categories){
 <thead>
 <tr>
 <th>Image</th>
+<th>Icon</th>
+
 <th>Category Name</th>
 <th>Subcategory Name</th>
 <th>Name</th>
@@ -75,6 +77,10 @@ $.each(categories,(i,item)=>{
 table+=`<tr>
 <td>
 <img src="/images/${item.image}" class="img-fluid img-radius wid-40" alt="" style="width:50px;height:50px">
+</td>
+
+<td>
+<img src="/images/${item.icon}" class="img-fluid img-radius wid-40" alt="" style="width:50px;height:50px">
 </td>
 
 <td>${item.categoryname}</td>
@@ -155,13 +161,8 @@ $('#update').click(function(){  //data insert in database
         id: $('#pid').val(),
         name: $('#pname').val(),
         categoryid:$('#pcategoryid').val(),
-       // subcategoryid:$('#psubcategoryid').val(),
-        name:$('#pname').val(),
-        price:$('#pprice').val(),
-        status:$('#pstatus').val(),
-        weight:$('#pweight').val(),
-
-       
+        subcategoryid:$('#psubcategoryid').val(),
+ 
         }
 
     $.post(`${table}/update`, updateobj , function(data) {

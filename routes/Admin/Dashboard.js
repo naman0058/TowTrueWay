@@ -144,6 +144,69 @@ router.get('/store-listing/:name/delete', (req, res) => {
 
 
 
+router.post('/store-listing/:name/update', (req, res) => {
+    let body = req.body
+    pool.query(`update ${req.params.name} set ? where id = ?`, [req.body, req.body.id], (err, result) => {
+        if(err) {
+            res.json({
+                status:500,
+                type : 'error',
+                description:err
+            })
+        }
+        else {
+            res.json({
+                status:200,
+                type : 'success',
+                description:'successfully update'
+            })
+
+            
+        }
+    })
+})
+
+
+
+
+
+router.post('/store-listing/:name/update-image',upload.fields([{ name: 'image', maxCount: 1 }, { name: 'icon', maxCount: 8 }]), (req, res) => {
+    let body = req.body;
+    body['image'] = req.files.image[0].filename;
+    body['icon'] = req.files.icon[0].filename;
+
+    // pool.query(`select image from ${table} where id = '${req.body.id}'`,(err,result)=>{
+    //     if(err) throw err;
+    //     else {
+    //         fs.unlinkSync(`public/images/${result[0].image}`); 
+
+
+ pool.query(`update ${req.params.name} set ? where id = ?`, [req.body, req.body.id], (err, result) => {
+        if(err) {
+            res.json({
+                status:500,
+                type : 'error',
+                description:err
+            })
+        }
+        else {
+            // res.json({
+            //     status:200,
+            //     type : 'success',
+            //     description:'successfully update'
+            // })
+
+            res.redirect(`/admin/dashboard/store-listing/${req.params.name}`)
+        }
+    })
+
+
+})
+
+
+
+
+
 
 
 router.get('/vendor/list/:type',(req,res)=>{
