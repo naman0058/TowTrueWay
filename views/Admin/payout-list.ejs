@@ -428,18 +428,22 @@
 
 <script>
     $('.show-reports').click(function(){
-        if( $('#from_date').val() == '' || $('#from_date').val() == [] ) alert('Choose From Date')
-        else if ( $('#to_date').val() == '' || $('#to_date').val() == [] ) alert('Choose To Date')
-        else {
+        // if( $('#from_date').val() == '' || $('#from_date').val() == [] ) alert('Choose From Date')
+        // else if ( $('#to_date').val() == '' || $('#to_date').val() == [] ) alert('Choose To Date')
+        // else {
          
-            let from_date = $('#from_date').val()
-            let to_date = $('#to_date').val()
+            // let from_date = $('#from_date').val()
+            // let to_date = $('#to_date').val()
+
+
+let from_date = '2021-09-01'
+let to_date = '2021-09-15'
 
             $.get('/admin/dashboard/ecommerce/payout/report',{from_date,to_date},data=>{
                 console.log(data)
                 makeTable(data)
             })
-        }
+        // }
     })
 
 
@@ -448,19 +452,36 @@
 
     function makeTable(data){
     let table = ` <div class="table-responsive">
+<div class = 'container'>
+        <div class='row'>
+            <div class = 'col-lg-6'>
+                <input type ='text' class = 'form-control referenceid' placeholder = 'Enter Refrence ID'>
+                </div>
+            <div class = 'col-lg-6'>
+    <button type="button"  class="btn btn-warning" style="" id="submit1">Submit </button>
+                
+                </div>
 
-    <button type="button"  class="btn btn-primary" style="margin:20px">Total Transaction Recieved : ${data[0][0].total_amount} </button>
+            </div>
+            </div>
+
+    <button type="button"  class="btn btn-primary" style="margin:50px">Total Payout Send : ${data[0][0].total_amount} </button>
+    <button type="button"  class="btn btn-primary" style="margin:50px;float:right" id="selectall">Select All </button>
+
+
 <table id="report-table" class="table  table-striped mb-0">
 <thead>
 <tr>
+    <th>#</th>
 <th>Account Holder Name</th>
 <th>Account Number</th>
 <th>Bank Name</th>
 <th>IFSC CODE</th>
 <th>Branch Name</th>
 <th>Account Type</th>
-
 <th>Mobile Number</th>
+<th>Amount</th>
+
 
 </tr>
 </thead>
@@ -468,6 +489,8 @@
 
 $.each(data[1],(i,item)=>{
 table+=`<tr>
+<td><input type='checkbox' name = 'products[]' value="${item.id}"  id='products' class='check'></td>
+
 
 <td>${item.vendor_account_holder_name}</td>
 <td>${item.vendor_account_number}</td>
@@ -477,6 +500,8 @@ table+=`<tr>
 
 <td>${item.vendor_account_type}</td>
 <td>${item.vendor_mobile_number}</td>
+<td>${item.vendor_price}</td>
+
 
 
 </tr>`
@@ -490,6 +515,64 @@ table+=`</tbody>
     $('#result').html(table)
     $('#result').show()
 }
+
+
+
+
+
+
+
+
+
+
+$(function () {
+        // add multiple select / deselect functionality
+$('#result').on('click', '#selectall', function() {
+
+        // $("#selectall").click(function () {
+           
+            $('.check').prop('checked', true);
+        });
+ 
+        // if all checkbox are selected, then check the select all checkbox
+        // and viceversa
+        $('#result').on('click', '#submit1', function() {
+
+    // alert($('.check').val())
+
+  
+    let productid =$('#products:checked').val();
+    
+    var a = [];
+                $("#products:checked").each(function() {
+                    a.push(this.value);
+                });
+               
+    console.log('products',a.length)
+
+    if($('.referenceid').val() == '' || $('.referenceid').val() == null || $('.referenceid').val() == []) alert('Enter Reference ID')
+     else if( a.length == 0 || a.length == '0' ) alert('Select Atleast One Account')
+
+    else{
+        let b = JSON.stringify(a)
+        let reference_id = $('.referenceid').val()
+
+
+ $.post('/admin/dashboard/update/booking-status',{reference_id,b},data=>{
+            alert('Update Successfully')
+            window.location.reload()
+        })
+
+    }
+
+
+   
+
+        //    alert('hi')
+ 
+        });
+    });
+
 
 </script>
 

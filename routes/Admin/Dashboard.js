@@ -4,6 +4,7 @@ var pool =  require('../pool');
 var upload = require('../multer');
 const { PayloadTooLarge } = require('http-errors');
 const { query } = require('../pool');
+const { reset } = require('nodemon');
 
 
 
@@ -21,8 +22,10 @@ router.get('/',(req,res)=>{
         var query4 = `select * from products order by id desc limit 5;`
         var query5 = `select * from booking where date = curdate() and status !='completed' ;`
         pool.query(query+query1+query2+query3+query4+query5,(err,result)=>{
-            res.render('Admin/Dashboard',{msg : '',result})
-
+            // res.render('Admin/Dashboard',{msg : '',result})
+            if(err) throw err;
+else res.render('Admin/Dashboard',{msg : '',result})
+ 
 
         })
 
@@ -221,11 +224,13 @@ router.get('/vendor/details/:id',(req,res)=>{
     var query = `select v.* , (select c.name from category c where c.id = v.categoryid) as categoryname from vendor v where v.id = '${req.params.id}';`
     var query1 = `select sum(price) as total_price from booking where vendorid = '${req.params.id}';`
     var query2 = `select count(id) as total_orders from booking where vendorid = '${req.params.id}';`
-    var query3 = `select count(id) as running_orders from booking where status != 'delivered';`
-    var query4 = `select count(id) as completed_orders from booking where status = 'delivered';`
-    pool.query(query+query1+query2+query3+query4,(err,result)=>{
+    var query3 = `select count(id) as running_orders from booking where status != 'delivered' and vendorid = '${req.params.id}';`
+    var query4 = `select count(id) as completed_orders from booking where status = 'delivered' and vendorid = '${req.params.id}';`
+    var query5 = `select b.* , (select p.name from products p where p.id = b.booking_id) as productname from booking b where vendorid = '${req.params.id}' order by id desc limit 10;`
+
+    pool.query(query+query1+query2+query3+query4+query5,(err,result)=>{
         if(err) throw err;
-        else res.render('Admin/vendor-details',{result})
+        else res.render('Admin/vendor-details',{result,vendorid:req.params.id})
     })
 })
 
@@ -326,6 +331,43 @@ router.get('/orders/:type',(req,res)=>{
 
 
 
+
+
+   router.get('/view/all/order/:id',(req,res)=>{
+    pool.query(`select b.* , 
+    (select p.name from products p where p.id = b.booking_id) as bookingname,
+    (select p.image from products p where p.id = b.booking_id) as bookingimage 
+
+    from booking b where b.vendorid = '${req.params.id}'  order by id desc`,(err,result)=>{
+        err ? console.log(err) : res.render('Admin/ORder',{result, title:'Vendor Orders'})
+    })
+   })
+
+
+
+   
+   router.get('/users/orders/:number',(req,res)=>{
+    pool.query(`select b.* , 
+    (select p.name from products p where p.id = b.booking_id) as bookingname,
+    (select p.image from products p where p.id = b.booking_id) as bookingimage 
+
+    from booking b where b.usernumber = '${req.params.number}'  order by id desc`,(err,result)=>{
+        err ? console.log(err) : res.render('Admin/ORder',{result, title:'Customer Orders'})
+    })
+   })
+
+
+
+
+   router.get('/users/address/:number',(req,res)=>{
+    pool.query(`select * from address where usernumber = '${req.params.number}'  order by id desc`,(err,result)=>{
+        err ? console.log(err) : res.render('Admin/Address',{result, title:'Customer Orders'})
+    })
+   })
+
+
+
+
    router.get('/transaction/reports',(req,res)=>{
        if(req.session.adminid){
         res.render('Admin/transaction-reports')
@@ -405,6 +447,10 @@ router.get('/users/normal',(req,res)=>{
 
 
 
+
+
+
+
 router.get('/users/listing',(req,res)=>{
     if(req.session.adminid){
         pool.query(`select * from listing order by id desc`,(err,result)=>{
@@ -440,9 +486,8 @@ router.get('/ecommerce/payout',(req,res)=>{
 
 
 
-router.get('/ecommerce/payout/report',(req,res)=>{
-    var query = `select sum(price) as total_amount from booking b where b.payout is null and date between '${req.query.from_date}' and '${req.query.to_date}';`
-    var query1 = `select b.vendorid , b.price , b.date, b.subcategoryid, 
+router.get('/ecommerce/payout-history',(req,res)=>{
+    pool.query(`select b.vendorid , b.price , b.date, b.subcategoryid, b.vendor_price,
     (select v.account_holder_name from vendor v where v.id = b.vendorid) as vendor_account_holder_name,
     (select v.ifsc_code from vendor v where v.id = b.vendorid) as vendor_ifsc_code,
     (select v.branch_name from vendor v where v.id = b.vendorid) as vendor_branch_name,
@@ -452,7 +497,58 @@ router.get('/ecommerce/payout/report',(req,res)=>{
     (select v.number from vendor v where v.id = b.vendorid) as vendor_mobile_number,
     (select v.account_number from vendor v where v.id = b.vendorid) as vendor_account_number,
     (select s.commission from subcategory s where s.id = b.subcategoryid ) as company_commission
-    from booking b where b.payout is null and date between '${req.query.from_date}' and '${req.query.to_date}';`
+    from booking b where b.payout = 'completed' order by date desc;`,(err,result)=>{
+        if(err) throw err;
+        else res.render('Admin/payout-history',{result})
+    })
+})
+
+
+
+
+
+router.get('/view/all/payout/:id',(req,res)=>{
+    pool.query(`select b.*,
+    (select p.name from products p where p.id = b.booking_id) as productname
+    from booking b where b.payout is not null and b.vendorid = '${req.params.id}' order by date desc;`,(err,result)=>{
+        if(err) throw err;
+        else res.render('Admin/single-payout-history',{result})
+    })
+})
+
+
+
+router.get('/ecommerce/payout-remaining',(req,res)=>{
+    pool.query(`select b.vendorid , b.price , b.date, b.subcategoryid, b.vendor_price,
+    (select v.account_holder_name from vendor v where v.id = b.vendorid) as vendor_account_holder_name,
+    (select v.ifsc_code from vendor v where v.id = b.vendorid) as vendor_ifsc_code,
+    (select v.branch_name from vendor v where v.id = b.vendorid) as vendor_branch_name,
+    (select v.account_type from vendor v where v.id = b.vendorid) as vendor_account_type,
+
+    (select v.bank_name from vendor v where v.id = b.vendorid) as vendor_bank_name,
+    (select v.number from vendor v where v.id = b.vendorid) as vendor_mobile_number,
+    (select v.account_number from vendor v where v.id = b.vendorid) as vendor_account_number,
+    (select s.commission from subcategory s where s.id = b.subcategoryid ) as company_commission
+    from booking b where b.payout is not null order by date desc;`,(err,result)=>{
+        if(err) throw err;
+        else res.render('Admin/payout-remaining',{result})
+    })
+})
+
+
+router.get('/ecommerce/payout/report',(req,res)=>{
+    var query = `select sum(vendor_price) as total_amount from booking b where b.payout is null and b.status = 'delivered' and date between '${req.query.from_date}' and '${req.query.to_date}';`
+    var query1 = `select b.vendorid , b.price , b.date, b.subcategoryid, b.vendor_price, b.id,
+    (select v.account_holder_name from vendor v where v.id = b.vendorid) as vendor_account_holder_name,
+    (select v.ifsc_code from vendor v where v.id = b.vendorid) as vendor_ifsc_code,
+    (select v.branch_name from vendor v where v.id = b.vendorid) as vendor_branch_name,
+    (select v.account_type from vendor v where v.id = b.vendorid) as vendor_account_type,
+
+    (select v.bank_name from vendor v where v.id = b.vendorid) as vendor_bank_name,
+    (select v.number from vendor v where v.id = b.vendorid) as vendor_mobile_number,
+    (select v.account_number from vendor v where v.id = b.vendorid) as vendor_account_number,
+    (select s.commission from subcategory s where s.id = b.subcategoryid ) as company_commission
+    from booking b where b.payout is null and b.status = 'delivered' and date between '${req.query.from_date}' and '${req.query.to_date}';`
     pool.query(query+query1,(err,result)=>{
         if(err) throw err;
         else res.json(result)
@@ -460,6 +556,66 @@ router.get('/ecommerce/payout/report',(req,res)=>{
 })
 
 
+
+router.get('/vendor/transaction',(req,res)=>{
+    res.render('Admin/vendor-transaction')
+})
+
+
+
+
+router.get('/product/full/details/:id',(req,res)=>{
+    pool.query(`select b.* , 
+    (select p.name from products p where p.id = b.booking_id) as productname,
+    (select v.name from vendor v where v.id = b.vendorid) as vendorname
+    from booking b where b.id = '${req.params.id}'`,(err,result)=>{
+        if(err) throw err;
+        else res.render('Admin/single-order-details',{result})
+    })
+})
+
+
+
+router.post('/update/booking-status',(req,res)=>{
+
+    var today = new Date();
+    var dd = today.getDate();
+    
+    var mm = today.getMonth()+1; 
+    var yyyy = today.getFullYear();
+    if(dd<10) 
+    {
+        dd='0'+dd;
+    } 
+    
+    if(mm<10) 
+    {
+        mm='0'+mm;
+    } 
+    today = yyyy+'-'+mm+'-'+dd;
+    
+
+
+    let body = req.body;
+    console.log(req.body)
+
+    let c = JSON.parse(req.body.b)
+
+    console.log('c',c)
+    for(i=0;i<c.length;i++){
+        let d = c[i]
+        pool.query(`update booking set reference_id = '${req.body.reference_id}' , payout_date = '${today}' , payout = 'completed' where id = '${d}'`,(err,result)=>{
+                    if(err) throw err;
+                    else {
+
+                    }
+                })
+          
+    }
+    res.json({
+        msg : 'success'
+    })
+})
 
 // All Data Found
 

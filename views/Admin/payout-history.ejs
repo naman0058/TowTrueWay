@@ -17,7 +17,7 @@
               
                 <div class="row">
                     <div class="col-12">
-                        <h3 class="content-heading">Customer's List</h3>
+                        <h3 class="content-heading">Payout's History</h3>
                     </div>
                     <div class="col-12">
                         <div class="card">
@@ -26,22 +26,40 @@
                                     <table id="example" class="display" style="min-width: 845px">
                                         <thead>
                                             <tr>
-                                                 <th>Name</th>
-                                                 <th>Number</th>
-                                                 <th>Orders</th>
-                                                 <th>Address</th>
+                                                <th>Account Holder Name</th>
+                                                <th>Account Number</th>
+                                                <th>Bank Name</th>
+                                                <th>IFSC CODE</th>
+                                                <th>Branch Name</th>
+                                                <th>Account Type</th>
+                                                
+                                                <th>Mobile Number</th>
+                                                <th>Amount</th>
+                                                <th>Date</th>
+                                                <th>Reference ID </th>
 
-                                            </tr>
+                                                
+                                                
+                                                </tr>
                                         </thead>
                                         <tbody>
 
 <% for(i=0;i<result.length;i++) { %>
 
                                             <tr>
-                                                <td><%=result[i].name%></td>
-                                                <td><%=result[i].number%></td>
-                                                <td><a href="/admin/dashboard/users/orders/<%=result[i].number%>"><button type="button" class="btn btn-link">View Orders</button></a></td>
-                                                <td><a href="/admin/dashboard/users/address/<%=result[i].number%>"><button type="button" class="btn btn-link">View Address</button></a></td>
+                                                <td><%=result[i].vendor_account_holder_name%></td>
+                                                <td><%=result[i].vendor_account_number%></td>
+                                                <td><%=result[i].vendor_bank_name%></td>
+                                                <td><%=result[i].vendor_ifsc_code%></td>
+                                                <td><%=result[i].vendor_branch_name%></td>
+                                                
+                                                <td><%=result[i].vendor_account_type%></td>
+                                                <td><%=result[i].vendor_mobile_number%></td>
+                                                <td><%=result[i].vendor_price%></td>
+                                                <td><%=result[i].payout_date%></td>
+                                                <td><%=result[i].reference_id%></td>
+
+                                                
                                             </tr>
 
                                             <% } %>
@@ -49,11 +67,20 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>Name</th>
-                                                 <th>Number</th>
-                                                <th>Joining Date</th>
-                                                <th>View Details</th>
-                                            </tr>
+                                                <th>Account Holder Name</th>
+                                                <th>Account Number</th>
+                                                <th>Bank Name</th>
+                                                <th>IFSC CODE</th>
+                                                <th>Branch Name</th>
+                                                <th>Account Type</th>
+                                                <th>Mobile Number</th>
+                                                <th>Amount</th>
+                                                <th>Date</th>
+                                                <th>Reference ID </th>
+
+                                                
+                                                
+                                                </tr>
                                         </tfoot>
                                     </table>
                                 </div>

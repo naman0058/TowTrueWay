@@ -17,7 +17,7 @@
               
                 <div class="row">
                     <div class="col-12">
-                        <h3 class="content-heading">Customer's List</h3>
+                        <h3 class="content-heading">Customer's Address</h3>
                     </div>
                     <div class="col-12">
                         <div class="card">
@@ -26,10 +26,13 @@
                                     <table id="example" class="display" style="min-width: 845px">
                                         <thead>
                                             <tr>
-                                                 <th>Name</th>
-                                                 <th>Number</th>
-                                                 <th>Orders</th>
-                                                 <th>Address</th>
+                                                <th>Name</th>
+                                                <th>State</th>
+                                                 <th>City</th>
+                                                 <th>Pincode</th>
+                                                 <th>Landmark</th>
+
+                                                
 
                                             </tr>
                                         </thead>
@@ -39,21 +42,24 @@
 
                                             <tr>
                                                 <td><%=result[i].name%></td>
-                                                <td><%=result[i].number%></td>
-                                                <td><a href="/admin/dashboard/users/orders/<%=result[i].number%>"><button type="button" class="btn btn-link">View Orders</button></a></td>
-                                                <td><a href="/admin/dashboard/users/address/<%=result[i].number%>"><button type="button" class="btn btn-link">View Address</button></a></td>
+                                                <td><%=result[i].state%></td>
+                                                <td><%=result[i].city%></td>
+                                                <td><%=result[i].pincode%></td>
+                                                <td><%=result[i].landmark%></td>
+
                                             </tr>
 
                                             <% } %>
                                             
                                         </tbody>
                                         <tfoot>
-                                            <tr>
-                                                <th>Name</th>
-                                                 <th>Number</th>
-                                                <th>Joining Date</th>
-                                                <th>View Details</th>
-                                            </tr>
+                                            <th>Name</th>
+                                            <th>State</th>
+                                             <th>City</th>
+                                             <th>Pincode</th>
+                                             <th>Landmark</th>
+
+                                          
                                         </tfoot>
                                     </table>
                                 </div>
