@@ -30,6 +30,7 @@
       <% if(result[0].bank_name) { %>
 
     <input type="text" class="form-control" name="bank_name" value="<%=result[0].bank_name%>" readonly/>
+    <!-- <select name="bank_name" id="bank_name" class="form-control" aria-checked="icici" ></select> -->
                                      
                                                     
 <% } else { %>
@@ -548,7 +549,7 @@
 $.getJSON(`https://demo1.kalpamritmarketing.com/api/bank`, data => {    
     categories = data.result
     console.log(data.result)
-    fillDropDown('bank_name', data.result, 'Choose Category', 0)
+    fillDropDown('bank_name', data.result, 'Choose Bank', 0)
   
 })
 
@@ -559,9 +560,9 @@ function fillDropDown(id, data, label, selectedid = 0) {
 
     $.each(data, (i, item) => {
         if (item.id == selectedid) {
-            $(`#${id}`).append($('<option selected>').val(item.id).text(item.name))
+            $(`#${id}`).append($('<option selected>').val(item.name).text(item.name))
         } else {
-            $(`#${id}`).append($('<option>').val(item.id).text(item.name))
+            $(`#${id}`).append($('<option>').val(item.name).text(item.name))
         }
     })
 }
