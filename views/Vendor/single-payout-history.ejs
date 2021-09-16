@@ -17,7 +17,7 @@
               
                 <div class="row">
                     <div class="col-12">
-                        <h3 class="content-heading"><%=title%></h3>
+                        <h3 class="content-heading">Payout's History</h3>
                     </div>
                     <div class="col-12">
                         <div class="card">
@@ -27,16 +27,13 @@
                                         <thead>
                                             <tr>
                                                 <th>Order ID</th>
-
                                                 <th>Product Name</th>
-                                                <th>Customer Name</th>
-                                                <th>Number</th>
-                                                <th>Address</th>
-                                                <th>Amount</th>
-                                                <th>Quantity</th>
-                                                <th>Status</th>
-                                                <th>View Details</th>
-                                            </tr>
+                                                <th>Amount Paid</th>
+                                                <th>Amount Recieved</th>
+                                                <th>Date</th>
+                                                <th>Reference ID</th>
+                                                
+                                                </tr>
                                         </thead>
                                         <tbody>
 
@@ -44,19 +41,14 @@
 
                                             <tr>
                                                 <td><%=result[i].orderid%></td>
-
-                                                <td><%=result[i].bookingname%></td>
-                                                <td><%=result[i].name%></td>
-                                                <td><%=result[i].number%></td>
-                                                <td><%=result[i].address%></td>
+                                                <td><%=result[i].productname%></td>
                                                 <td><%=result[i].price%></td>
-                                                <td><%=result[i].quantity%></td>
-                                                <td><%=result[i].status%></td>
-                                                <td><a href="/vendor-dashboard/product/full/details/<%=result[i].id%>"><button type="button" class="btn btn-link">Details</button></a></td>
-
-
-
-                                                <!-- <td><a href="#"><button type="button" class="btn btn-link">Track Order</button></a></td> -->
+                                                <td><%=result[i].vendor_price%></td>
+                                                <td><%=result[i].payout_date%></td>
+                                                
+                                                <td><%=result[i].reference_id%></td>
+                                                
+                                                
                                             </tr>
 
                                             <% } %>
@@ -65,19 +57,14 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Order ID</th>
-
                                                 <th>Product Name</th>
-                                                <th>Customer Name</th>
-                                                <th>Number</th>
-                                                <th>Address</th>
-                                                <th>Amount</th>
-                                                <th>Quantity</th>
-                                                <th>Status</th>
-                                                <th>View Details</th>
-
-                                            </tr>
+                                                <th>Amount Paid</th>
+                                                <th>Amount Recieved</th>
+                                                <th>Date</th>
+                                                <th>Reference ID</th>
+                                                
+                                                </tr>
                                         </tfoot>
-                                    
                                     </table>
                                 </div>
                             </div>

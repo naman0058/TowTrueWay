@@ -67,6 +67,10 @@ router.get('/get-category',(req,res)=>{
    
    })
 
+
+
+
+
    
    
    router.get('/get-subcategory',(req,res)=>{
@@ -100,12 +104,28 @@ router.get('/search',(req,res)=>{
 
 
 router.get('/product-description',(req,res)=>{
-    var query = `select * from products where id = '${req.query.id}';`
-    var query1 = `select * from images where productid = '${req.query.id}';`
-    pool.query(query+query1,(err,result)=>{
-        if(err) throw err;
-        else res.json(result)
-    })
+
+
+  pool.query(`select * from products where id  = '${req.query.id}'`,(err,result)=>{
+    if(err) throw err;
+    else {
+      let subcategory = result[0].subcategoryid
+
+
+      var query = `select * from products where id = '${req.query.id}';`
+      var query1 = `select * from images where productid = '${req.query.id}';`
+      var query2 = `select  * from products where subcategoryid = '${subcategoryid}';`
+      
+      pool.query(query+query1+query2,(err,result)=>{
+          if(err) throw err;
+          else res.json(result)
+      })
+
+
+
+    }
+  })
+
 })
 
 
@@ -805,6 +825,32 @@ router.post("/payment-initiate", (req, res) => {
   
   
   
+
+  router.get('/get-top-banner',(req,res)=>{
+    pool.query(`select * from banner where type = 'Front Banner'`,(err,result)=>{
+      if(err) throw err;
+      else res.json(result)
+    })
+  })
   
+  
+  
+  router.get('/get-bottom-banner',(req,res)=>{
+    pool.query(`select * from banner where type = 'Bottom Banner'`,(err,result)=>{
+      if(err) throw err;
+      else res.json(result)
+    })
+  })
+  
+
+
+
+  router.post('/get-products-api',(req,res)=>{
+    pool.query(`select * from products where subcategoryid = '${req.body.subcategoryid}'`,(err,result)=>{
+      if(err) throw err;
+      else res.json(result)
+    })
+  })
+
 
 module.exports = router;

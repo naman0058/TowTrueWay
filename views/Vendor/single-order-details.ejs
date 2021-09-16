@@ -1,89 +1,218 @@
 <%- include ('./OrdersHeader.ejs') %>
 
 
+
+
+<style>
+
+
+
+.circle {
+    width: 10px;
+    height: 10px;
+    background-color: #62bd19;
+    border-radius: 50%;
+  
+}
+
+
+
+.circle1 {
+    width: 10px;
+    height: 10px;
+    background-color: #bd1919;
+    border-radius: 50%;
+  
+}
+
+
+
+
+</style>
+
+
         <!--**********************************
             Content body start
         ***********************************-->
         <div class="content-body">
 
             <div class="row page-titles mx-0">
-               
-              
+                <div class="col-sm-6 p-md-0">
+                    <div class="breadcrumb-range-picker">
+                        <span><i class="icon-calender"></i></span>
+                        <span class="ml-1">August 08, 2017 - August 08, 2017</span>
+                    </div>
+                </div>
+                <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Components</a></li>
+                    </ol>
+                </div>
             </div>
             <!-- row -->
 
             <div class="container-fluid">
-                
-              
+                <div class="row justify-content-between mb-3">
+					<div class="col-12 ">
+						<h2 class="page-heading">Hi,Welcome Back!</h2>
+						<p class="mb-0">Your restaurent admin template</p>
+					</div>
+                </div>
                 <div class="row">
-                    <div class="col-12">
-                        <h3 class="content-heading"><%=title%></h3>
-                    </div>
-                    <div class="col-12">
+                    
+                    <div class="col-xl-8 col-md-6 col-xxl-6">
                         <div class="card">
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="example" class="display" style="min-width: 845px">
-                                        <thead>
-                                            <tr>
-                                                <th>Order ID</th>
-
-                                                <th>Product Name</th>
-                                                <th>Customer Name</th>
-                                                <th>Number</th>
-                                                <th>Address</th>
-                                                <th>Amount</th>
-                                                <th>Quantity</th>
-                                                <th>Status</th>
-                                                <th>View Details</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-<% for(i=0;i<result.length;i++) { %>
-
-                                            <tr>
-                                                <td><%=result[i].orderid%></td>
-
-                                                <td><%=result[i].bookingname%></td>
-                                                <td><%=result[i].name%></td>
-                                                <td><%=result[i].number%></td>
-                                                <td><%=result[i].address%></td>
-                                                <td><%=result[i].price%></td>
-                                                <td><%=result[i].quantity%></td>
-                                                <td><%=result[i].status%></td>
-                                                <td><a href="/vendor-dashboard/product/full/details/<%=result[i].id%>"><button type="button" class="btn btn-link">Details</button></a></td>
-
-
-
-                                                <!-- <td><a href="#"><button type="button" class="btn btn-link">Track Order</button></a></td> -->
-                                            </tr>
-
-                                            <% } %>
-                                            
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Order ID</th>
-
-                                                <th>Product Name</th>
-                                                <th>Customer Name</th>
-                                                <th>Number</th>
-                                                <th>Address</th>
-                                                <th>Amount</th>
-                                                <th>Quantity</th>
-                                                <th>Status</th>
-                                                <th>View Details</th>
-
-                                            </tr>
-                                        </tfoot>
-                                    
-                                    </table>
+                                <div class="media align-items-center mb-4">
+                                   
+                                    <div class="media-body">
+                                        <h5 class="mb-0">Customer Details </h5>
+                                        
+                                    </div>
+                                 
+                                     
                                 </div>
+
+                                <table class="table">
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>Mobile</td>
+                                        <td>Address</td>
+                                       
+                                
+                                
+                                    </tr>
+                                    <tr>
+                                        <td><%=result[0].name%></td>
+                                      
+                                        <td> <%=result[0].number%></td>
+                                        <td> <%=result[0].address%></td>
+                                   
+                                
+                                
+                                
+                                    </tr>
+                                    
+                                
+                                  
+                                
+                                </table>
+                               
+                             
+
+                                
                             </div>
+                          
                         </div>
                     </div>
-                   
+
+
+
+                    <div class="col-xl-4 col-md-6 col-xxl-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media align-items-center mb-4">
+                                   
+                                    <div class="media-body">
+                                        <h5 class="mb-0">Vendor Details </h5>
+                                        
+                                    </div>
+                                 
+                                     
+                                </div>
+
+                                <table class="table">
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>Vendor Price</td>
+                                       
+                                
+                                
+                                    </tr>
+                                    <tr>
+                                        <td><%=result[0].vendorname%></td>
+                                      
+                                        <td> <%=result[0].vendor_price%></td>
+                                   
+                                
+                                
+                                
+                                    </tr>
+                                    
+                                
+                                  
+                                
+                                </table>
+                               
+                             
+
+                                
+                            </div>
+                          
+                        </div>
+                    </div>
+
+
+                    <div class="col-xl-12 col-md-6 col-xxl-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media align-items-center mb-4">
+                                   
+                                    <div class="media-body">
+                                        <h5 class="mb-0">Product Details </h5>
+                                        <button type="button" class="btn btn-primary float-right text-capitalize" style="float: right;"><%=result[0].status%></button>
+                                       
+                                    </div>
+                                 
+                                     
+                                </div>
+
+                               
+                                  
+                                   
+<table class="table">
+    <tr>
+        <td>Name</td>
+        <td>Amount</td>
+        <td>Payment Mode</td>
+        <td>Order ID</td>
+        <td>Date</td>
+        <td>Quantity</td>
+        <td>Single Price</td>
+
+
+    </tr>
+    <tr>
+        <td><%=result[0].productname%></td>
+      
+        <td>Rs. <%=result[0].price%></td>
+        <td> <%=result[0].payment_mode%></td>
+        <td> <%=result[0].orderid%></td>
+        <td> <%=result[0].date%></td>
+        <td> <%=result[0].quantity%></td>
+        <td> <%=result[0].oneprice%></td>
+
+
+
+
+    </tr>
+    
+
+  
+
+</table>
+                                   
+
+                            
+
+                                
+                            </div>
+                          
+                        </div>
+                    </div>
+                  
+                  
                 </div>
             </div>
         </div>
@@ -322,26 +451,32 @@
     <script src="/Admin/main/./js/quixnav.js"></script>
     <script src="/Admin/main/./js/styleSwitcher.js"></script>
 
-    <!-- JS Grid -->
-    <script src="/Admin/./assets/plugins/jquery-validation/jquery.validate.min.js"></script>
-    <script src="/Admin/./assets/plugins/jsgrid/js/jsgrid.min.js"></script>
-    <!-- Footable -->
-    <script src="/Admin/./assets/plugins/footable/js/footable.min.js"></script>
-    <!-- Bootgrid -->
-    <script src="/Admin/./assets/plugins/jquery-bootgrid/dist/jquery.bootgrid.min.js"></script>
-    <!-- Datatable -->
-    <script src="/Admin/./assets/plugins/datatables/js/jquery.dataTables.min.js"></script>
+
+    <!-- Easy pie chart -->
+    <script src="/Admin/./assets/plugins/easy-pie-chart/jquery.easypiechart.min.js"></script>
 
 
-    <!-- JS Grid Init -->
-    <script src="/Admin/main/./js/plugins-init/jsgrid-init.js"></script>
-    <script src="/Admin/main/./js/plugins-init/footable-init.js"></script>
-    <script src="/Admin/main/./js/plugins-init/jquery.bootgrid-init.js"></script>
-    <script src="/Admin/main/./js/plugins-init/datatables.init.js"></script>
+    <!-- Init file -->
+    <script src="/Admin/main/./js/dashboard/dashboard-3.js"></script>
 
+    
+
+
+<script>
+
+$('.change_status').click(function(){
+    let status = $(this).attr('name');
+    let id = $(this).attr('id')
+   
+$.post('/admin/dashboard/vendor/update-status',{id,status},(req,res)=>{
+    location.reload();
+})
+
+})
+
+</script>
 
 
 </body>
-
 
 </html>

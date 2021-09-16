@@ -10,6 +10,7 @@ var table = 'admin'
 
 router.get('/',(req,res)=>{
     console.log(req.session.vendornumber)
+    // req.session.vendorid = 4
     // req.session.vendornumber = '918319339945'
     if(req.session.vendornumber){
        pool.query(`select * from vendor where number = '${req.session.vendornumber}'`,(err,result)=>{
@@ -246,5 +247,171 @@ router.get('/commission/list',(req,res)=>{
         else res.render('Vendor/commission',{result})
     })
 })
+
+
+
+
+
+
+
+
+
+
+
+
+router.get('/product/full/details/:id',(req,res)=>{
+    pool.query(`select b.* , 
+    (select p.name from products p where p.id = b.booking_id) as productname,
+    (select v.name from vendor v where v.id = b.vendorid) as vendorname
+    from booking b where b.id = '${req.params.id}'`,(err,result)=>{
+        if(err) throw err;
+        else res.render('Vendor/single-order-details',{result})
+    })
+})
+
+
+
+
+
+
+
+router.get('/payout/history',(req,res)=>{
+    console.log(req.session.vendorid)
+    pool.query(`select b.vendorid , b.price , b.date, b.subcategoryid, b.vendor_price,
+    (select v.account_holder_name from vendor v where v.id = b.vendorid) as vendor_account_holder_name,
+    (select v.ifsc_code from vendor v where v.id = b.vendorid) as vendor_ifsc_code,
+    (select v.branch_name from vendor v where v.id = b.vendorid) as vendor_branch_name,
+    (select v.account_type from vendor v where v.id = b.vendorid) as vendor_account_type,
+
+    (select v.bank_name from vendor v where v.id = b.vendorid) as vendor_bank_name,
+    (select v.number from vendor v where v.id = b.vendorid) as vendor_mobile_number,
+    (select v.account_number from vendor v where v.id = b.vendorid) as vendor_account_number,
+    (select s.commission from subcategory s where s.id = b.subcategoryid ) as company_commission
+    from booking b where b.payout = 'completed' and b.vendorid = '${req.session.vendorid}' order by date desc;`,(err,result)=>{
+        if(err) throw err;
+        else res.render('Vendor/payout-history',{result})
+    })
+})
+
+
+
+
+
+router.get('/live-earning',(req,res)=>{
+    pool.query(`select b.*,
+    (select p.name from products p where p.id = b.booking_id) as productname
+    from booking b where b.payout is null and b.vendorid = '${req.session.vendorid}' order by date desc;`,(err,result)=>{
+        if(err) throw err;
+        else res.render('Vendor/single-payout-history',{result})
+    })
+})
+
+
+
+
+
+router.get('/complete-earning',(req,res)=>{
+    pool.query(`select b.*,
+    (select p.name from products p where p.id = b.booking_id) as productname
+    from booking b where b.payout is not null and b.vendorid = '${req.session.vendorid}' order by date desc;`,(err,result)=>{
+        if(err) throw err;
+        else res.render('Vendor/single-payout-history',{result})
+    })
+})
+
+
+
+
+
+
+router.get('/reports',(req,res)=>{
+  
+        res.render('Vendor/payout-list')
+       
+})
+
+
+
+router.get('/payout/report',(req,res)=>{
+    var query = `select sum(vendor_price) as total_amount from booking b where b.payout is null and b.status = 'delivered' and b.vendorid = '${req.session.vendorid}' and b.date between '${req.query.from_date}' and '${req.query.to_date}';`
+    var query1 = `select b.* ,(select p.name from products p where p.id = b.booking_id) as productname
+    from booking b where b.payout is null and b.status = 'delivered' and b.vendorid = '${req.session.vendorid}' and b.date between '${req.query.from_date}' and '${req.query.to_date}';`
+    pool.query(query+query1,(err,result)=>{
+        if(err) throw err;
+        else res.json(result)
+    })
+})
+
+
+
+
+
+router.get('/transaction/reports',(req,res)=>{
+    res.render('Vendor/transaction-reports')
+
+   
+})
+
+
+
+router.get('/transaction/reports/bytype',(req,res)=>{
+    var query = `select sum(amount) as total_amount_recieved from transaction t where  date between '${req.query.from_date}' and '${req.query.to_date}' and t.type = '${req.query.type}' and sign = '+' and number = '${req.session.vendornumber}';`
+    var query1 = `select t.* , (select u.name from users u where u.number = t.number) as username from transaction t where date between '${req.query.from_date}' and '${req.query.to_date}' and t.type = '${req.query.type}' and number = '${req.session.vendornumber}' order by id desc ;`
+    var query2 = `select sum(amount) as total_amount_sent from transaction t where  date between '${req.query.from_date}' and '${req.query.to_date}' and t.type = '${req.query.type}' and sign = '-' and number = '${req.session.vendornumber}' ;`
+
+    pool.query(query+query1+query2,(err,result)=>{
+        if(err) throw err;
+     //    00else res.render('Admin/transaction-talent-hunt',{result})
+ else res.json(result)  
+ })
+})
+
+
+
+
+router.get('/profile',(req,res)=>{
+    
+    pool.query(`select * from vendor where number = '${req.session.vendornumber}'`,(err,result)=>{
+        if(err) throw err;
+        else res.render('Vendor/profile',{result})
+    })
+})
+
+
+router.get('/bank',(req,res)=>{
+    
+    pool.query(`select * from vendor where number = '${req.session.vendornumber}'`,(err,result)=>{
+        if(err) throw err;
+    // else res.json(result)
+        else res.render('Vendor/bank',{result})
+    })
+})
+
+
+
+
+
+
+router.post('/update/vendor/details', (req, res) => {
+    let body = req.body
+   body['number'] = req.session.vendornumber
+   console.log(req.body)
+    pool.query(`update vendor set ? where number = ?`, [req.body, req.body.number], (err, result) => {
+        if(err) {
+            res.json({
+                status:500,
+                type : 'error',
+                description:err
+            })
+        }
+        else{
+        
+            res.redirect('/vendor-dashboard/bank')
+        
+    }
+
+})
+
+    })
 
 module.exports = router;

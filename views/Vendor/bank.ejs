@@ -1,4 +1,4 @@
-<%- include ('./storeListingHeader.ejs') %>
+<%- include ('./OrdersHeader.ejs') %>
 
 
         <!--**********************************
@@ -13,7 +13,7 @@
               
                 <div class="row" id='insertdiv'>
                     <div class="col-12">
-                        <h3 class="content-heading mt-3">Transaction Received Reports </h3>
+                        <h3 class="content-heading mt-3">Bank Details   </h3>
 
                     </div>
                    
@@ -21,21 +21,149 @@
                         <div class="card">
                             <div class="card-body">    
                                     <div class="basic-form">
-                                        <form action="/admin/dashboard/store-listing/category/insert" method="POST" enctype="multipart/form-data" class="uploadImage">
+                                        <form action="/vendor-dashboard/update/vendor/details" method="POST">
                                                <div class="form-row">
-                                                
                                                 <div class="col-6">
-                                                    <label>From Date</label>
-                                                    <input type="date" class="form-control" name="from_date" id="from_date" placeholder="State">
+                                                    <label>Bank Name</label>
+
+
+      <% if(result[0].bank_name) { %>
+
+    <input type="text" class="form-control" name="bank_name" value="<%=result[0].bank_name%>" readonly/>
+                                     
+                                                    
+<% } else { %>
+    <select name="bank_name" id="bank_name" class="form-control" aria-checked="icici" ></select>
+
+    <% } %>
+
+                                                  </select>
                                                 </div>
                                                 <div class="col-6">
-                                                    <label>To Date</label>
-                                                    <input type="date" class="form-control" name="to_date" id="to_date" placeholder="Category Name">
+                                                    <label>IFSC Code</label>
+                                                    <% if(result[0].ifsc_code) {  %>
+
+                                                        <input type="text" class="form-control" name="ifsc_code" value="<%=result[0].ifsc_code%>" readonly placeholder="Account Holder Name">
+                                                  
+                                                  <% } else { %>
+    
+                                                    <input type="text" class="form-control" name="ifsc_code" value="<%=result[0].ifsc_code%>" placeholder="Account Holder Name">
+    
+                                                    <% } %>
                                                 </div>
                                               
+                                              
                                             </div>
-                               <button class="btn btn-primary show-reports" type="button" style="margin-top:20px;float:right">Show Payout Reports</button>
 
+
+
+                                            <div class="form-row" style="margin-top: 20px;">
+                                                <div class="col-6">
+                                                    <label>Branch Name</label>
+                                                    <% if(result[0].branch_name) {  %>
+                                                        <input type="text" class="form-control" name="branch_name" value="<%=result[0].branch_name%>" readonly  placeholder="Branch Name">
+
+
+                                                        <% } else { %>
+
+                                                            <input type="text" class="form-control" name="branch_name" value="<%=result[0].branch_name%>"  placeholder="Branch Name">
+
+                                                            <% } %>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label>Account Holder Name</label>
+
+                                                    <% if(result[0].account_holder_name) {  %>
+
+                                                    <input type="text" class="form-control" name="account_holder_name" value="<%=result[0].account_holder_name%>" readonly placeholder="Account Holder Name">
+                                              
+                                              <% } else { %>
+
+                                                <input type="text" class="form-control" name="account_holder_name" value="<%=result[0].account_holder_name%>" placeholder="Account Holder Name">
+
+                                                <% } %>
+
+                                                </div>
+                                                                      
+                                            </div>
+
+
+
+
+                                            <div class="form-row" style="margin-top: 20px;">
+                                                <div class="col-6">
+                                                    <label>Account Number</label>
+                                                    <% if(result[0].account_number) {  %>
+                                                    <input type="text" class="form-control" name="account_number" value="<%=result[0].account_number%>" readonly  placeholder="Account Number">
+                                                   <% } else { %>
+
+                                                    <input type="text" class="form-control" name="account_number" value="<%=result[0].account_number%>"  placeholder="Account Number">
+
+                                                    <% } %>
+                                                </div>
+                                               
+                                                <div class="col-6">
+                                                    <label>Account Type</label>
+
+
+                                                    <% if(result[0].account_type) {  %>
+
+                                                    <input type="text" class="form-control" name="account_type" value="<%=result[0].account_type%>" readonly placeholder="Account Type">
+                                                
+                                                <% } else { %>
+                                                    <input type="text" class="form-control" name="account_type" value="<%=result[0].account_type%>" placeholder="Account Type">
+                                                
+
+<% } %>
+
+                                                </div>
+                                             
+
+
+                                                
+                                              
+                                            </div>
+
+
+
+
+                                            <div class="form-row" style="margin-top: 20px;">
+                                                <div class="col-6">
+                                                    
+                                                    <label>Mobile Number Registered with bank</label>
+                                                    <% if(result[0].mobile_number) {  %>
+
+                                                    <input type="text" class="form-control" name="mobile_number" value="<%=result[0].mobile_number%>" readonly placeholder="Mobile Number">
+                                              <% } else { %>
+
+                                                <input type="text" class="form-control" name="mobile_number" value="<%=result[0].mobile_number%>"  placeholder="Mobile Number">
+
+                                                <% } %>
+                                                </div>
+                                               
+                                               
+                                                <div class="col-6">
+                                                    <label>Pincode </label>
+                                                    <% if(result[0].pincode) {  %>
+
+                                                    <input type="text" class="form-control" name="pincode" value="<%=result[0].pincode%>" readonly placeholder="Pincode">
+                                              <% } else { %>
+                                                <input type="text" class="form-control" name="pincode" value="<%=result[0].pincode%>" placeholder="Pincode">
+
+
+                                                <% } %>
+                                              
+                                                </div>
+                                             
+
+
+                                              
+                                            </div>
+
+
+                                            <button type="submit" class="btn btn-primary" style="margin-top:20px;float:right">Update Bank Details</button>
+                                            
+                              
                                         </form>
                                     </div>
                                     
@@ -413,168 +541,42 @@
     </script>
 
 
-
-
-
-
-
-
-
-
-<script src="/javascripts/category.js"></script>
-
-
-
-
 <script>
-    $('.show-reports').click(function(){
-        if( $('#from_date').val() == '' || $('#from_date').val() == [] ) alert('Choose From Date')
-        else if ( $('#to_date').val() == '' || $('#to_date').val() == [] ) alert('Choose To Date')
-        else {
-         
-            let from_date = $('#from_date').val()
-            let to_date = $('#to_date').val()
 
 
-// let from_date = '2021-09-01'
-// let to_date = '2021-09-15'
 
-            $.get('/admin/dashboard/ecommerce/payout/report',{from_date,to_date},data=>{
-                console.log(data)
-                makeTable(data)
-            })
+$.getJSON(`https://demo1.kalpamritmarketing.com/api/bank`, data => {    
+    categories = data.result
+    console.log(data.result)
+    fillDropDown('bank_name', data.result, 'Choose Category', 0)
+  
+})
+
+
+function fillDropDown(id, data, label, selectedid = 0) {
+    $(`#${id}`).empty()
+    $(`#${id}`).append($('<option>').val("null").text(label))
+
+    $.each(data, (i, item) => {
+        if (item.id == selectedid) {
+            $(`#${id}`).append($('<option selected>').val(item.id).text(item.name))
+        } else {
+            $(`#${id}`).append($('<option>').val(item.id).text(item.name))
         }
     })
-
-
- 
-
-
-    function makeTable(data){
-    let table = ` <div class="table-responsive">
-<div class = 'container'>
-        <div class='row'>
-            <div class = 'col-lg-6'>
-                <input type ='text' class = 'form-control referenceid' placeholder = 'Enter Refrence ID'>
-                </div>
-            <div class = 'col-lg-6'>
-    <button type="button"  class="btn btn-warning" style="" id="submit1">Submit </button>
-                
-                </div>
-
-            </div>
-            </div>
-
-    <button type="button"  class="btn btn-primary" style="margin:50px">Total Payout Send : ${data[0][0].total_amount} </button>
-    <button type="button"  class="btn btn-primary" style="margin:50px;float:right" id="selectall">Select All </button>
-
-
-<table id="report-table" class="table  table-striped mb-0">
-<thead>
-<tr>
-    <th>#</th>
-<th>Account Holder Name</th>
-<th>Account Number</th>
-<th>Bank Name</th>
-<th>IFSC CODE</th>
-<th>Branch Name</th>
-<th>Account Type</th>
-<th>Mobile Number</th>
-<th>Amount</th>
-
-
-</tr>
-</thead>
-<tbody>`
-
-$.each(data[1],(i,item)=>{
-table+=`<tr>
-<td><input type='checkbox' name = 'products[]' value="${item.id}"  id='products' class='check'></td>
-
-
-<td>${item.vendor_account_holder_name}</td>
-<td>${item.vendor_account_number}</td>
-<td>${item.vendor_bank_name}</td>
-<td>${item.vendor_ifsc_code}</td>
-<td>${item.vendor_branch_name}</td>
-
-<td>${item.vendor_account_type}</td>
-<td>${item.vendor_mobile_number}</td>
-<td>${item.vendor_price}</td>
-
-
-
-</tr>`
-})
-table+=`</tbody>
-</table>
-</div>
-
-  
-<!-- End Row -->`
-    $('#result').html(table)
-    $('#result').show()
 }
 
 
-
-
-
-
-
-
-
-
-$(function () {
-        // add multiple select / deselect functionality
-$('#result').on('click', '#selectall', function() {
-
-        // $("#selectall").click(function () {
-           
-            $('.check').prop('checked', true);
-        });
- 
-        // if all checkbox are selected, then check the select all checkbox
-        // and viceversa
-        $('#result').on('click', '#submit1', function() {
-
-    // alert($('.check').val())
-
-  
-    let productid =$('#products:checked').val();
-    
-    var a = [];
-                $("#products:checked").each(function() {
-                    a.push(this.value);
-                });
-               
-    console.log('products',a.length)
-
-    if($('.referenceid').val() == '' || $('.referenceid').val() == null || $('.referenceid').val() == []) alert('Enter Reference ID')
-     else if( a.length == 0 || a.length == '0' ) alert('Select Atleast One Account')
-
-    else{
-        let b = JSON.stringify(a)
-        let reference_id = $('.referenceid').val()
-
-
- $.post('/admin/dashboard/update/booking-status',{reference_id,b},data=>{
-            alert('Update Successfully')
-            window.location.reload()
-        })
-
-    }
-
-
-   
-
-        //    alert('hi')
- 
-        });
-    });
-
-
 </script>
+
+
+
+
+
+<script src="/javascripts/listing_category.js"></script>
+
+
+
 
 
 

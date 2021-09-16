@@ -6,85 +6,123 @@
         ***********************************-->
         <div class="content-body">
 
-            <div class="row page-titles mx-0">
-               
-              
-            </div>
+            
             <!-- row -->
 
             <div class="container-fluid">
-                
               
-                <div class="row">
+                <div class="row" id='insertdiv'>
                     <div class="col-12">
-                        <h3 class="content-heading"><%=title%></h3>
+                        <h3 class="content-heading mt-3">My Profile   </h3>
+
                     </div>
-                    <div class="col-12">
+                   
+                    <div class="col-xl-12 col-xxl-12">
+                        <div class="card">
+                            <div class="card-body">    
+                                    <div class="basic-form">
+                                        <form action="/admin/dashboard/listing-category/insert" method="POST" enctype="multipart/form-data" class="uploadImage">
+                                               <div class="form-row">
+                                                <div class="col-4">
+                                                    <label>Name</label>
+                                                    <input type="text" class="form-control" name="name" value="<%=result[0].name%>" placeholder="Name" readonly>
+                                                </div>
+                                                <div class="col-4">
+                                                    <label>Mobile Number</label>
+                                                    <input type="text" class="form-control" name="number" value="<%=result[0].number%>"  placeholder="Number" readonly>
+                                                </div>
+                                                <div class="col-4">
+                                                    <label>Business Name</label>
+                                                    <input type="text" class="form-control" name="email" value="<%=result[0].business_name%>" placeholder="Business Name" readonly>
+                                                </div>
+
+
+                                                
+                                              
+                                            </div>
+
+
+
+                                            <div class="form-row" style="margin-top: 20px;">
+                                                <div class="col-4">
+                                                    <label>AAdhar Number</label>
+                                                    <input type="text" class="form-control" name="SponserId" value="<%=result[0].aadhar_number%>"  placeholder="Aadhar Number" readonly>
+                                                </div>
+                                                <div class="col-4">
+                                                    <label>GST Number</label>
+                                                    <input type="text" class="form-control" value="<%=result[0].gst_number%>" placeholder="GST Number" readonly>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <label>PAN Number</label>
+                                                    <input type="text" class="form-control" value="<%=result[0].pan_number%>" placeholder="PAN Number" readonly>
+                                                </div>
+                                             
+
+
+                                                
+                                              
+                                            </div>
+
+
+                                            
+                              
+                                        </form>
+                                    </div>
+                                    
+                                  
+                                    
+                                   
+                                    
+                             
+                                    
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                   
+                    
+                    <div class="col-xl-12 col-xxl-12">
                         <div class="card">
                             <div class="card-body">
+                                <!-- <h4 class="card-title">Table Bordered</h4> -->
                                 <div class="table-responsive">
-                                    <table id="example" class="display" style="min-width: 845px">
-                                        <thead>
-                                            <tr>
-                                                <th>Order ID</th>
 
-                                                <th>Product Name</th>
-                                                <th>Customer Name</th>
-                                                <th>Number</th>
-                                                <th>Address</th>
-                                                <th>Amount</th>
-                                                <th>Quantity</th>
-                                                <th>Status</th>
-                                                <th>View Details</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                <table id="report-table" class="table  table-striped mb-0">
+                                <thead>
+                                <tr>
+                                <th>PAN CARD</th>
+                                <th>AADHAR Front </th>
+                                <th>AADHAR Back</th>
 
-<% for(i=0;i<result.length;i++) { %>
+                                </tr>
+                                </thead>
+                                <tbody>`
+                                
+                                <tr>
+                                <td>
+                                <img src="/images/<%=result[0].pan_card%>" class="img-fluid img-radius wid-40" alt="" style="width:30px;height:30px">
+                                </td>
+                                <td>
+                                    <img src="/images/<%=result[0].aadhar_front%>" class="img-fluid img-radius wid-40" alt="" style="width:30px;height:30px">
+                                    </td>
+                                    <td>
+                                        <img src="/images/<%=result[0].aadhar_back%>" class="img-fluid img-radius wid-40" alt="" style="width:30px;height:30px">
+                                        </td>
+                                      
+                               
+                                </tr>
+                               </tbody>
+                                </table>
 
-                                            <tr>
-                                                <td><%=result[i].orderid%></td>
-
-                                                <td><%=result[i].bookingname%></td>
-                                                <td><%=result[i].name%></td>
-                                                <td><%=result[i].number%></td>
-                                                <td><%=result[i].address%></td>
-                                                <td><%=result[i].price%></td>
-                                                <td><%=result[i].quantity%></td>
-                                                <td><%=result[i].status%></td>
-                                                <td><a href="/vendor-dashboard/product/full/details/<%=result[i].id%>"><button type="button" class="btn btn-link">Details</button></a></td>
-
-
-
-                                                <!-- <td><a href="#"><button type="button" class="btn btn-link">Track Order</button></a></td> -->
-                                            </tr>
-
-                                            <% } %>
-                                            
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Order ID</th>
-
-                                                <th>Product Name</th>
-                                                <th>Customer Name</th>
-                                                <th>Number</th>
-                                                <th>Address</th>
-                                                <th>Amount</th>
-                                                <th>Quantity</th>
-                                                <th>Status</th>
-                                                <th>View Details</th>
-
-                                            </tr>
-                                        </tfoot>
-                                    
-                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-                   
                 </div>
+               
             </div>
         </div>
         <!--**********************************
@@ -316,28 +354,135 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="/Admin/./assets/plugins/common/common.min.js"></script>
+    <script src="../../assets/plugins/common/common.min.js"></script>
     <script src="/Admin/main/./js/custom.min.js"></script>
     <script src="/Admin/main/./js/settings.js"></script>
     <script src="/Admin/main/./js/quixnav.js"></script>
     <script src="/Admin/main/./js/styleSwitcher.js"></script>
+    
+    <!-- Jquery Validation -->
+    <script src="../../assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <!-- Form step -->
+    <script src="../../assets/plugins/jquery-steps/build/jquery.steps.min.js"></script>
+    <script src="../../assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <!-- Form validate init -->
+    <script src="/Admin/main/./js/plugins-init/jquery.validate-init.js"></script>
+    <!-- Dropify -->
+    <script src="../../assets/plugins/dropify/dist/js/dropify.min.js"></script>
+    <!-- Typeahead -->
+    <script src="../../assets/plugins/typeahead.js/dist/typeahead.jquery.min.js"></script>
+    <script src="../../assets/plugins/typeahead.js/dist/typeahead.bundle.min.js"></script>
+    <script src="../../assets/plugins/typeahead.js/dist/bloodhound.min.js"></script>
+    <!-- Tagsinput -->
+    <script src="../../assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js"></script>
+    <!-- Switchery -->
+    <script src="../../assets/plugins/innoto-switchery/dist/switchery.min.js"></script>
+    <!-- Select 2 -->
+    <script src="../../assets/plugins/select2/js/select2.full.min.js"></script>
+    <!-- Touchspinner -->
+    <script src="../../assets/plugins/bootstrap-touchspin/js/jquery.bootstrap-touchspin.min.js"></script>
+    <!-- Input mask -->
+    <script src="../../assets/plugins/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
+    <!-- x-editable -->
+    <script src="../../assets/plugins/moment/moment.min.js"></script>
+    <script src="../../assets/plugins/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+    <!-- Summernote -->
+    <script src="../../assets/plugins/summernote/js/summernote.min.js"></script>
+    <!-- Daterangepicker -->
+    <!-- momment js is must -->
+    <!-- <script src="../../assets/plugins/moment/moment.min.js"></script> -->
+    <script src="../../assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <!-- clockpicker -->
+    <script src="../../assets/plugins/moment/moment.min.js"></script>
+    <script src="../../assets/plugins/clockpicker/js/bootstrap-clockpicker.min.js"></script>
+    <!-- asColorPicker -->
+    <!-- momment js is must -->
+    <!-- <script src="../../assets/plugins/moment/moment.min.js"></script> -->
+    <script src="../../assets/plugins/jquery-asColor/jquery-asColor.min.js"></script>
+    <script src="../../assets/plugins/jquery-asGradient/jquery-asGradient.min.js"></script>
+    <script src="../../assets/plugins/jquery-asColorPicker/js/jquery-asColorPicker.min.js"></script>
+    <!-- Material color picker -->
+    <!-- momment js is must -->
+    <!-- <script src="../../assets/plugins/moment/moment.min.js"></script> -->
+    <script src="../../assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <!-- pickdate -->
+    <script src="../../assets/plugins/pickadate/picker.js"></script>
+    <script src="../../assets/plugins/pickadate/picker.time.js"></script>
+    <script src="../../assets/plugins/pickadate/picker.date.js"></script>
 
-    <!-- JS Grid -->
-    <script src="/Admin/./assets/plugins/jquery-validation/jquery.validate.min.js"></script>
-    <script src="/Admin/./assets/plugins/jsgrid/js/jsgrid.min.js"></script>
-    <!-- Footable -->
-    <script src="/Admin/./assets/plugins/footable/js/footable.min.js"></script>
-    <!-- Bootgrid -->
-    <script src="/Admin/./assets/plugins/jquery-bootgrid/dist/jquery.bootgrid.min.js"></script>
-    <!-- Datatable -->
-    <script src="/Admin/./assets/plugins/datatables/js/jquery.dataTables.min.js"></script>
 
 
-    <!-- JS Grid Init -->
-    <script src="/Admin/main/./js/plugins-init/jsgrid-init.js"></script>
-    <script src="/Admin/main/./js/plugins-init/footable-init.js"></script>
-    <script src="/Admin/main/./js/plugins-init/jquery.bootgrid-init.js"></script>
-    <script src="/Admin/main/./js/plugins-init/datatables.init.js"></script>
+
+    <!-- Form step init -->
+    <script src="/Admin/main/./js/plugins-init/jquery-steps-init.js"></script>
+    <!-- Dropify init -->
+    <script src="/Admin/main/./js/plugins-init/dropify-init.js"></script>
+    <!-- Typeahead init -->
+    <script src="/Admin/main/./js/plugins-init/typehead.js-init.js"></script>
+    <!-- Tagsinput init -->
+    <script src="/Admin/main/./js/plugins-init/bootstrap-tagsinput-init.js"></script>
+    <!-- Switchery init -->
+    <script src="/Admin/main/./js/plugins-init/switchery-init.js"></script>
+    <!-- Select 2 init -->
+    <script src="/Admin/main/./js/plugins-init/select2-init.js"></script>
+    <!-- Touchspinner init -->
+    <script src="/Admin/main/./js/plugins-init/bootstrap-touchpin-init.js"></script>
+    <!-- x-editable init -->
+    <script src="/Admin/main/./js/plugins-init/bootstrap-editable-init.js"></script>
+    <!-- Summernote init -->
+    <script src="/Admin/main/./js/plugins-init/summernote-init.js"></script>
+    <!-- Daterangepicker -->
+    <script src="/Admin/main/./js/plugins-init/bs-daterange-picker-init.js"></script>
+    <!-- Clockpicker init -->
+    <script src="/Admin/main/./js/plugins-init/clock-picker-init.js"></script>
+    <!-- asColorPicker init -->
+    <script src="/Admin/main/./js/plugins-init/jquery-asColorPicker.init.js"></script>
+    <!-- Material color picker init -->
+    <script src="/Admin/main/./js/plugins-init/material-date-picker-init.js"></script>
+    <!-- Pickdate -->
+    <script src="/Admin/main/./js/plugins-init/pickadate-init.js"></script>
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+    <script>
+    
+      $('.uploadImage').submit(function (e) {
+        e.preventDefault();
+    
+        // var title = $('#title').val(); 
+    
+        $(this).ajaxSubmit({
+          // data: {title: title},
+          contentType: 'application/json',
+          success: function (response) {
+            alert('successfully')
+
+          }
+        });
+        return false;
+      });
+    
+    
+    
+    </script>
+
+
+
+
+
+
+
+
+
+
+<script src="/javascripts/listing_category.js"></script>
+
+
+
 
 
 
