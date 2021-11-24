@@ -114,7 +114,7 @@ router.post('/insert',upload.fields([{ name: 'image', maxCount: 1 }, { name: 'th
  
     // console.log(req.files)
 
-    let price = (req.body.price)/(req.body.discount)
+    let price = (req.body.price)
     let net_price = (req.body.price)-price
     body['net_amount'] = Math.round(net_price);
     body['categoryid'] = req.session.categoryid;
@@ -122,7 +122,7 @@ router.post('/insert',upload.fields([{ name: 'image', maxCount: 1 }, { name: 'th
 
     body['image'] = req.files.image[0].filename;
     body['thumbnail'] = req.files.thumbnail[0].filename;
- console.log(req.body)
+ console.log('mydata',req.body)
    pool.query(`insert into products set ?`,body,(err,result)=>{
        err ? console.log(err) : res.json({msg : 'success'})
    })

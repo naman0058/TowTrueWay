@@ -116,12 +116,12 @@
 
                                             <div class="row" style="margin-top: 20px;">
                                                 <div class="col-6">
-                                                    <label>Product Price</label>
+                                                    <label>MRP Price</label>
                                                     <input type="number" class="form-control" name="price" placeholder="Product Price">
                                                 </div>
                                                 <div class="col-6">
-                                                    <label>Discount</label>
-                                                    <input type="number" class="form-control" name="discount" placeholder="Discount (In %)">
+                                                    <label>DP Price</label>
+                                                    <input type="number" class="form-control" name="dp_price" placeholder="Distributer Price">
                                                 </div>
 
                                                
@@ -164,7 +164,7 @@
                                             <div class="row" style="margin-top: 20px;">
                                                 <div class="col-6">
                                                     <label>Small Description</label>
-                                                   <textarea class="form-control" name="description" placeholder="Prdocut Description (Small Description)"></textarea>
+                                                   <textarea class="form-control" name="small_description" placeholder="Prdocut Description (Small Description)"></textarea>
                                                 </div>
 
 
@@ -615,24 +615,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
     <script>
     
-      $('.uploadImage').submit(function (e) {
-        e.preventDefault();
-    
-        // var title = $('#title').val(); 
-    
-        $(this).ajaxSubmit({
-          // data: {title: title},
-          contentType: 'application/json',
-          success: function (response) {
-            alert('successfully')
-           
-          }
-        });
-        return false;
-      });
-    
-    
-    
+   
     </script>
 
 
@@ -654,6 +637,7 @@
       e.preventDefault();
       let description = $("#editor").html().trim();
       // var title = $('#title').val(); 
+      // alert(description)
   
       $(this).ajaxSubmit({
          data: {description: description},

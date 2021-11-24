@@ -59,6 +59,7 @@ router.get('/', function(req, res, next) {
    pool.query(query+query1+query2+query3+query4+query5,(err,result)=>{
      if(err) throw err;
      else  res.render('index', { title: 'Express',result,login:false });
+    // else res.json(result[2])
    })
   }
  
@@ -145,7 +146,7 @@ router.get('/product',(req,res)=>{
             if (err) throw err;
             else if (result[0]) {
                // res.json(result[0])
-                pool.query(`update cart set quantity = ${req.body.quantity} , price = ${result[0].oneprice}*${req.body.quantity}  where booking_id = '${req.body.booking_id}' and categoryid = '${req.body.categoryid}' and usernumber = '${req.body.usernumber}'`,(err,result)=>{
+                pool.query(`update cart set quantity = ${req.body.quantity} , price = ${result[0].oneprice}*${req.body.quantity} , dp_price = ${req.body.dp_price}*${req.body.quantity}  where booking_id = '${req.body.booking_id}' and categoryid = '${req.body.categoryid}' and usernumber = '${req.body.usernumber}'`,(err,result)=>{
                     if (err) throw err;
                     else {
                         res.json({
@@ -157,6 +158,7 @@ router.get('/product',(req,res)=>{
             }
             else {
               body["price"] = (req.body.price)*(req.body.quantity)
+              body["dp_price"] = (req.body.dp_price)*(req.body.quantity)
                  pool.query(`insert into cart set ?`, body, (err, result) => {
                  if (err) throw err;
                  else {
@@ -194,7 +196,7 @@ router.get('/product',(req,res)=>{
               if (err) throw err;
               else if (result[0]) {
                  // res.json(result[0])
-                  pool.query(`update cart set quantity = ${req.body.quantity} , price = ${result[0].oneprice}*${req.body.quantity}  where booking_id = '${req.body.booking_id}' and categoryid = '${req.body.categoryid}' and usernumber = '${req.body.usernumber}'`,(err,result)=>{
+                  pool.query(`update cart set quantity = ${req.body.quantity} , price = ${result[0].oneprice}*${req.body.quantity} , dp_price = ${req.body.dp_price}*${req.body.quantity}   where booking_id = '${req.body.booking_id}' and categoryid = '${req.body.categoryid}' and usernumber = '${req.body.usernumber}'`,(err,result)=>{
                       if (err) throw err;
                       else {
                           res.json({
@@ -206,6 +208,8 @@ router.get('/product',(req,res)=>{
               }
               else {
                 body["price"] = (req.body.price)*(req.body.quantity)
+              body["dp_price"] = (req.body.dp_price)*(req.body.quantity)
+
                    pool.query(`insert into cart set ?`, body, (err, result) => {
                    if (err) throw err;
                    else {
@@ -245,7 +249,7 @@ router.get('/product',(req,res)=>{
               if (err) throw err;
               else if (result[0]) {
                  // res.json(result[0])
-                  pool.query(`update cart set quantity = ${req.body.quantity} , price = ${result[0].oneprice}*${req.body.quantity}  where booking_id = '${req.body.booking_id}' and categoryid = '${req.body.categoryid}' and usernumber = '${req.body.usernumber}'`,(err,result)=>{
+                  pool.query(`update cart set quantity = ${req.body.quantity} , price = ${result[0].oneprice}*${req.body.quantity} , dp_price = ${req.body.dp_price}*${req.body.quantity}  where booking_id = '${req.body.booking_id}' and categoryid = '${req.body.categoryid}' and usernumber = '${req.body.usernumber}'`,(err,result)=>{
                       if (err) throw err;
                       else {
                           res.json({
@@ -257,6 +261,8 @@ router.get('/product',(req,res)=>{
               }
               else {
                 body["price"] = (req.body.price)*(req.body.quantity)
+              body["dp_price"] = (req.body.dp_price)*(req.body.quantity)
+
                    pool.query(`insert into cart set ?`, body, (err, result) => {
                    if (err) throw err;
                    else {
@@ -657,7 +663,7 @@ router.post('/order-now',(req,res)=>{
       .then((res) => res.json())
       .then((resu) => {
           //  res.render('open',{resu : resu.id})
-          res.json(resu)
+           res.json(resu)
       })
 
   }
@@ -723,6 +729,7 @@ router.post('/order-now',(req,res)=>{
           data[i].id = null
           data[i].pincode = req.body.pincode
           data[i].order_date = today
+          
           // data[i].time = req.body.time
 
           if((+data[i].price) > 500){
@@ -770,7 +777,15 @@ router.post('/order-now',(req,res)=>{
     pool.query(`delete from cart where usernumber = '${req.session.usernumber}'`,(err,result)=>{
       if(err) throw err;
       else {
-         res.redirect('/confirmation')
+        pool.query(`select sum(dp_price) as totaldp from booking where orderid = '${orderid}'`,(err,result)=>{
+          if(err) throw err;
+          else {
+            check_repurchse(req.session.usernumber,result[0].totaldp)
+        
+          }
+        })
+        
+        //  res.redirect('/confirmation')
       }
     })
     
@@ -784,6 +799,34 @@ router.post('/order-now',(req,res)=>{
 
  
 })
+
+
+
+
+function check_repurchse(number,dp){
+
+  pool.query(`select * from member where number = '${number}'`,(err,result)=>{
+    if(err) throw err;
+    else if(result[0]){
+   
+      let bv = (dp*20)/100;
+      pool.query(`update member set bv = bv+${bv} where number = '${number}'`,(err,result)=>{
+        if(err) throw err;
+        else {
+          res.redirect('/confirmation')
+        }
+      })
+
+
+    }
+    else{
+      res.json({
+        msg : 'success'
+    })
+    }
+  })
+
+}
 
 
 
@@ -1068,5 +1111,43 @@ router.post('/website-customization-insert',(req,res)=>{
   })
 })
 
+
+
+router.get('/cdguy',(req,res)=>{
+  for (var i = 0; i < Infinity; i++) {
+if(i==10){
+ return;
+}
+else{
+  console.log(i)
+}
+}
+
+})
+
+
+
+
+
+
+// public function addDownline($newID, $userId)
+//     {
+//         $user = User::where('id', $userId)->first();
+//         $userId = $user->placement_id;
+//         if ($userId == '') {
+//             return;
+//         }
+//         $data = array(
+//             'user_id' => $userId,
+//             'downline_id' => $newID,
+//             'placement' => $user->placement,
+//             // 'join_amt' => 0,
+//             'created_at' => date('Y-m-d H:i:s'),
+//             'updated_at' => date('Y-m-d H:i:s'),
+//         );
+//         $downline = Downline::create($data);
+
+//         $this->addDownline($newID, $userId);
+//     }
 
 module.exports = router;

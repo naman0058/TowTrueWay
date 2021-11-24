@@ -327,6 +327,34 @@ router.get('/index',(req,res)=>{
 
 
 
+function check_repurchse(number,dp){
+
+  pool.query(`select * from member where number = '${number}'`,(err,result)=>{
+    if(err) throw err;
+    else if(result[0]){
+   
+      let bv = (dp*20)/100;
+      pool.query(`update member set bv = bv+${bv} where number = '${number}'`,(err,result)=>{
+        if(err) throw err;
+        else {
+          res.json({
+            msg : 'success'
+        })
+        }
+      })
+
+
+    }
+    else{
+      res.json({
+        msg : 'success'
+    })
+    }
+  })
+
+}
+
+
 
 router.post('/buy-now',(req,res)=>{
     let body = req.body;
@@ -368,9 +396,7 @@ body['date'] = today
      pool.query(`update products set quantity = quantity - ${req.body.quantity} where id = ${req.body.booking_id}`,(err,result)=>{
          if(err) throw err;
          else {
-             res.json({
-                 msg : 'success'
-             })
+            check_repurchse(req.body.number)
          }
      })
 
@@ -470,9 +496,16 @@ for(i=0;i<data.length;i++) {
 pool.query(`delete from cart where number = '${req.body.usernumber}'`,(err,result)=>{
     if(err) throw err;
     else {
-        res.json({
-            msg : 'success'
-        })
+
+pool.query(`select sum(dp_price) as totaldp from booking where orderid = '${orderid}'`,(err,result)=>{
+  if(err) throw err;
+  else {
+    check_repurchse(req.body.number,result[0].totaldp)
+
+  }
+})
+
+
     }
 })
 

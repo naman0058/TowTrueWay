@@ -964,7 +964,7 @@
                                                         <button class="quantity-minus w-icon-minus"></button>
                                                     </div>
                                                 </div>
-                                                <button class="btn btn-primary btn-cart addToCart" vendorid = "<%=result[1][0].vendorid%>" categoryname = '<%=result[1][0].name%>' subcategoryid="<%=result[1][0].subcategoryid%>"  booking_id="<%=result[1][0].id%>" price="<%=result[1][0].net_amount%>" categoryid = '<%=result[1][0].categoryid%>' totalquantity = '<%=result[1][0].quantity%>' >
+                                                <button class="btn btn-primary btn-cart addToCart" vendorid = "<%=result[1][0].vendorid%>" categoryname = '<%=result[1][0].name%>' subcategoryid="<%=result[1][0].subcategoryid%>"  booking_id="<%=result[1][0].id%>" price="<%=result[1][0].net_amount%>" categoryid = '<%=result[1][0].categoryid%>' totalquantity = '<%=result[1][0].quantity%>' dp_price = '<%=result[1][0].dp_price%>' >
                                                     <i class="w-icon-cart addToCart" ></i>
                                                     <span>Add to Cart</span>
                                                 </button>
@@ -2852,7 +2852,7 @@
                                 <button class="quantity-minus w-icon-minus"></button>
                             </div>
                         </div>
-                        <button class="btn btn-primary btn-cart addToCart" id="addToCart" categoryname = '<%=result[1][0].name%>' subcategoryid="<%=result[1][0].subcategoryid%>"  booking_id="<%=result[1][0].id%>" price="<%=result[1][0].net_amount%>" categoryid = '<%=result[1][0].categoryid%>' totalquantity = '<%=result[1][0].quantity%>' >
+                        <button class="btn btn-primary btn-cart addToCart" id="addToCart" categoryname = '<%=result[1][0].name%>' subcategoryid="<%=result[1][0].subcategoryid%>"  booking_id="<%=result[1][0].id%>" price="<%=result[1][0].net_amount%>" categoryid = '<%=result[1][0].categoryid%>' totalquantity = '<%=result[1][0].quantity%>' dp_price = '<%=result[1][0].dp_price%>' >
                             <i class="w-icon-cart addToCart" ></i>
                             <span>Add to Cart123</span>
                         </button>
@@ -2913,12 +2913,13 @@
                 let totalquantity = $(this).attr('totalquantity');
                 let categoryname = $(this).attr('categoryname')
                 let vendorid = $(this).attr('vendorid')
+                let dp_price = $(this).attr('dp_price')
 
-    
+    // alert(quantity)
                 // let vendorid = $(this).attr('vendorid');
     
     
-                if(quantity > totalquantity){
+                if((+quantity) > (+totalquantity)){
                     
                     alert(`We have only ${totalquantity} stock availbale`)
                 }
@@ -2926,7 +2927,7 @@
                 else {
                     price = price*quantity
             
-            $.post('/cart-handler',{booking_id,price,categoryid,oneprice,quantity,subcategoryid,vendorid},data=>{
+            $.post('/cart-handler',{booking_id,price,categoryid,oneprice,quantity,subcategoryid,vendorid,dp_price},data=>{
               
 
             })  
