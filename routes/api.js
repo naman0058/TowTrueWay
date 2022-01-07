@@ -329,11 +329,20 @@ router.get('/index',(req,res)=>{
 
 function check_repurchse(number,dp){
 
+
+
   pool.query(`select * from member where number = '${number}'`,(err,result)=>{
     if(err) throw err;
     else if(result[0]){
    
       let bv = (dp*20)/100;
+
+      // 3% sponserid ko mil jayega 3% mil jayega
+      
+      
+      // dpPrice = dpprice+dpprice;
+
+
       pool.query(`update member set bv = bv+${bv} where number = '${number}'`,(err,result)=>{
         if(err) throw err;
         else {

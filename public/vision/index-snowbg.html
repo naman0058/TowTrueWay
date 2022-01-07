@@ -29,27 +29,27 @@ http://themeforest.net/licenses
 	<!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
 
 	<!-- Initializer -->
-	<link rel="stylesheet" href="/vision/css/normalize.css">
+	<link rel="stylesheet" href="css/normalize.css">
 
 	<!-- Web fonts and Web Icons -->
-	<link rel="stylesheet" href="/vision/css/pageloader.css">
-	<link rel="stylesheet" href="/vision/fonts/opensans/stylesheet.css">
-	<link rel="stylesheet" href="/vision/fonts/geosans/stylesheet.css">
-	<link rel="stylesheet" href="/vision/css/ionicons.min.css">
+	<link rel="stylesheet" href="css/pageloader.css">
+	<link rel="stylesheet" href="fonts/opensans/stylesheet.css">
+	<link rel="stylesheet" href="fonts/geosans/stylesheet.css">
+	<link rel="stylesheet" href="css/ionicons.min.css">
 
 	<!-- Vendor CSS style -->
-	<link rel="stylesheet" href="/vision/css/foundation.min.css">
-	<link rel="stylesheet" href="/vision/js/vendor/jquery.fullPage.css">
-	<link rel="stylesheet" href="/vision/js/vegas/vegas.min.css">
+	<link rel="stylesheet" href="css/foundation.min.css">
+	<link rel="stylesheet" href="js/vendor/jquery.fullPage.css">
+	<link rel="stylesheet" href="js/vegas/vegas.min.css">
 
 	<!-- Main CSS files -->
-	<link rel="stylesheet" href="/vision/css/main.css">
+	<link rel="stylesheet" href="css/main.css">
 	<!-- alt layout -->
-	<!--        <link rel="stylesheet" href=".//vision/css/style-color1.css">-->
+	<!--        <link rel="stylesheet" href="./css/style-color1.css">-->
 	<!-- responsiveness -->
-	<link rel="stylesheet" href="/vision/css/main_responsive.css">
+	<link rel="stylesheet" href="css/main_responsive.css">
 
-	<script src="/vision/js/vendor/modernizr-2.7.1.min.js"></script>
+	<script src="js/vendor/modernizr-2.7.1.min.js"></script>
 </head>
 
 <body id="menu" class="alt-bg">
@@ -77,11 +77,11 @@ http://themeforest.net/licenses
 		</a>
 		<ul class="menu clearfix">
 			<li>
-				<a href="#home">Home</a>
+				<a href="#about-us">About</a>
 			</li>
 
 			<li>
-				<a href="#write-message">Contact</a>
+				<a href="#contact">Contact</a>
 			</li>
 			<!-- Add other menu similar to "about" here : -->
 			<!--<li>
@@ -99,8 +99,13 @@ http://themeforest.net/licenses
 			<a href="#home"><i class="ion icon ion-ios-home"></i>
 				<span class="title">Home page</span>
 			</a>
-		
-			<a href="#write-message"><i class="ion icon ion-ios-email"></i>
+			<a href="#register"><i class="ion icon ion-android-create"></i>
+				<span class="title">Registration</span>
+			</a>
+			<a href="#about-us"><i class="ion icon ion-ios-information"></i>
+				<span class="title">About us</span>
+			</a>
+			<a href="#contact"><i class="ion icon ion-ios-email"></i>
 				<span class="title">Contact</span>
 			</a>
 		</div>
@@ -110,7 +115,7 @@ http://themeforest.net/licenses
 	<!-- BEGIN OF site cover -->
 	<div class="page-cover">
 		<!-- Cover Background -->
-		<div class="cover-bg pos-abs full-size bg-img" data-image-src="/images/ttw.jfif"></div>
+		<div class="cover-bg pos-abs full-size bg-img" data-image-src="img/bg-default.jpg"></div>
 
 		<!-- BEGIN OF Slideshow Background -->
 		<!--<div class="cover-bg pos-abs full-size slide-show">
@@ -167,13 +172,20 @@ http://themeforest.net/licenses
 				<div class="site-config" data-date="01/01/2022 00:00:00" data-date-timezone="+0"></div>
 				<div class="big">
 					<div class="digit">
-						<span class="days">30</span>
+						<span class="days">00</span>
 						<span class="txt">days</span>
 					</div>
 				</div>
 
 
-			
+				<div class="medium clearfix">
+					<span class="hours">00</span>
+					<span class="unit">:</span>
+					<span class="minutes">00</span>
+				</div>
+				<div class="small">
+					<span class="seconds">00</span><span class="thin"> sec</span>
+				</div>
 			</div>
 
 		</div>
@@ -189,7 +201,28 @@ http://themeforest.net/licenses
 			<h3 class="s-title">Almost here</h3>
 			<div class="s-fixed-content">
 				<!-- Begin of Social links -->
-			
+				<ul>
+					<li>
+						<h4>Follow us</h4>
+						<div class="socialnet">
+							<a href="#"><i class="ion ion-social-facebook"></i>
+								<span class="title">Facebook</span>
+							</a>
+							<a href="#"><i class="ion ion-social-instagram"></i>
+								<span class="title">Instagram</span>
+							</a>
+							<a href="#"><i class="ion ion-social-twitter"></i>
+								<span class="title">Twitter</span>
+							</a>
+							<a href="#"><i class="ion ion-social-pinterest"></i>
+								<span class="title">Pinterest</span>
+							</a>
+							<a href="#"><i class="ion ion-social-tumblr"></i>
+								<span class="title">Tumblr</span>
+							</a>
+						</div>
+					</li>
+				</ul>
 				<!-- End of Social links -->
 			</div>
 			<!-- Content -->
@@ -202,14 +235,16 @@ http://themeforest.net/licenses
 						</div>-->
 
 					<div class="p-title">
-						<img class="h-logo" src="/images/logonew.png" alt="Logo">
+						<img class="h-logo" src="img/logo.png" alt="Logo">
 						<!--							<img class="h-logo" src="img/logo_dark.png" alt="Logo">-->
 					</div>
 
 					<div class="h-right">
-						<h3>Tow True Way <br></h3>
-						<h4 class="subhead"><a href="#register">Launching soon</a></h4>
-					
+						<h3>Lorem <br>product</h3>
+						<h4 class="subhead"><a href="#register">Available here soon</a></h4>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet malesuada feugiat.
+							Curabitur fermentum bibendum
+							nulla, non dictum ipsum tincidunt non.</p>
 					</div>
 
 				</header>
@@ -268,15 +303,131 @@ http://themeforest.net/licenses
 		<!-- End of register page -->
 
 		<!-- Begin of about us page -->
-		
+		<div class="section page-about page page-cent" data-section="about-us">
+			<h3 class="s-title">About Us
+			</h3>
+			<section class="content">
+				<header class="p-title">
+					<img class="h-logo" src="img/logo.png" alt="Logo">
+					<!--							<img class="h-logo" src="img/logo_dark.png" alt="Logo">-->
+					</h2>
+
+					<h4 class="subhead">We <span class="bold">make</span> only <span class="bold">beautiful</span>
+						things</h4>
+				</header>
+				<article class="text">
+					<p>Lorem ipsum <strong>magicum </strong>dolor sit amet, consectetur adipiscing elit. Maecenas a sem
+						ultrices neque vehicula fermentum a sit amet nulla.</p>
+					<p>Aenean ultricies odio at erat facilisis tincidunt. Fusce tempor auctor justo, nec facilisis quam
+						vehicula vel. Aenean non mattis purus, eget lobortis odio. </p>
+				</article>
+			</section>
+			<!-- Arrows scroll down/up -->
+			<footer class="p-footer p-scrolldown">
+				<a class="down btn">
+					<div>
+					</div>
+				</a>
+				<a class="up btn">
+					<div>
+					</div>
+				</a>
+			</footer>
+		</div>
 		<!-- End of about us page -->
 
 		<!-- Begin of Contact page   -->
-	
+		<div class="section page-contact page page-cent" data-section="contact">
+
+			<h3 class="s-title">Contact
+			</h3>
+			<div class="s-fixed-content">
+				<ul>
+					<li>
+						<h4>Find us on</h4>
+						<!-- Begin of Social links -->
+						<div class="socialnet">
+							<a href="#"><i class="ion ion-social-facebook"></i>
+								<span class="title">Facebook</span>
+							</a>
+							<a href="#"><i class="ion ion-social-instagram"></i>
+								<span class="title">Instagram</span>
+							</a>
+							<a href="#"><i class="ion ion-social-twitter"></i>
+								<span class="title">Twitter</span>
+							</a>
+							<a href="#"><i class="ion ion-social-pinterest"></i>
+								<span class="title">Pinterest</span>
+							</a>
+							<a href="#"><i class="ion ion-social-tumblr"></i>
+								<span class="title">Tumblr</span>
+							</a>
+						</div>
+						<!-- End of Social links -->
+					</li>
+				</ul>
+			</div>
+			<!-- Begin of contact information -->
+			<div class="slide" id="s-information">
+				<section class="content">
+
+					<!-- Begin Of Page SubSection -->
+					<div class="contact">
+						<div class="row">
+							<div class="medium-12 columns left">
+								<ul>
+									<li>
+										<p>99 Location Street
+											<br>Antartica 1230
+										</p>
+									</li>
+									<li>
+										<p><strong>Email : </strong><a
+												href="mailto://contact@mail.com">contactemail@mail.com</a></p>
+									</li>
+									<li>
+										<p><strong>Phone : </strong>+999 123 456 89</p>
+									</li>
+
+									<li>
+										<p><strong>Website : </strong> <a
+												href="http://www.highhay.com/">www.highhay.com</a></p>
+									</li>
+									<li>
+										<p>
+											<img class="h-logo" src="img/logo.png" alt="Logo">
+											<!--							<img class="h-logo" src="img/logo_dark.png" alt="Logo"></p>-->
+										<p class="small">Vision by <strong><a
+													href="http://highhay.com/">Brand</a></strong>. All right reserved
+											2016</p>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- End of page SubSection -->
+				</section>
+			</div>
+			<!-- end of contact information -->
+
+
+			<!-- Arrows scroll down/up -->
+			<footer class="p-footer p-scrolldown">
+				<a class="down btn">
+					<div>
+					</div>
+				</a>
+				<a class="up btn">
+					<div>
+					</div>
+				</a>
+			</footer>
+		</div>
 		<!-- End of Contact page  -->
 
 		<!-- Begin of Message page -->
-		<div class="section page page-message page-cent" data-section="write-message" style="margin-bottom: 50px;">
+		<div class="section page page-message page-cent" data-section="write-message">
 
 			<h3 class="s-title">Write to us
 			</h3>
@@ -288,19 +439,22 @@ http://themeforest.net/licenses
 						<div class="wrapper">
 							<div>
 								<form class="message form send_message_form" method="get"
-									action="/landing-page/submit">
+									action="http://demo.highhay.com/vision/ajaxserver/serverfile.php">
 									<div class="fields clearfix">
 										<div class="input">
 											<label for="mes-name">Name </label>
 											<input id="mes-name" name="name" type="text" placeholder="Your Name"
 												required>
 										</div>
-										
+										<div class="buttons">
+											<button id="submit-message" class="button email_b"
+												name="submit_message">Submit</button>
+										</div>
 									</div>
 									<div class="fields clearfix">
 										<div class="input">
-											<label for="mes-email">Mobile  </label>
-											<input id="mes-number" type="number" placeholder=" Number" name="number"
+											<label for="mes-email">Email </label>
+											<input id="mes-email" type="email" placeholder="Email Address" name="email"
 												required>
 										</div>
 									</div>
@@ -311,10 +465,6 @@ http://themeforest.net/licenses
 
 										<div>
 											<p class="message-ok invisible">Your message has been sent, thank you.</p>
-										</div>
-                                        <div class="buttons">
-											<button id="submit-message" class="button email_b"
-												name="submit_message">Submit</button>
 										</div>
 									</div>
 								</form>
@@ -346,28 +496,28 @@ http://themeforest.net/licenses
 
 	<!-- All Javascript plugins goes here -->
 	<!--		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>-->
-	<script src="/vision/js/vendor/jquery-1.11.2.min.js"></script>
+	<script src="js/vendor/jquery-1.11.2.min.js"></script>
 	<!-- All vendor scripts -->
-	<script src="/vision/js/vendor/all.js"></script>
-	<script src="/vision/js/particlejs/particles.min.js"></script>
-	<script src="/vision/js/particlejs/particles-init-snow.js"></script>
+	<script src="js/vendor/all.js"></script>
+	<script src="js/particlejs/particles.min.js"></script>
+	<script src="js/particlejs/particles-init-snow.js"></script>
 
 	<!-- Detailed vendor scripts -->
-	<!--<script src=".//vision/js/vendor/jquery.fullPage.min.js"></script>
-        <script src=".//vision/js/vendor/jquery.slimscroll.min.js"></script>
-        <script src=".//vision/js/vendor/jquery.knob.min.js"></script>
-        <script src=".//vision/js/vegas/vegas.min.js"></script>
-        <script src=".//vision/js/jquery.maximage.js"></script>
-        <script src=".//vision/js/okvideo.min.js"></script>-->
+	<!--<script src="./js/vendor/jquery.fullPage.min.js"></script>
+        <script src="./js/vendor/jquery.slimscroll.min.js"></script>
+        <script src="./js/vendor/jquery.knob.min.js"></script>
+        <script src="./js/vegas/vegas.min.js"></script>
+        <script src="./js/jquery.maximage.js"></script>
+        <script src="./js/okvideo.min.js"></script>-->
 
 	<!-- Downcount JS -->
-	<script src="/vision/js/jquery.downCount.js"></script>
+	<script src="js/jquery.downCount.js"></script>
 
 	<!-- Form script -->
-	<script src="/vision/js/form_script.js"></script>
+	<script src="js/form_script.js"></script>
 
 	<!-- Javascript main files -->
-	<script src="/vision/js/main.js"></script>
+	<script src="js/main.js"></script>
 
 
 	<!-- Google Analytics: Uncomment and change UA-XXXXX-X to be your site"s ID. -->

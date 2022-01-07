@@ -1,0 +1,1628 @@
+/*-----------------------------------------------------------------
+[Legal Notice]
+
+Copyright (c) HighHay/Mivfx
+Before using this template, you should agree with themeforest licenses terms.
+http://themeforest.net/licenses
+-------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------
+[Table of contents]
+/** CSS Reference
+    0. Base Style
+        0.button Buttons
+        0.color Color bg-XX text-XX
+	1. Link and logo at top / .header-top
+	2. Dot navigation at right / #fp-nav, #fp-nav.right
+	3. Quick links at right / .quick-link
+		3.1 quick link position / .quick-link .count-X (where X=1,2,3,4,5)
+		3.2 Links
+	4. Page nav / .page-nav
+	5. Page cover / .page-cover
+		5.1. page cover background image,color (overriden by data-bgcolor or data-image-src atributes) / .page-cover .cover-bg
+		5.2 Page cover  background mask (overriden by data-bgcolor or data-image-src atributes) / .page-cover .cover-bg-mask
+	6. Main page / .page-main
+		6.0 Page footer with scroll down button / .p-footer
+		6.1 Page general params / .page-cent, .page
+		6.3 Page and slide animation / .page.transition , .slide.transition
+		6.4 Clock countdown / .pane-when .clock
+		6.5 Registration form / .page-register
+		6.6 About us / .page-about
+		6.7 Contact, Message / .page-contact
+	7. Video background / .video-container
+
+	Hooks for responsiveness (mobile friendly) can be found in "main_responsive.css" file
+
+**/
+/*---------- 
+[Colors]
+    text color : #FFFFFF, #FFF
+    blue : #5677FC
+    transluscent white : rgba(255, 255, 255, 0.15) / #fff;
+*/
+
+/* 0. Base Style  */
+/* initialization */
+html {
+    color: #fff;
+    font-size: 1em;
+    line-height: 1.4;
+	background: #626262;
+}
+
+::-moz-selection {
+    background: #fff;
+    text-shadow: none;
+}
+
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+audio,
+img,
+svg,
+video {
+    vertical-align: middle;
+}
+
+canvas{
+  display:block;
+  vertical-align:bottom;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+body, html, h1, h2, h3, h4, h5, h6, a, ul, li{
+    
+}
+body{
+    font-family: 'Montserrat';
+	font-weight: 300;
+    background: #fff;
+    
+    margin: 0;
+    padding: 0;
+}
+ul, li{
+    list-style: none outside none;
+    margin: 0;
+}
+iframe{
+    border: none;   
+}
+.pos-rel{
+    position: relative;
+}
+.pos-abs{
+    position: absolute;
+}
+.pos-fix{
+    position: fixed;
+}
+.full-width{
+    width: 100%;
+    max-width: 1440px;
+}
+.full-height{
+    height: 100%;   
+}
+.full-size{
+    top:0;
+    left:0;
+    right: 0;
+    bottom: 0;
+}
+
+.my-button {
+    text-transform: uppercase; 
+    font-size: 1rem;
+    padding: 1em;
+    /* padding-top: 0.8rem; */
+    padding-bottom: 0.8rem;
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.center-vh{
+/*
+    height: 100%;
+    width: 100%; 
+*/
+    /* width needed for Firefox */
+
+    /* old flexbox - Webkit and Firefox. For backwards compatibility */
+    display: -webkit-box; display: -moz-box;
+    /* middle-aged flexbox. Needed for IE 10 */
+    display: -ms-flexbox;
+    /* new flexbox. Chrome (prefix), Opera, upcoming browsers without */
+    display: -webkit-flex;
+    display: flex;
+
+    /* old flexbox: box-* */
+    -webkit-box-align: center; -moz-box-align: center;
+    /* middle flexbox: flex-* */
+    -ms-flex-align: center;
+    /* new flexbox: various property names */
+    -webkit-align-items: center;
+    align-items: center;
+
+
+    -webkit-box-pack: center; -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;    
+}
+.pos-top{
+    top:0;
+}
+.pos-left{
+    left: 0;
+}
+.pos-right{
+    right: 0;
+}
+.pos-bottom{
+    bottom: 0;   
+}
+.relh100{
+    position:relative; height: 100%;   
+}
+/* Make page full width so reset foundation restriction on max-width*/
+.row{
+/*    width: 100%;*/
+    max-width: 100%;
+}
+
+
+ul, li{
+    list-style: none outside none;
+    margin: 0;
+}
+
+.full-width{
+    width: 100%;
+    max-width: 100%;
+    
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.fullscreen-width{
+    width: 100%;
+    max-width: 100%;
+}
+.table{
+    display: table;
+    height: inherit;
+    margin: auto;
+}
+.table-cell{
+    display: table-cell;
+/*    height: inherit;*/
+    vertical-align: middle;
+}
+.align-center{
+    text-align: center;   
+}
+.align-left{    
+    text-align: left;
+}
+.align-right{
+    text-align: right;   
+}
+.align-justify{
+    text-align: justify;   
+}
+/*
+.mask{
+    position: relative;
+}
+*/
+
+/** 0. color Color */
+.mask:before
+{
+    position: absolute;
+    top:0;
+    left:0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    content: ' ';
+    opacity: 0.8;
+/*    z-index: 10;*/
+}
+.title.bg-red,
+.bg-red,
+.mask-red:before{    
+    background: #e51c23;
+}
+.title.bg-yellow,
+.bg-yellow,
+.mask-yellow:before{    
+    background: #ffeb3b;
+}
+.title.bg-blue,
+.bg-blue,
+.mask-blue:before{    
+    background: #5677fc;
+}
+.title.bg-pink,
+.bg-pink,
+.mask-pink:before{    
+    background: #e91e63;
+}
+.title.bg-green,
+.bg-green,
+.mask-green:before{    
+    background: #259b24;
+}
+.title.bg-white,
+.bg-white,
+.mask-white:before{    
+    background: #fff;
+}
+.title.bg-black,
+.bg-black,
+.mask-black:before{    
+    background: #1f1f1f;
+}
+.title.bg-orange,
+.bg-orange,
+.mask-orange:before{    
+    background: #ff9800;
+/*    background: #ef6c00;*/
+}
+.title.bg-purple,
+.bg-purple,
+.mask-purple:before{    
+    background: #9c27b0;
+}
+.title.bg-lime,
+.bg-lime,
+.mask-lime:before{    
+    background: #cddc39;
+}
+.title.bg-bluegrey,
+.bg-bluegrey,
+.mask-bluegrey:before{    
+    background: #607d8b;
+}
+
+.title.bg-bluegreylight,
+.bg-bluegreylight,
+.mask-bluegreylight:before{    
+    background: #f0f0f0;
+}
+.title.bg-bluegreydark,
+.bg-bluegreydark,
+.mask-bluegreydark:before{    
+    background: #37474f;
+}
+.title.bg-indigo,
+.bg-indigo,
+.mask-indigo:before{    
+    background: #3f51b5;
+}
+.title.bg-black,
+.bg-black,
+.mask-black:before{    
+    background: #000;
+}
+.title.bg-black1,
+.bg-black1,
+.mask-black1:before{    
+    background: #333;
+}
+.title.bg-amber,
+.bg-amber,
+.mask-amber:before{    
+    background: #ffc107;
+}
+
+.text-white{
+    color: #fff;   
+}
+.text-black{
+    color: #333333;   
+}
+.text-bold{
+    font-weight: bold;   
+}
+.text-red{
+    color: #e51c23;   
+}
+.text-blue{
+    color: #455ede;   
+}
+.text-orange{
+    color: #ff9800;   
+}
+.text-yellow{
+    color: #ffd600;   
+}
+.text-amber{
+    color: #ffc107;   
+}
+.text-pink{
+    color: #e91e63;   
+}
+.text-lightblue{
+    color: #03a9f4;   
+}
+
+.small-col-20{
+    width: 20%;
+}
+.box-shadow {
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5),
+     0 2px 2px rgba(0,0,0,0.2),
+     0 0 4px 1px rgba(0,0,0,0.1);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5),
+     0 2px 2px rgba(0,0,0,0.2),
+     0 0 4px 1px rgba(0,0,0,0.1);
+    -ms-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5),
+     0 2px 2px rgba(0,0,0,0.2),
+     0 0 4px 1px rgba(0,0,0,0.1);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.5),
+     0 2px 2px rgba(0,0,0,0.2),
+     0 0 4px 1px rgba(0,0,0,0.1);
+}
+
+
+
+
+
+/* Viewport visibility animation  */
+.hidden{
+     opacity:0;
+     -webkit-transition: 0.6s;
+     -ms-transition: 0.6s;
+     transition: 0.6s;
+}
+.visible{
+     opacity:1;
+    -ms-transition: 0.6s;
+    -webkit-transition: 0.6s;
+    transition: 0.6s;
+}
+.invisible{
+    display: none !important;  
+}
+.s-visible-medium-up{
+    opacity:0;
+}
+strong,
+.bold{
+	font-weight: bold;
+}
+.column, .columns{
+    padding: 0;   
+}
+.row .row{
+    margin: 0;   
+}
+
+/* 1. Link and logo at top  */
+.header-top{
+    position: fixed;
+    z-index: 20;
+    top:0;
+    left: 56px;
+	height: 56px;
+	right: 50%;
+/*
+	background: rgba(255, 255, 255, 0.15);
+	-webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2), 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2), 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
+*/
+}
+
+
+	.header-top .menu-icon{
+		display: block;
+		float: left;
+		margin-top: 56px;
+		padding-right: 16px;
+		-webkit-transition: 0.3s;
+		transition: 0.3s;
+	}
+		.header-top .menu-icon .bars{
+			content: "";
+			display: block;
+/*			background: #ff4;*/
+			width: 32px;
+			height: 32px;
+			float: left;
+		}
+			.header-top .menu-icon .bars .bar1,
+			.header-top .menu-icon .bars .bar2,
+			.header-top .menu-icon .bars .bar3{
+				display: block;
+				content: "";
+				height: 2px;
+				width: 32px;
+				background: #fff;
+/*				margin: auto;*/
+				margin-bottom: 10px;
+				-webkit-transition: 0.3s;
+				transition: 0.3s;
+			}
+			.header-top .menu-icon .bars .bar2{
+				width: 16px;
+			}
+
+			.header-top .menu-icon:hover .bars .bar1,
+			.header-top .menu-icon:hover .bars .bar3{
+				width: 16px;
+			}
+			.header-top .menu-icon:hover .bars .bar2{
+				width: 32px;
+			}
+		.header-top .menu-icon .txt{
+			float: left;
+			font-family: "Montserrat";
+			font-size: 16px;
+			color: #fff;
+			padding-top: 0px;
+			padding-left: 16px;
+		}
+	
+
+	.header-top .menu{
+		position: absolute;
+		left: 32px;
+		top: 56px;
+/*		background: #f4f;*/
+		margin-top: -8px;
+		visibility: hidden;
+		opacity: 0;
+		-webkit-transform: translateX(56px);
+		transform: translateX(56px);
+		-webkit-transition: 0.3s;
+		transition: 0.3s;
+/*		width: 580px;*/
+	}
+	.header-top .menu li{
+		display: block;
+		float: left;
+		font-family: "Montserrat";
+		font-size: 16px;	
+	}
+	.header-top .menu a{
+		display: inline-block;
+		padding: 8px 16px;
+		color: #fff;
+		position: relative;
+	}
+	.header-top .menu a:after{
+		content: "";
+		position: absolute;
+		bottom: 0;
+		left: 16px;
+		right: 16px;
+		height: 0;
+		border-bottom: 2px solid #fff;
+		opacity: 0;
+		-webkit-transition: 0.3s;
+		transition: 0.3s;
+	}
+	.header-top .menu a:hover:after{
+		bottom: 8px;
+		opacity: 1;
+	}
+.header-top.menu-resp {
+	z-index: 1000;
+}
+	.header-top.menu-resp .menu-icon{
+		z-index: 1002;
+		position: fixed;
+	}
+	.header-top.menu-resp .menu{
+		position: fixed;
+		z-index: 1001;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: #1d1d1d;
+		padding-top: 24px;
+	}
+	.header-top.menu-resp .menu li{
+		display: block;
+		float: none;
+		width: 100%;
+		text-align: center;
+		
+		font-size: 24px;
+	}
+.header-top.menu-visible .menu-icon .txt{
+	visibility: hidden;
+	opacity: 0;
+}
+ 
+.header-top.menu-visible .menu{
+	visibility: visible;
+	opacity: 1;
+	-webkit-transform: none;
+	transform: none;
+}
+
+
+	.header-top.menu-visible .menu-icon .bars .bar1,
+	.header-top.menu-visible .menu-icon .bars .bar3{
+		width: 16px;
+	}
+	.header-top.menu-visible .menu-icon .bars .bar2{
+		width: 32px;
+	}
+	.header-top.menu-visible .menu-icon:hover .bars .bar1,
+	.header-top.menu-visible .menu-icon:hover .bars .bar3{
+		width: 32px;
+	}
+	.header-top.menu-visible .menu-icon:hover .bars .bar2{
+		width: 16px;
+	}
+ 
+/* 2. Dot navigation at right */
+#fp-nav.right{
+/*	top: 64px;*/
+	top: 0;
+/*	top: 68px;*/
+/*	top: 80px;*/
+    right: 0px;
+    margin-right: 48px; /* 56px total*/
+	position: absolute;
+}
+#fp-nav ul{
+	margin-top: 56px;
+}
+#fp-nav ul li, .fp-slidesNav ul li {
+    height: 7px;
+}
+#fp-nav span, .fp-slidesNav span{
+    border-color: #fff;
+	-webkit-transition: 0.3s;
+	transition: 0.3s;
+	width: 10px;
+	height: 10px;
+}
+#fp-nav ul li a.active span,
+#fp-nav ul li a:hover span,
+#fp-nav ul li a.active:hover span,
+#fp-nav ul li a span{
+	background: #fff;
+	width: 24px;
+	border-radius: 0;
+	height: 2px;
+	left: auto;
+	right: 0;
+	top: 0;
+	margin-top: 0;
+	transition: 0.3s;
+/*	border: 6px solid;*/
+/*	border-color: rgba(0,0,0,0.5) !important*/
+}
+#fp-nav ul li a span:before{
+	position: absolute;
+	content: "";
+	top: -6px;
+	left: -2px;
+	right: -2px;
+	bottom: -6px;
+/*	background: rgba(0, 0, 0, 0.2);*/
+}
+#fp-nav ul li a:hover span{
+	width: 48px;
+}
+#fp-nav ul li a.active span,
+#fp-nav ul li a.active:hover span{
+	width: 96px;
+}
+/* 3.  Menu at top*/
+.menu-link{
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+    width: 56px;
+	-webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2), 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2), 0px 0px 2px 0px rgba(0, 0, 0, 0.1);
+	z-index: 100;
+	background: rgba(0, 0, 0, 0.26);
+}
+
+/* 4. Page footer */
+.page-nav{
+	z-index: 100;
+	position: fixed;
+	top: 56px;
+	left: auto;
+	right: 168px;
+	margin-left: 9px;
+	color: #fff;
+	font-size:18px;
+    font-family: 'Montserrat';
+	font-weight: 300;
+}
+.page-nav a:first-child{
+/*	margin-left: 8px;*/
+}
+.page-nav a{
+/*	position: relative;*/
+	color: #fff;
+	-webkit-transition: 0.3s;
+	transition: 0.3s;
+	float: left;
+	display: block;
+	margin-right: 8px;
+	padding: 4px ;
+	width: 32px;
+	height: 32px;
+	text-align: center;
+/*	background: #fff;*/
+/*	color: #1d1d1d;*/
+	
+	background: rgba(255, 255, 255, 0.15);
+	color: #fff;
+}
+.page-nav a .ion{
+	font-size: 1.2em;
+}
+.page-nav a:hover{
+	opacity: 0.8;
+}
+.page-nav a .title{
+	font-size: 10px;
+	position: absolute;
+	right: 8px;
+	left: auto;
+	text-align: right;
+	width: 90px;
+	bottom: -28px;
+	font-family: "Montserrat";
+	text-transform: uppercase;
+	transition: 0.3s;
+	opacity: 0;
+	visibility: hidden;
+}
+.page-nav a:hover .title{
+	opacity: 1;
+	bottom: -18px;
+	visibility: visible;
+}
+
+/* 5. Page cover */
+.page-cover{
+    width: 100%;
+    position: fixed;
+    height: 100%;
+    z-index: 0;
+}
+    /* 5.1. Page cover background image,color */
+    .page-cover .cover-bg{
+        background: url(../img/bg-default.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        z-index: -3;
+    }
+	.page-cover .cover-bg.bg-color{
+        background-image: none;
+        z-index: -3;
+    }
+
+    /* 5.2 Page cover  background mask */
+    .page-cover .cover-bg.cover-bg-mask{
+        background: rgba(0, 0, 0, 0.12);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed; 
+        z-index: 0;
+        -webkit-transition: 2s;
+        -ms-transition: 2s;
+        transition: 2s;
+    }
+	/* 5.3 background slide */
+	.page-cover .vegas-timer {
+		display: none;
+	}
+    /* ---- particles.js container ---- */
+
+    #particles-js{
+      width: 100%;
+      height: 100%;
+      background-color: #b61924;
+      background-image: url('');
+      background-size: cover;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+    }
+
+/* 6. Main Page */
+.page-main{  
+    position: relative;
+	margin-left: 0;
+    width: 100%;
+    height: 100%;
+}
+ 
+/* 6.0 Page footer with scroll down button */
+
+.p-footer {
+    bottom: 0;
+	top: 0;
+	left: auto;
+	right: 0;
+    position: fixed;
+    padding: 0px;
+	z-index: 100;
+	visibility: hidden;
+	z-index: 500;
+}
+.section.active .p-footer{
+	visibility: visible;
+}
+.section.active .p-footer .btn{
+	visibility: visible;
+	opacity: 1;
+	margin-top: 0;
+	margin-top: -0;
+	margin-bottom: -0;
+}
+.p-footer .btn{
+	position: absolute;
+	height: 24px;
+	width: 32px;
+/*	background: #f4f;*/
+	top: 16px;
+	right: 46px;
+	transition: 0.6s;
+	opacity: 0;
+	margin-top: -16px;
+	margin-bottom: -16px;
+}
+
+.p-footer .btn.down{
+	top: auto;
+	bottom: 16px;
+	transform: rotate(180deg);
+}
+
+.p-footer .btn:after,
+.p-footer .btn:before{
+	position: absolute;
+	content: "";
+	width: 10px;
+	height: 2px;
+	background: #fff;
+	top: 8px;
+	left: 0;
+	margin-left: 8px;
+	margin-top: 3px;
+	transition: 0.3s;
+}
+.p-footer .btn:before{
+	transform: translateX(6px) rotate(45deg) ;
+}
+.p-footer .btn:after{
+	transform: rotate(-45deg);
+}
+
+.p-footer .btn:hover:before,
+.p-footer .btn:hover:after{
+	margin-top: 0px;
+/*	box-shadow: 0 9px 0 0 #fff;*/
+}
+.p-footer .btn div:after,
+.p-footer .btn div:before{
+	position: absolute;
+	content: "";
+	width: 10px;
+	height: 2px;
+	background: #fff;
+	top: 8px;
+	left: 0;
+	margin-left: 8px;
+	margin-top: 3px;
+	transition: 0.3s;
+	opacity: 0;
+}
+
+.p-footer .btn div:before{
+	transform: translateX(6px) rotate(45deg) ;
+}
+.p-footer .btn div:after{
+	transform: rotate(-45deg);
+}
+
+.p-footer .btn:hover  div:before,
+.p-footer .btn:hover  div:after{
+	margin-top: 8px;
+	opacity: 1;
+/*	box-shadow: 0 9px 0 0 #fff;*/
+}
+/* 6.1 Page general params */
+
+.page{    
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+
+.page-cent{
+    width: 100%;   
+    position: relative;
+    text-align: center;
+}
+.page-cent .content p{
+}
+.page-cent .content{
+    width: 720px;
+    width: 100%;
+    margin: 0 auto;
+	padding: 56px;
+    display: inline-block; 
+    -ms-transition: 0.6s;
+    -webkit-transition: 0.6s;
+    transition: 0.6s;
+	text-align: left;
+    font-family: 'Montserrat';
+	font-weight: 300;
+	color: #fff;
+}
+
+.page-cent .p-title{
+    display: block;
+    margin-bottom: 0.5rem;
+}
+.page-cent .p-title h3{
+    text-transform: uppercase;   
+    font-size: 32px;
+    padding-left: 0px;
+    text-align: left;
+    display: inline-block;
+	color: #fff;
+    font-family: 'Montserrat';
+	font-weight: bold;
+	border-bottom: 8px solid #5677fc;
+}
+.page-cent .p-title h2{
+    text-transform: uppercase;   
+    font-size: 56px;
+	line-height: 1.3em;
+    text-align: left;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+    display: block;
+	color: #fff;
+    font-family: 'Montserrat';
+}
+.page-cent .p-title img{
+	width: 360px;
+}
+/* Page general structure */
+.page .p-title i{
+    display: inline-block;
+    margin-left: 0.5em;
+    margin-right: 0em;
+	font-size: 0.8em;
+}
+.page-cent .text{	
+    font-family: 'Montserrat';
+	font-weight: 300;
+	color: #fff;
+	text-align: left;
+}
+.page p{    
+    font-family: 'Montserrat';
+	font-weight: 300;
+    color: #ffffff;
+    font-size: 16px;
+    margin-bottom: 0.75rem;
+}
+.page p.small{
+/*	font-size: 14px;*/
+	font-size: 15px;
+}
+.page p.center{
+	text-align: center;
+}
+.page p.upper{
+    text-transform: uppercase;
+}
+.page p.light{
+	font-weight: 300;
+}
+.page h4{
+	text-transform: uppercase;
+	font-weight: bold;
+    color: #ffffff;
+    font-size: 18px;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+.page h2,
+.page h3,
+.page h4{
+    font-family: 'League Spartan';
+	letter-spacing: 0.0;
+    color: #ffffff;
+}
+
+/* 6.2 Page and slide animation */
+.slide,
+.page .content,
+.page-home .logo-container ,
+.page{
+	-webkit-transition: 0.8s background , 0.6s transform, 0.6s opacity;
+	transition: 0.8s background , 0.6s transform, 0.6s opacity;
+	-webkit-transform: none;
+	transform: none;
+	background: transparent;
+/*
+	-webkit-perspective: 1000px;
+	perspective: 1000px;
+*/
+	border: none;
+}
+.page .content{
+	position: absolute;
+	z-index: 1;
+	bottom: 0;
+	left: 0;
+    width: 42%;
+}
+/* page title */
+.page .s-title{
+/*	position: absolute;*/
+	position: fixed;
+	left: auto;
+	top: 160px;
+	font-family: "League Spartan";
+	font-size: 48px;
+	text-transform: uppercase;
+	color: rgba(255,255,255,0.2);
+	border-bottom: 2px solid currentColor;
+	text-align: right;
+	transition: 0.3s;
+	transition-delay: 0s;
+/*	margin-left: 60%;*/
+	opacity: 0;
+	visibility: hidden;
+	left: 30%;
+	right: 100px;
+}
+
+.page.active .s-title{
+	opacity: 1;
+	visibility: visible;
+	left: 50%;
+	right: 56px;
+	transition: 0.6s;
+	transition-delay: 1s;
+}
+/* fixed content*/
+.page .s-fixed-content{
+	position: fixed;
+	left: auto;
+	top: 240px;
+	font-family: "League Spartan";
+	font-size: 16px;
+	color: #FFF;
+	text-align: right;
+	transition: 0.3s;
+	transition-delay: 0s;
+	opacity: 0;
+	visibility: hidden;
+	left: 30%;
+	right: 36px;
+}
+
+.page.active .s-fixed-content{
+	opacity: 1;
+	visibility: visible;
+	left: 50%;
+	right: 56px;
+	transition: 0.6s;
+	transition-delay: 1.5s;
+}
+.s-fixed-content h4{
+	font-size: 16px;
+/*	font-size: 18px;*/
+/*	font-family: "GeoSansLight";*/
+/*	font-weight: 100;*/
+	font-family: "Montserrat";
+	font-weight: 500;
+	text-transform: none;
+}
+.page:before{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: transparent;
+	content: '';
+	z-index: 0;
+	-webkit-visibility: hidden;
+	visibility: hidden;
+	-webkit-transition: 0.8s background , 0.6s transform, 0.8s visibility;
+	transition: 0.8s background , 0.6s transform, 0.8s visibility;
+	-webkit-transform: none;
+	transform: none;
+}
+.page.transition:before{
+	-webkit-visibility: visible;
+	visibility: visible;
+	-webkit-transform: scale(0.8);
+	transform: scale(0.8);
+/*	background: rgba(255, 255, 255, 0.15);*/
+}
+.page-home.transition .logo-container{
+	-webkit-transform: translateY(20px) scale(0.1);
+	transform: translateY(20px) scale(0.1);
+	opacity: 0;
+}
+.page.transition .content{
+	-webkit-transform: scale(0.85);
+	transform: scale(0.85);
+}
+.slide.transition{
+	-webkit-transform: scale(0.8);
+	transform: scale(0.8);
+	background: rgba(255, 255, 255, 0.15);
+}
+/* 6.3 Home page */
+.page-home .content ,
+.page-home.page-cent .content {
+	position: absolute;
+	width: 50%;
+/*	top: 104px;*/
+/*	bottom: auto;*/
+}
+.page-home .content p{
+	margin-bottom: -4px;
+}
+.page-home .logo-container{
+	position: absolute;
+	top: 100px;
+	width: 100%;
+	text-align: center;
+}
+
+.page-home .logo-container img.h-logo{
+	position: relative;
+	display: inline-block;
+	/* adjust below according t your llogo dimension */
+	height: 100px;
+	width: auto;
+}
+
+.page-home .content .header{
+	margin: 0 auto;
+	text-align: left;
+/*	text-align: center;*/
+	position: relative;
+}
+.page-home .content .header>div{
+/*	display: inline-block;*/
+	position: relative;
+}
+
+.page-home .content h2{
+	text-transform: uppercase;
+	font-size: 56px;
+	text-align: left;
+	line-height: 1em;
+}
+
+.page-home .content h3{
+	text-align: left;
+	text-transform: uppercase;
+	font-size: 32px;
+	line-height: 1em;
+	font-weight: bold;
+	border-left: 4px solid currentColor;
+	padding-left: 10px;
+	margin-left: 0px;
+	max-width: 180px;
+}
+
+.page .content .subhead{
+	display: block;
+	text-align: left;
+	position: absolute;
+	position: relative;
+	color: #fff;
+	-webkit-transition: 0.3s;
+	transition: 0.3s;
+}
+	
+
+.page .content .subhead a{
+	color: inherit;
+}
+/* 6.4 Clock countdown */
+.pane-when{
+	position: fixed;
+	left: 50%;
+	top: auto;
+	bottom: 56px;
+	right: 56px;
+	color: #fff;
+	z-index: 1;
+}
+	.pane-when .header{
+		float: right;
+		width: 50%;
+		min-width: 280px;
+		max-width: 360px;
+		text-align: right;
+		border-bottom: 2px solid #fff;
+		font-family: "Montserrat";
+		margin-bottom: 16px;
+		padding-bottom: 8px;
+	}
+		.pane-when .header p{
+			margin: 0;
+		}
+	.pane-when .clock{
+		float: right;
+		width: 100%;
+		min-width: 280px;
+/*		max-width: 512px;*/
+		text-align: right;
+		font-family: "GeosansLight";
+		position: relative;
+		margin-bottom: -28px;
+	}
+		.pane-when .clock .big{
+			display: inline-block;
+			position: relative;
+			vertical-align: baseline;
+			font-size: 110px;
+			line-height:0.8;
+			margin-right: 0px;
+		}
+			.pane-when .clock .big .day{
+				display: block;
+			}
+			.pane-when .clock .big .txt{
+				position: absolute;
+				right: auto;
+				left: 100%;
+				top: 0;
+				bottom: auto;
+				font-size: 18px;
+				text-align: left;
+			}
+		.pane-when .clock .big:after{
+			position: absolute;
+/*			content: ":";*/
+			font-size: 72px;
+			bottom: 2px;
+			right: -10px;
+		}
+		.pane-when .clock .medium{
+			display: inline-block;
+			width: 180px;
+			position: relative;
+/*			vertical-align: middle;*/
+			font-size: 72px;
+			word-spacing: -16px;
+		}
+		.pane-when .clock .medium .hours,
+		.pane-when .clock .medium .minutes{
+			display: inline-block;
+			width: auto;
+			text-align: center;
+		}
+
+		.pane-when .clock .medium .hours{
+			width: auto;
+		}
+
+		.pane-when .clock .small{
+			display: inline-block;
+			position: absolute;
+			font-size: 18px;
+			line-height: 1;
+			right: 0;
+			top: 0;
+		}
+
+/* 6.5 Registration form */
+.page-register .content{
+/*    margin-top: -4rem;*/
+/*
+    padding-left: 1em;
+    padding-right: 1em;
+*/
+/*    padding-top: 0.2rem;*/
+}
+.page-register .form{  
+	max-width: 480px;
+}
+.page .form{  
+}
+#mc_embed_signup form .mc-field-group{
+  
+	border: 1px solid #fff;
+	border-top: none;
+/*  height: 48px;*/
+	position: relative;
+	
+	margin-top: 24px;
+}
+#mc_embed_signup form .mc-field-group label{
+	position: absolute;
+	top: -24px;
+	color: #fff;
+}
+
+#mc_embed_signup .indicates-required{
+	display: none;
+}
+#mc_embed_signup form input.email{
+	background: transparent;
+
+	border: none;
+	color: #fff;
+	padding: 0em 1em;
+	padding-bottom: 0.3em;
+	margin-bottom: 0;
+	font-family: 'Montserrat';
+	font-weight: 300;
+	font-size: 16px;
+	box-shadow: none;
+	display: inline-block;
+}
+.page .form input{ 
+    background: transparent;
+    border: none;
+    color: #fff;
+    padding: 0em 1em;
+	padding-bottom: 0.3em;
+    font-family: 'Montserrat';
+	font-weight: 300;
+    font-size: 16px;
+    box-shadow: none;
+    display: inline-block;
+/*    min-width: 400px;*/
+	position: absolute;
+    width: auto;
+	width: 100%;
+	bottom: 0;
+	padding-left: 96px;
+	left: 0;
+	right: 0;
+	margin-bottom: 0;
+}
+.page .form.send_email_form input{
+	
+}
+.page .form.send_email_form .fields{
+	margin-top: 48px;
+/*	background: rgba(255, 255, 255, 0.10);*/
+	padding-left: 16px;
+/*	height: 46px;*/
+	min-height: 36px;
+}
+
+.page .form.send_email_form .buttons,
+.page .form.send_email_form .buttons button{
+/*	height: 45px;*/
+}
+.page .form label{
+	display: inline-block;
+	font-family: "League Spartan";
+	font-weight: bold;
+    font-size: 18px;
+    color: #fff;
+	text-transform: uppercase;
+    display: inline-block;
+	margin-bottom: 0.4em;
+	padding-top: 8px;
+}
+.page .form.send_email_form label{
+	padding-top: 0.40em;
+}
+.page .form .fields{
+	margin-top: 24px;    
+	padding-left: 16px;
+	position: relative;
+    border-bottom: 1px solid #fff;
+    border-left: 1px solid #fff;
+}
+.page .form .fields.no-border{
+	border: none;
+	padding-left: 0;
+}
+.page .form .fields.no-border label{
+	padding-left: 16px;
+}
+.page .form .fields>div{
+	float: left;
+}
+.page .form .fields .buttons{ 
+	position: absolute;
+	bottom: 0;
+	right: -.5px;
+}
+.page .form button{ 
+    background: #fff;
+    color: #1d1d1d;
+	font-family: "League Spartan";
+	font-weight: bold;
+    font-size: 18px;
+	line-height: 1;
+    text-transform: uppercase;
+    padding: 0.7rem 1rem; 
+	padding-top: 0.8rem;
+    margin-bottom: 0;
+	position: relative;
+	-webkit-transition: 0.3s;
+	transition: 0.3s;
+	z-index: 2;
+}
+.page .form button:after{
+	z-index: -1;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	right: 50%;
+	bottom: 50%;
+	content: "";
+	background: rgba(0, 0, 0, 0.41);
+	opacity: 0;
+	border-radius: 120px;
+	-webkit-transition: 0.3s;
+	transition: 0.3s;	
+}
+.page .form button:hover:after{
+	opacity: 1;
+	border-radius: 0;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+.page .form button:hover{
+	background: #FFF;
+	color: #fff;
+}
+.page .form textarea{ 
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid currentColor;
+    color: #fff;
+    padding: 0.5em 1em;
+    min-width: 200px;    
+    font-size: 16px;
+    font-family: 'Montserrat';
+	font-weight: 300;
+    display: block;
+    width: 100%;
+    box-shadow: none;
+    min-height: 108px;
+	margin-top: 3px;
+	margin-bottom: 0;
+} 
+.page .message-ok{
+    margin-bottom: 0;
+    position: absolute;
+/*    font-size: 20px;*/
+}
+
+/* 6.6 About us */
+
+.page-about .article{
+	max-width: 480px;
+	margin: auto;
+}
+
+.page-about .content p:last-child{
+	margin-bottom: -4px;
+}
+
+/* 6.7 Contact, Message */
+.page-contact{  
+/*    margin-top: -1rem;*/
+}
+
+.page-contact .fp-controlArrow {
+	display: none;
+}
+.page-contact .p-title{
+	position: relative;
+}
+.page-contact .p-title .buttons{
+	position: absolute;
+	bottom: 8px;
+	right: 0;
+	background: rgba(255,255,255,0.15);
+	display: inline-block;
+}
+
+.page-contact .p-title .buttons li{
+	position: relative;
+	display: block;
+	width: 48px;
+	float: left;
+}
+.page-contact .p-title .buttons a{
+	text-align: center;
+	width: 48px;
+	height: 48px;
+	display: inline-block;
+	position: relative;
+	margin: 0;
+}
+.page-contact .p-title .buttons a i{
+	margin: 0;
+	font-size: 24px;
+	padding-top: 0.5em;
+}
+
+.page-contact .p-title .buttons a:after{
+	position: absolute;
+	content: "";
+	background: rgba(255,255,255,0);
+	border-radius: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	-webkit-transition: 0.2s;
+	transition: 0.2s;
+}
+.page-contact .p-title .buttons a:hover:after{
+	border-radius: 0;
+	background: rgba(255,255,255,0.15);
+}
+.page-contact .contact li{
+/*	margin-top: 20px;*/
+}
+.page-contact .contact li:last-child p:last-child{
+/*	margin-top: 20px;*/
+	margin-bottom: -6px;
+}
+.page-contact .contact img{
+	height: 56px;
+	width: auto;
+}
+.page-contact a{
+    color: #fff;
+}
+.page-contact .right{
+	text-align: right;
+}
+	.page-contact .social-links .page-header .header-title{
+        display: none;
+    }
+	.s-fixed-content .socialnet,
+    .page-contact .socialnet{
+		position: relative;
+		margin-right: -10px;
+/*		margin-right: -0px;*/
+/*		border-right: 2px solid #fff;*/
+/*		padding-right: 4px;*/
+	}
+	.s-fixed-content .socialnet a,
+    .page-contact .socialnet a{
+        color: #fff;
+		font-size: 24px;
+		line-height: 1;
+        margin-bottom:  0;
+        display: inline-block;
+		padding-top: 6px;
+		width: 1.5em;
+		height: 1.5em;
+        border-radius: 1em;
+        background: transparent; 
+		position: static;
+		text-align: center;
+        -webkit-transition: 0.3s;
+        transition: 0.3s;
+		opacity: 1;
+    }
+		.s-fixed-content .socialnet a .title{
+			position: absolute;
+			right: 12px;
+			bottom: -24px;
+			width: 120px;
+			text-align: right;
+			font-size: 10px;
+			font-family: "Montserrat";
+			color: #fff;
+			opacity: 0;
+			visibility: hidden;
+			-webkit-transition: 0.3s;
+			transition: 0.3s;
+		}
+		.s-fixed-content .socialnet a:hover .title{
+			right: 12px;
+			bottom: -12px;
+			opacity: 1;
+			visibility: visible;
+		}
+	.s-fixed-content .socialnet a:hover,
+	.page-contact .socialnet a:hover{
+		opacity: 0.5;
+	}
+/* Form */
+
+/* 7. Video background / PArticles background fixes */
+/* 7.1. static video background */
+.video-container{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left:0;
+    z-index: -2;
+}
+.video-container video{
+    height: 724px; 
+    width: 1287px; 
+    margin-top: -42px; 
+    margin-left: 0px;   
+}
+.video-container iframe{    
+    width: 120%;
+	height: 120%;
+	margin-left: -10%;
+	margin-top: -2%;
+/*    height: 724px; */
+/*    width: 1287px; */
+}
+.show-for-medium-up{
+    display: none;   
+}
+
+/*Hooks and fixes*/
+/* particles fixes here */
+.page,
+.page-main{
+	pointer-events: none;
+}
+	.page .content *,
+	.page .p-footer *,
+	.page .s-fixed-content *{
+		pointer-events: all;
+	}
+
+.page form label.error{
+	position: absolute;
+	font-size: 12px;
+	top: -22px;
+	left: 0;
+	font-family: "Montserrat";
+}

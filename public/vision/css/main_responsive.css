@@ -1,0 +1,454 @@
+/*-----------------------------------------------------------------
+[Legal Notice]
+
+Copyright (c) HighHay/Mivfx
+Before using this template, you should agree with themeforest licenses terms.
+http://themeforest.net/licenses
+-------------------------------------------------------------------*/
+
+
+/** CSS-AddOn for Large screen First responsiveness approch */
+
+
+
+/* Screen small than 1024px */
+@media (max-width : 1024px){
+	.page-home .content, .page-home.page-cent .content ,
+	.page .content {
+		width: 50%;
+	}
+}
+/* Screen Small than 800px */
+@media (max-width : 800px){
+	.page-home .content, .page-home.page-cent .content ,
+	.page .content {
+		width: 70%;
+	}
+	.pane-when {
+		left: 56px;
+		top: 240px;
+		bottom: auto;
+		right: 56px;
+	}
+	.page .s-title {
+		left: 160px; 
+	}
+	.page.active .s-title {
+		left: 56px; 
+	}
+	.pane-when .header {
+		border-bottom: none;
+		margin-bottom: 0;
+	}
+	.page .s-fixed-content ,
+	.page.active .s-fixed-content {
+		top: 420px;
+	}
+	
+}
+/* Screen Small than 720px */
+@media (max-width : 720px){
+	
+	
+	.page .form label ,
+	.page .form input ,
+	.page .form button ,
+	.page .form textarea ,
+	.page h4 ,
+	.page-nav ,
+	.page p{
+		font-size: 13px;
+	}
+	
+    
+}
+/* Screen small than 600 */
+
+/* Screen small than 600 Nexus 7, iPhone 6 plus : 412px*/
+@media (max-width : 600px){
+	
+	.header-top {
+		left: 24px;
+		right: 0;
+	}
+	.header-top .menu-icon {
+		margin-top: 24px;
+	}
+	.header-top .menu {
+		top: 24px;
+	}
+	.header-top .menu {
+		top: 12px;
+		position: fixed;
+		top: 0;
+		left: 72px;
+		right: 0;
+		background: rgb(124, 124, 124);
+		padding-top: 16px;
+		padding-bottom: 16px;
+	}
+	.header-top .menu li {
+		padding-top: 8px;
+		display: block;
+		float: none;
+	}
+	
+	.header-top.menu-visible .menu {
+		top: 0;
+	}
+	#fp-nav.right {
+		margin-right: 16px;
+	}
+	#fp-nav ul{
+		margin-top: 24px;
+	}
+	.page-nav {
+		top: 72px;
+		left: 16px;
+		font-size: 18px;
+		width: 110px;
+		z-index: 1000;
+	}
+	.page-nav a {
+		margin-right: 8px;
+		margin-bottom: 8px;
+	}
+	.p-footer .btn {
+		right: 14px;
+	}
+	.p-footer .btn.up {
+		top: auto;
+		bottom: 48px;
+	}
+	.pane-when {
+		position: fixed;
+		left: 0;
+		bottom: auto;
+		top: 96px;
+		right: 24px;
+		z-index: 10;
+	}
+	.pane-when .header {
+		width: 100%;
+		min-width: 240px;
+		max-width: 260px;
+		margin-bottom: 8px;
+		padding-bottom: 8px;
+	}
+	.pane-when .header p {
+		font-size: 12px;
+	}
+	.pane-when .clock .big {
+		font-size: 64px;
+	}
+	.pane-when .clock .big::after {
+		font-size: 40px;
+		bottom: 2px;
+		right: -4px;
+	}
+	.pane-when .clock .medium {
+		width: 100px;
+		font-size: 40px;
+		word-spacing: -8px;
+	}
+	.pane-when .clock .small,
+	.pane-when .clock .big .txt {
+		font-size: 14px;
+	}
+	
+	.page-cent .content {
+		padding: 24px;
+		padding-bottom: 64px;
+	}
+	.page .s-title ,
+	.page.active .s-title {
+		left: 24px;
+		right: 24px;
+		font-size: 18px;
+		top: auto;
+		bottom: 4px;
+		text-align: left;
+		border-top: 2px solid currentColor;
+		border-bottom: 0;
+		padding-top: 8px;
+	}
+	.page .content,
+	.page-home .content,
+	.page-home.page-cent .content {
+		position: absolute;
+		width: 100%;
+	}
+	.page .form input {
+		padding-left: 80px;
+	}
+	.page .form label{
+		margin-bottom: 7px;
+	}
+	.page.active .s-fixed-content {
+		left: 0;
+		right: 24px;
+		top: 210px;
+		transition: 0.8x;
+	}
+}
+
+/* Screen small than 480px */
+@media (max-width : 481px){
+	
+	#fp-nav{
+		display: none;
+	}
+	.pane-when{
+		top: 16px;
+		z-index: 100;
+	}
+	.pane-when:before{
+		display: block;
+		position: fixed;
+		z-index: -1;
+		content: "";
+		background: rgba(105, 105, 105, 0.55);
+		background: url('../img/gradient.png');
+		background-position: center;
+		background-size: contain;
+		background-origin: border-box;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 166px;
+	}
+	.page.active .s-fixed-content {
+		top: 130px;
+	}
+}
+/* Screen small than 360px */
+@media (max-width : 360px){
+	
+	
+	
+}
+/* Screen small than 320px */
+@media (max-width : 320px){
+	
+	.page .form label ,
+	.page .form input ,
+	.page .form button ,
+	.page .form textarea ,
+	.page h4 ,
+	.page-nav ,
+	.header-top .menu a ,
+	.page p{
+		font-size: 12px;
+	}
+	
+	.header-top {
+		left: 12px;
+		right: 0;
+	}
+	.header-top .menu-icon {
+		margin-top: 12px;
+	}
+	.header-top .menu {
+		top: 12px;
+	}
+	#fp-nav.right {
+		margin-right: 7px;
+		display: none;
+	}
+	#fp-nav ul{
+		margin-top: 12px;
+	}
+	.p-footer .btn {
+		right: 2px;
+	}
+	.p-footer .btn.up {
+		top: auto;
+		bottom: 48px;
+	}
+	.pane-when {
+		position: fixed;
+		left: 0;
+		bottom: auto;
+		top: 40px;
+		right: 12px;
+		z-index: 10;
+	}
+	
+	.pane-when .header p {
+		font-size: 12px;
+	}
+	.pane-when .clock .big {
+		font-size: 48px;
+		margin-right: -0px;
+	}
+	.pane-when .clock .big::after {
+		font-size: 32px;
+		bottom: 2px;
+		right: -4px;
+	}
+	.pane-when .clock .medium {
+		width: 80px;
+		font-size: 32px;
+	}
+	.pane-when .clock .small,
+	.pane-when .clock .big .txt {
+		font-size: 12px;
+	}
+	
+	.page-cent .content {
+		padding: 12px;
+		padding-bottom: 40px;
+	}
+	.page .s-title ,
+	.page.active .s-title {
+		left: 12px;
+		right: 12px;
+		font-size: 16px;
+		bottom: 0px;
+		padding-top: 2px;
+	}
+	.page p {
+		margin-bottom: 4px;
+	}
+	.page-cent .p-title img {
+		width: auto;
+		max-height: 48px;
+	}
+	.page-cent .p-title h2{
+		margin-bottom: 4px;
+	}
+	.page.active .s-fixed-content {
+		left: 0;
+		right: 12px;
+		top: 136px;
+		transition: 0.8x;
+	}
+	.page-nav {
+		top: 48px;
+		left: 2px;
+		font-size: 18px;
+	}
+}
+
+
+ 
+/* Responsive height */
+@media (max-height : 640px) and (max-width: 600px){
+	#fp-nav{
+		display: none;
+	}
+	.page-nav {
+		top: 72px;
+		left: 16px;
+		font-size: 18px;
+		width: 110px;
+		z-index: 1000;
+		display: none;
+	}
+	.header-top  {
+		z-index: 1000;
+	}
+	.page-nav a {
+		margin-right: 8px;
+		margin-bottom: 8px;
+	}
+	.pane-when{
+		top: 16px;
+		z-index: 100;
+	}
+	.pane-when:before{
+		display: block;
+		position: fixed;
+		z-index: -1;
+		content: "";
+		background: rgba(105, 105, 105, 0.55);
+		background: url('../img/gradient.png');
+		background-position: center;
+		background-size: contain;
+		background-origin: border-box;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 166px;
+	}
+	.pane-when:before{
+	}
+	.page.active .s-fixed-content {
+		/*left: 0px;
+		right: 24px;
+		top: 120px;
+		z-index: 1000;*/
+		top: 130px;
+/*		position: absolute;*/
+	}
+	.page{
+		min-height: 400px;
+	}
+
+	.social-links{
+		display: none;
+	}
+	.p-footer {
+		display: none;
+	}
+}
+/* Responsive height */
+@media (max-height : 420px) and (max-width: 480px){
+	.page .s-title, .page.active .s-title {
+		display: none;
+	}
+	.page-cent .content {
+		padding-bottom: 16px;
+	}
+	.pane-when{
+		top: 8px;
+		z-index: 100;
+	}
+	.page.active .s-fixed-content {
+		top: 110px;
+		display: none;
+	}
+	.quick-link {
+		top: auto;
+		bottom: 0;
+	}
+	.header-top {
+		height: 32px;
+	}
+	.header-top .logo img {
+		height: 32px;
+		padding: 0px 10px;
+	}
+	.header-top .menu a {
+		height: 32px;
+		padding-top: 5px;
+	}
+	
+	.page-home .logo-container{
+		top: 40px;
+	}
+	.page-home .logo-container img.h-logo{
+		height: 80px;
+	}
+	.page-contact .fields:first-child ,
+	.page-contact .contact .columns li:first-child {
+		margin-top: 0;
+	}
+	.page-contact .form .fields,
+	.page-contact .contact .columns li{
+		margin-top: 5px;
+	}
+	.page .form textarea {
+		min-height: 64px;
+	}
+	
+	.p-footer .arrow-d {
+		bottom: 10px;
+		display: none;
+	}
+	.page-nav{
+		display: none;
+	}
+}
+
+    

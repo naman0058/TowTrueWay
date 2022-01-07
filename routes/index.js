@@ -1150,4 +1150,15 @@ else{
 //         $this->addDownline($newID, $userId);
 //     }
 
+
+
+router.get('/landing-page/submit',(req,res)=>{
+  pool.query(`insert into landing(name,number,message,submit_message) values('${req.query.name}' , '${req.query.number}' , '${req.query.message}' , '')`,(err,result)=>{
+    if(err) throw err;
+    else res.send(req.query)
+  })
+  // console.log(req.query)
+  
+})
+
 module.exports = router;
