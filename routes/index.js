@@ -20,17 +20,13 @@ router.get('/', function(req, res, next) {
    (select p.categoryid from products p where p.id = productid) as productcategoryid,
    (select p.subcategoryid from products p where p.id = productid) as productsubcategoryid,
    (select p.net_amount from products p where p.id = productid) as productnetamount
-   
-     FROM
-      (SELECT *,
-                    ROW_NUMBER() OVER (PARTITION BY bannerid ORDER BY id DESC) as country_rank
-        FROM promotional_text_management p) ranked
-     WHERE country_rank <= 5 order by bannerid desc , productquantity desc;`
+        FROM promotional_text_management p;`
    var query3 = `select * from promotional_text order by id desc;`
    var query4 = `select * from cart where usernumber = '${req.session.number}';`
    var query5 = `select * from banner where type = 'Bottom Banner' order by id desc;`
+   var query6 = `select * from subcategory order by name ;`
  
-   pool.query(query+query1+query2+query3+query4+query5,(err,result)=>{
+   pool.query(query+query6+query1+query2+query3+query4+query5,(err,result)=>{
      if(err) throw err;
      else  res.render('index', { title: 'Express',result,login:true });
    })
@@ -47,16 +43,13 @@ router.get('/', function(req, res, next) {
    (select p.categoryid from products p where p.id = productid) as productcategoryid,
    (select p.subcategoryid from products p where p.id = productid) as productsubcategoryid,
    (select p.net_amount from products p where p.id = productid) as productnetamount
-   
-     FROM
-      (SELECT *,
-                    ROW_NUMBER() OVER (PARTITION BY bannerid ORDER BY id DESC) as country_rank
-        FROM promotional_text_management p) ranked
-     WHERE country_rank <= 5 order by bannerid desc , productquantity desc;`
+        FROM promotional_text_management p;`
    var query3 = `select * from promotional_text order by id desc;`
    var query4 = `select * from cart where usernumber = '${req.session.number}';`
    var query5 = `select * from banner where type = 'Bottom Banner' order by id desc;`
-   pool.query(query+query1+query2+query3+query4+query5,(err,result)=>{
+   var query6 = `select * from subcategory order by name ;`
+
+   pool.query(query+query6+query1+query2+query3+query4+query5,(err,result)=>{
      if(err) throw err;
      else  res.render('index', { title: 'Express',result,login:false });
     // else res.json(result[2])
@@ -81,14 +74,16 @@ router.get('/product',(req,res)=>{
   
       if(req.session.usernumber){
         var query = `select * from category order by id desc;`
-        var query1 = `select p.* , 
-        (select b.name from brand b where b.id = p.brandid) as brandname
-        
+        var query1 =`select * from subcategory order by name;`
+        var query2 = `select p.* , 
+        (select b.name from brand b where b.id = p.brandid) as brandname,
+        (select s.name from subcategory s where s.id = p.subcategoryid) as subcategoryname
+
         from products p where p.id = '${req.query.id}';`
-        var query3 = `select * from products order by id desc;`
+ 
         var query4 = `select * from products where categoryid = '${categoryid}' order by id desc limit 8;`
         var query5 = `select * from images where productid = '${req.query.id}';`
-        pool.query(query+query1+query3+query4+query5,(err,result)=>{
+        pool.query(query+query1+query2+query4+query5,(err,result)=>{
           if(err) throw err;
           else res.render('view-product', { title: 'Express',login:true, result : result});
         })
@@ -97,17 +92,19 @@ router.get('/product',(req,res)=>{
       }
       else{
         var query = `select * from category order by id desc;`
-        var query1 = `select p.* , 
-        (select b.name from brand b where b.id = p.brandid) as brandname
-      
+        var query1 =`select * from subcategory order by name;`
+        var query2 = `select p.* , 
+        (select b.name from brand b where b.id = p.brandid) as brandname,
+        (select s.name from subcategory s where s.id = p.subcategoryid) as subcategoryname
         from products p where p.id = '${req.query.id}';`
-        var query3 = `select * from products order by id desc;`
+       
         var query4 = `select * from products where categoryid = '${categoryid}' order by id desc limit 8;`
         var query5 = `select * from images where productid = '${req.query.id}';`
   
-        pool.query(query+query1+query3+query4+query5,(err,result)=>{
+        pool.query(query+query1+query2+query4+query5,(err,result)=>{
           if(err) throw err;
           else res.render('view-product', { title: 'Express',login:false , result : result});
+          // else res.json(result[2])
     
         })
     
@@ -859,9 +856,38 @@ router.get('/my-account',(req,res)=>{
 
 router.get('/shop',(req,res)=>{
   var query = `select * from category order by id desc;`
-  var query1 = `select * from products where categoryid = '${req.query.categoryid}';`
-  pool.query(query+query1,(err,result)=>{
+  var query1 =`select * from subcategory order by name ;`
+  var query2 = `select * from products where categoryid = '${req.query.categoryid}';`
+  pool.query(query+query1+query2,(err,result)=>{
     if(err) throw err;
+    else  res.render('shop',{result:result})
+  })
+ 
+})
+
+
+
+router.get('/shop-by-category',(req,res)=>{
+  var query = `select * from category order by id desc;`
+  var query1 =`select * from subcategory order by name ;`
+  var query2 = `select s.* , (select c.image from category c where c.id = s.categoryid) as categoryimage from subcategory s where s.categoryid = '${req.query.categoryid}';`
+  pool.query(query+query1+query2,(err,result)=>{
+    if(err) throw err;
+    // else if(result[0]) res.send(result)
+    else  res.render('shop_subcategory',{result:result})
+  })
+ 
+})
+
+
+
+router.get('/shop-by-subcategory',(req,res)=>{
+  var query = `select * from category order by id desc;`
+  var query1 =`select * from subcategory order by name ;`
+  var query2 = `select p.* , (select s.name from subcategory s where s.id = p.categoryid) as subcategoryname from products p where p.subcategoryid = '${req.query.subcategoryid}';`
+  pool.query(query+query1+query2,(err,result)=>{
+    if(err) throw err;
+    // else if(result[0]) res.send(result)
     else  res.render('shop',{result:result})
   })
  
@@ -1159,6 +1185,15 @@ router.get('/landing-page/submit',(req,res)=>{
   })
   // console.log(req.query)
   
+})
+
+
+
+router.get('/product-description',(req,res)=>{
+  pool.query(`select * from products where id = '${req.query.msg}'`,(err,result)=>{
+    if(err) throw err;
+    else res.json(result)
+  })
 })
 
 module.exports = router;

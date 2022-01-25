@@ -1,245 +1,90 @@
 <%- include ('./header.ejs') %>
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css">
-		
-
-		<main id="shop" class="style3">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="main-shop">
-							<div class="wrap-imagebox">
-								
-							
-								<div class="row">
-
-
-<% for(i=0;i<result[1].length;i++) { %>
-
-									<div class="col-md-4 col-sm-6">
-										<div class="product-box">
-											<div class="imagebox style8">
-												<!-- <span class="item-new">NEW</span> -->
-												<div class="box-image owl-carousel-1">
-													<a href="/product?id=<%=result[1][i].id%>" title="">
-														<img src="/images/<%=result[1][i].image%>" alt="" style="width: 200px;">
-													</a>
-													<a href="/product?id=<%=result[1][i].id%>" title="">
-														<img src="/images/<%=result[1][i].thumbnail%>" alt="" style="width: 200px;">
-													</a>
-												
-												</div><!-- /.box-image -->
-												<div class="box-content">
-													
-													<div class="product-name">
-														<a href="/product?id=<%=result[1][i].id%>" title=""><%=result[1][i].name%></a>
-													</div>
-													<div class="price">
-														<span class="sale">Rs. <%=result[1][i].net_amount%></span>
-														<span class="regular">Rs. <%=result[1][i].price%></span>
-													</div>
-												</div><!-- /.box-content -->
-												<div class="box-bottom">
-													<div class="btn-add-cart">
-														<a id="addToCart"  booking_id="<%=result[1][0].id%>" price="<%=result[1][0].net_amount%>" categoryid = '<%=result[1][0].categoryid%>' vendorid = '<%=result[1][0].vendorid%>'>
-															<img src="images/icons/add-cart.png" alt="">Add to Cart
-														</a>
-													</div>
-													
-												</div><!-- /.box-bottom -->
-											</div><!-- /.imagebox style8 -->
-										</div><!-- /.product-box -->
-									</div><!-- /.col-md-4 col-sm-6 -->
-							
-                                    <% } %>
-									
-									
-								</div><!-- /.row -->
-							</div><!-- /.wrap-imagebox -->
-
-
-							<div class="blog-pagination style1" style="margin-top: 20px;">
-								<!-- <span>
-									Showing 1–15 of 20 results
-								</span> -->
-								<ul class="flat-pagination style1">
-									
-									<li>
-										<a href="#" class="waves-effect" title="">01</a>
-									</li>
-									
-									
-								</ul><!-- /.flat-pagination style1 -->
-								<div class="clearfix"></div>
-							</div><!-- /.blog-pagination -->
-						</div><!-- /.main-shop -->
-					</div><!-- /.col-md-12 -->
-				</div><!-- /.row -->
-			</div><!-- /.container -->
-		</main><!-- /#shop -->
-
-	
-
-        <%- include ('./footer.ejs') %>
-
-
-		<section class="footer-bottom">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<p class="copyright"> All Rights Reserved © Techno Store 2017</p>
-						<p class="btn-scroll">
-							<a href="#" title="">
-								<img src="images/icons/top.png" alt="">
-							</a>
-						</p>
-					</div><!-- /.col-md-12 -->
-				</div><!-- /.row -->
-			</div><!-- /.container -->
-		</section><!-- /.footer-bottom -->
-
-	</div><!-- /.boxed -->
-
-	<div id="pageMessages" style="position: fixed;bottom:20px;right:20px">
-
-
-		<!-- Javascript -->
-		<script type="text/javascript" src="javascript/jquery.min.js"></script>
-		<script type="text/javascript" src="javascript/tether.min.js"></script>
-		<script type="text/javascript" src="javascript/bootstrap.min.js"></script>
-		<script type="text/javascript" src="javascript/waypoints.min.js"></script>
-		<script type="text/javascript" src="javascript/jquery.circlechart.js"></script>
-		<script type="text/javascript" src="javascript/easing.js"></script>
-<script type="text/javascript" src="javascript/jquery.zoom.min.js"></script>
-		<script type="text/javascript" src="javascript/jquery.flexslider-min.js"></script>
-		<script type="text/javascript" src="javascript/owl.carousel.js"></script>
-		
-		<script type="text/javascript" src="javascript/jquery-ui.js"></script>
-		<script type="text/javascript" src="javascript/jquery.mCustomScrollbar.js"></script>
-		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&region=GB"></script>
-	   	<script type="text/javascript" src="javascript/gmap3.min.js"></script>
-	   	<script type="text/javascript" src="javascript/waves.min.js"></script>
-		<script type="text/javascript" src="javascript/jquery.countdown.js"></script>
-
-		<script type="text/javascript" src="javascript/main.js"></script>
-
-
-        <script>
-
-
-			$('#addToCart').click(function(){
-			
-				// id="<%=result[1][0].id%>" price="<%=result[1][0].net_amount%>" categoryid = '<%=result[1][0].categoryid%>' vendorid = '<%=result[1][0].vendorid%>' 
-				let quantity = '1'
-				let booking_id = $(this).attr('booking_id');
-				let price = $(this).attr('price');
-				let oneprice = $(this).attr('price');
-				let categoryid = $(this).attr('categoryid');
-				let vendorid = $(this).attr('vendorid');
-			
-			
-				 price = price*quantity
-			
-				$.post('/add-to-cart',{booking_id,price,categoryid,vendorid,oneprice,quantity},data=>{
-					createAlert('','Nice Work!','Here is a bunch of text about some stuff that happened.','success',true,true,'pageMessages')
-				})
-				
-			})
+<div id="product-category" class="container common-shed colo-w">
+  <div class="bg-color-b">
+ 
+  <div class="row">
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			function createAlert(title, summary, details, severity, dismissible, autoDismiss, appendToId) {
-			
-  var iconMap = {
-    info: "fa fa-info-circle",
-    success: "fa fa-thumbs-up",
-    warning: "fa fa-exclamation-triangle",
-    danger: "fa ffa fa-exclamation-circle"
-  };
-
-  var iconAdded = false;
-
-  var alertClasses = ["alert", "animated", "flipInX"];
-  alertClasses.push("alert-" + severity.toLowerCase());
-
-  if (dismissible) {
-    alertClasses.push("alert-dismissible");
-  }
-
-  var msgIcon = $("<i />", {
-    "class": iconMap[severity] // you need to quote "class" since it's a reserved keyword
-  });
-
-  var msg = $("<div />", {
-    "class": alertClasses.join(" ") // you need to quote "class" since it's a reserved keyword
-  });
-
-  if (title) {
-    var msgTitle = $("<h4 />", {
-      html: title
-    }).appendTo(msg);
+                <div id="content" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <ul class="breadcrumb">
+                <li><a href="index9328.html?route=common/home"><i class="fa fa-home"></i></a></li>
+                <li><a href="index55b2.html?route=product/category&amp;path=70">Bedroom</a></li>
+              </ul>
+            <div class="inspdes"> 
+         <h2>Bedroom</h2>
+                       </div>
+                        <div class="row cate-border">
+            <div class="col-md-2 col-sm-3 col-xs-3 catebt">
+                <div class="btn-group-sm">
+                   
+                    <button type="button" id="grid-view" class="btn inslistgrid" data-toggle="tooltip" title="Grid">
+                         <img src="/finaldesign/image/catalog/category/grid.png">
+                    </button>
+                </div>
+            </div>
     
-    if(!iconAdded){
-      msgTitle.prepend(msgIcon);
-      iconAdded = true;
-    }
-  }
+            <div class="col-lg-6 col-md-5 col-xs-4 col-sm-4 sorting">
+           
+            </div>
+            <div class="col-lg-4 col-md-5 col-xs-5 col-sm-5 sorting">
+                <div class="input-group input-group-sm">
+                    <label class="input-group-addon" for="input-sort">Sort By:</label>
+                    <select id="input-sort" class="form-control" onchange="location = this.value;">
+                                                                                    <option value="http://opencart.indiatemplates.in/royal-furniture/index.php?route=product/category&amp;path=70&amp;sort=p.sort_order&amp;order=ASC" selected="selected">Default</option>
+                                                                                                                <option value="index9f63.html?route=product/category&amp;path=70&amp;sort=pd.name&amp;order=ASC">Name (A - Z)</option>
+                                                                                                                <option value="index1853.html?route=product/category&amp;path=70&amp;sort=pd.name&amp;order=DESC">Name (Z - A)</option>
+                                                                                                                <option value="indexfcf6.html?route=product/category&amp;path=70&amp;sort=p.price&amp;order=ASC">Price (Low &gt; High)</option>
+                                                                                                                <option value="index43e1.html?route=product/category&amp;path=70&amp;sort=p.price&amp;order=DESC">Price (High &gt; Low)</option>
+                                                                                                                <option value="index8a7c.html?route=product/category&amp;path=70&amp;sort=rating&amp;order=DESC">Rating (Highest)</option>
+                                                                                                                <option value="indexa878.html?route=product/category&amp;path=70&amp;sort=rating&amp;order=ASC">Rating (Lowest)</option>
+                                                                                                                <option value="indexd994.html?route=product/category&amp;path=70&amp;sort=p.model&amp;order=ASC">Model (A - Z)</option>
+                                                                                                                <option value="index5449.html?route=product/category&amp;path=70&amp;sort=p.model&amp;order=DESC">Model (Z - A)</option>
+                                                                        </select>
+                </div>
+            </div>
+            
+        </div>
+      <div class="row catebg"> 
+        
+        <% for(i=0;i<result[2].length;i++){ %>
+     
+                <div class="product-layout product-list col-xs-12">
+          <div class="product-thumb transition">
+      <div class="image"><a href="/product?id=<%=result[2][i].id%>"><img src="/images/<%=result[2][i].thumbnail%>" alt="<%=result[2][i].name%>" title="<%=result[2][i].name%>" class="img-responsive center-block" /></a>
+               <!-- insp Images Start -->
+                                                                                                                                                                                                                                                                                            <!-- insp Images End -->
+                                    </div>
+      <div class="caption text-center">
 
-  if (summary) {
-    var msgSummary = $("<strong />", {
-      html: 'Added To Cart'
-    }).appendTo(msg);
-    
-    if(!iconAdded){
-      msgSummary.prepend(msgIcon);
-      iconAdded = true;
-    }
-  }
+        <h4><a href="/product?id=<%=result[2][i].id%>"><%=result[2][i].name%></a></h4>
+        <p class="list-des">Canon's press material for the EOS 5D states that it 'defines (a) new D-SLR category', while we're n..</p>
+        <% if(result[2][i].discount>0){ %>                    
+        <p class="price">           
+                              <s>Rs. <%=result[2][i].price%></s> Rs.<%=result[2][i].net_amount%>
+                     </p>
+         <% } else { %>
+          <p class="price">           
+           Rs.<%=result[2][i].net_amount%>
+   </p>
 
+   <% } %>
+        
+    </div>
+     
+    </div>
+        </div>
+              
+
+<% } %>
+
+
+         </div>
   
-  
-
-  if (dismissible) {
-    var msgClose = $("<span />", {
-      "class": "close", // you need to quote "class" since it's a reserved keyword
-      "data-dismiss": "alert",
-      html: "<i class='fa fa-times-circle'></i>"
-    }).appendTo(msg);
-  }
-  
-  $('#' + appendToId).prepend(msg);
-  
-  if(autoDismiss){
-    setTimeout(function(){
-      msg.addClass("flipOutX");
-      setTimeout(function(){
-        msg.remove();
-      },1000);
-    }, 5000);
-  }
-}
-
-
-
-
-			
-			</script>
-
-
-</body>	
-</html>
+                  </div>
+    </div>
+</div>
+</div>
+<%- include ('./footer.ejs') %>

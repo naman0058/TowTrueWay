@@ -1,0 +1,123 @@
+<%- include ('./header.ejs') %>
+
+
+
+	</div>
+	<div id="page-preloader" class="visible">
+		  <div class="preloader">
+			  <div id="loading-center-absolute">
+					<div class="object" id="object_one"></div>
+			  </div>
+		  </div>
+	</div>
+	<div id="common-home">
+	  <div class="bg-color-b">
+	  <div class="row commonrow">
+					<div id="content" class="col-sm-12">
+	<div class="slide-padding">
+		<div class="homeslide">
+		  <div id="slideshow0" class="owl-carousel owl-theme">
+
+			<% for(i=0;i<result[2].length;i++) { %>
+					 <div class="text-center">
+						 <a href="indexedcd.html?route=product/product&amp;path=57&amp;product_id=49">
+						 <img src="/images/<%=result[2][i].image%>" alt="iPhone 6" class="img-responsive" />
+						</a>
+					</div>
+
+					<% } %>
+						</div>
+		</div>
+	  </div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		$("#slideshow0").owlCarousel({
+		itemsCustom : [
+		[0, 1]
+		],
+		  autoPlay: 2500,
+		  animateIn: 'fadeIn',
+		  animateOut: 'fadeOut',
+		  loop: true,
+		  navigationText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>', '<i class="fa fa-angle-right" aria-hidden="true"></i>'],
+		  navigation : true,
+		  pagination:false
+		});
+		});
+	</script>
+	
+		<div class="container">
+			<div class="cat-img">
+				<h3 class="heading">Popular Categories<hr></h3>
+				<div class="homecate row catro">
+					
+											
+												
+														<div class="container">
+															<div class="row">
+										
+																<% for(i=0;i<result[2].length;i++){ %>
+													
+
+																<div class=" col-md-3 col-lg-2 col-sm-4 col-xs-6 ">
+																	<div class="">
+																											<a href="/shop-by-subcategory?subcategoryid=<%=result[2][i].id%>">
+																			<img src="/images/<%=result[2][i].image%>" style="width: 382px;height: 150px;object-fit: cover;" class="img-responsive " alt="">
+																		</a>
+																											<div class="">
+																			<div class="catedes">
+																				<h4 class="text-center"><a href="/shop-by-subcategory?subcategoryid=<%=result[2][i].id%>" class=""><%=result[2][i].name%></a></h4>
+																														</div>
+																		</div>
+																	</div>
+																</div>									
+																
+															
+<% } %>
+
+
+																<!-- <div class=" col-md-3 col-lg-2 col-sm-4 col-xs-4  text-center newdesign">
+																	<div class="block-cat">
+																											<a href="index55b2.html?route=product/category&amp;path=70">
+																			<img src="/finaldesign/image/cache/catalog/category/009-282x300.jpg" class="img-responsive center-block" alt="">
+																		</a>
+																											<div class="content-thum">
+																			<div class="catedes">
+																				<h4 class="text-center"><a href="index55b2.html?route=product/category&amp;path=70" class="">Bedroom</a></h4>
+																														</div>
+																		</div>
+																	</div>
+																</div> -->
+
+
+								</div>
+																		 </div>
+
+
+																		 
+														
+									   
+	
+	
+				 
+					</div>
+				</div>
+				</div> 
+				</div>           
+	</div>
+	</div>
+	
+	
+	
+
+	
+	
+	
+	</div>
+		</div>
+	</div>
+	
+
+	</div>
+
+	<%- include ('./footer.ejs') %>

@@ -20,10 +20,10 @@ $.getJSON(`/vendor-dashboard/show-product`, data => {
 })
 
 
+
 $.getJSON(`/vendor-dashboard/subcategory`, data => {
     categories = data
     fillDropDown('subcategoryid', data, 'Choose Category', 0)
-  
 })
 
 
@@ -32,6 +32,8 @@ $.getJSON(`/api/get-brand`, data => {
     subcategories = data
     fillDropDown('brandid', [], 'Choose Brand', 0)
 })
+
+
 
 $('#subcategoryid').change(() => {
     const filteredData = subcategories.filter(item => item.subcategoryid == $('#subcategoryid').val())

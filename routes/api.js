@@ -892,7 +892,29 @@ router.post("/payment-initiate", (req, res) => {
       if(err) throw err;
       else res.json(result)
     })
+    
   })
+
+
+
+  router.get('/get-subsubcategory',(req,res)=>{
+    pool.query(`select b.* , 
+    (select c.name from category c where c.id = b.categoryid) as categoryname,
+    (select s.name from subcategory s where s.id = b.subcategoryid) as subcategoryname
+    from subsubcategory b order by name`,(err,result)=>{
+        if(err) throw err;
+        else res.json(result)
+    }) 
+    })
+
+
+
+router.get('/get-single-booking-details',(req,res)=>{
+  pool.query(`select * from booking where id='${req.query.id}'`,(err,result)=>{
+    if(err) throw err;
+    else res.json(result);
+  })
+})
 
 
 module.exports = router;
