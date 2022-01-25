@@ -204,7 +204,11 @@ router.post("/cart-handler", (req, res) => {
 
 
 router.get('/myorder',(req,res)=>{
-    pool.query(`select * from booking where usernumber = '${req.query.number}' order by date desc`,(err,result)=>{
+    pool.query(`select b.* , 
+    (select p.small_description from products p where p.id = b.booking_id) as productdescription,
+    (select p.thumbnail from products p where p.id = b.booking_id) as productthumbnail
+
+     from booking b where usernumber = '${req.query.number}' order by date desc`,(err,result)=>{
         if(err) throw err;
         else res.json(result)
     })
@@ -346,18 +350,14 @@ function check_repurchse(number,dp){
       pool.query(`update member set bv = bv+${bv} where number = '${number}'`,(err,result)=>{
         if(err) throw err;
         else {
-          res.json({
-            msg : 'success'
-        })
+         return true;
         }
       })
 
 
     }
     else{
-      res.json({
-        msg : 'success'
-    })
+    return true;
     }
   })
 
@@ -405,7 +405,10 @@ body['date'] = today
      pool.query(`update products set quantity = quantity - ${req.body.quantity} where id = ${req.body.booking_id}`,(err,result)=>{
          if(err) throw err;
          else {
-            check_repurchse(req.body.number)
+            check_repurchse(req.body.number,req.body.dp_price);
+            res.json({
+              msg : 'success'
+            })
          }
      })
 
@@ -482,14 +485,20 @@ body['date'] = today
 
 
 
+
 for(i=0;i<data.length;i++) {
+   let j = i;
    pool.query(`insert into booking set ?`,data[i],(err,result)=>{
            if(err) throw err;
-           else {
-  pool.query(`update products set quantity = quantity - ${data[i].quantity} where id = '${data[i].booking_id}'`,(err,result)=>{
+           else if(result){
+
+  // console.log('afyeri',j);
+
+
+  pool.query(`update products set quantity = quantity - ${data[j].quantity} where id = '${data[j].booking_id}'`,(err,result)=>{
    if(err) throw err;
    else {
-
+console.log(data[j].quantity);
    }
 
   })
@@ -510,6 +519,10 @@ pool.query(`select sum(dp_price) as totaldp from booking where orderid = '${orde
   if(err) throw err;
   else {
     check_repurchse(req.body.number,result[0].totaldp)
+    res.json({
+      msg : 'success'
+  })
+  
 
   }
 })
