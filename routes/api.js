@@ -83,7 +83,7 @@ router.get('/get-category',(req,res)=>{
 
 
    router.get('/get-subcategory1',(req,res)=>{
-    pool.query(`select s.* , (select c.name from category c where c.id = s.categoryid) as categoryname from subcategory s where s.categoryid = '${req.query.categoryid}'  order by id desc limit 10`,(err,result)=>{
+    pool.query(`select s.* , (select c.name from category c where c.id = s.categoryid) as categoryname from subcategory s where s.categoryid = '${req.query.categoryid}'`,(err,result)=>{
         if(err) throw err;
         else res.json(result)
     }) 
