@@ -922,12 +922,119 @@ router.post("/payment-initiate", (req, res) => {
 
 
 
-router.get('/get-single-booking-details',(req,res)=>{
-  pool.query(`select * from booking where id='${req.query.id}'`,(err,result)=>{
+router.post('/get-single-booking-details',(req,res)=>{
+  pool.query(`select b.* , 
+  (select p.small_description from products p where p.id = b.booking_id) as productdescription,
+  (select p.thumbnail from products p where p.id = b.booking_id) as productthumbnail
+
+   from booking b where id = '${req.body.id}'`,(err,result)=>{
     if(err) throw err;
     else res.json(result);
   })
 })
 
+
+
+
+
+router.post('/remove-all-data',(req,res)=>{
+  pool.query(`delete from cart where usernumber = '${req.body.number}'`,(err,result)=>{
+      if(err) throw err;
+      else {
+          res.json({
+              msg : 'success'
+          })
+      }
+  })
+})
+
+
+
+
+
+
+router.post('/remove-all-data-by-id',(req,res)=>{
+  pool.query(`delete from cart where usernumber = '${req.body.number}' and id ='${req.body.id}'`,(err,result)=>{
+      if(err) throw err;
+      else {
+          res.json({
+              msg : 'success'
+          })
+      }
+  })
+})
+
+
+
+
+
+
+ 
+router.post('/digital-locker-insert',upload.single('image'), (req, res) => {
+  let body = req.body;
+  var today = new Date();
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  var yyyy = today.getFullYear();
+  
+  today = yyyy + '-' + mm + '-' + dd;
+  
+  
+    body['date'] = today;
+    body['time'] = time;
+  body['image'] = req.file.filename
+  
+
+
+pool.query(`insert into digital_locker set ?`, body, (err, result) => {
+      if(err) {
+          res.json({
+              status:500,
+              type : 'error',
+              description:err
+          })
+      }
+      else {
+          res.json({
+              status:200,
+              type : 'success',
+              description:'successfully update'
+          })
+
+          // res.redirect('/banner/new-promotional-text')
+      }
+  })
+
+
+
+
+ 
+})
+
+
+router.get('/get-digital-locker',(req,res)=>{
+  pool.query(`select * from digital_locker where usernumber = '${req.query.number}'`,(err,result)=>{
+    if(err) throw err;
+    else res.json(result);
+  })
+})
+
+
+router.get('/get-state',(req,res)=>{
+  pool.query(`select * from state order by name`,(err,result)=>{
+    if(err) throw err;
+    else res.json(result)
+  })
+})
+
+
+router.get('/get-city',(req,res)=>{
+  pool.query(`select c.*, (select s.name from state s where s.id = c.stateid) as categoryname from city c order by name`,(err,result)=>{
+    if(err) throw err;
+    else res.json(result)
+  })
+})
 
 module.exports = router;
