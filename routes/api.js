@@ -294,7 +294,7 @@ router.get('/index',(req,res)=>{
 
   pool.query(query2+query3,(err,result)=>{
     if(err) throw err;
-    else  res.render('index', { title: 'Express',result,login:true });
+    else  res.json(result)
   })
 })
 
