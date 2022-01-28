@@ -278,55 +278,24 @@ let data2 = []
 router.get('/index',(req,res)=>{
 
      
-    let data1 = []
-  
-    
-    pool.query(`select * from app_order`,(err,result)=>{
-        if(err) throw err;
-        else {
-    //  console.log(result.length)
-    
-   for( i=0;i<result.length;i++){
-       let j = i
-       let length = result.length
-       let title = result[i].title
-       let categoryid = result[i].categoryid
-       let subcategoryid = result[i].subcategoryid
-
-// console.log('original',j)
-
-       
-       pool.query(`select * from products where categoryid = '${categoryid}' and subcategoryid = '${subcategoryid}'`,(err,response)=>{
-           if(err) throw err;
-           else {
-  
-
-
-// console.log(j)
-   data2.push({Title:title,data:response})
  
-    // console.log('dfgfdfffff',data2)
-    // res.json(data2)
+  var query2=` SELECT bannerid ,productid , (select t.name from promotional_text t where t.id = bannerid) as textname ,
+  (select p.name from products p where p.id = productid) as productname,
+  (select p.price from products p where p.id = productid) as productprice,
+  (select p.quantity from products p where p.id = productid) as productquantity,
+  (select p.discount from products p where p.id = productid) as productdiscount,
+  (select p.image from products p where p.id = productid) as productimage,
+  (select p.categoryid from products p where p.id = productid) as productcategoryid,
+  (select p.subcategoryid from products p where p.id = productid) as productsubcategoryid,
+  (select p.net_amount from products p where p.id = productid) as productnetamount
+       FROM promotional_text_management p;`
+  var query3 = `select * from promotional_text order by id desc;`
+  
 
-
-
-           
-           }
-
-        //    console.log('fgy',response[0])
-           
-
-
-       })
-     
-   }
-//    console.log('finaltime',data2)
-   res.json(data2)
-   data2 = []
-
-        }
-    })
-
+  pool.query(query2+query3,(err,result)=>{
+    if(err) throw err;
+    else  res.render('index', { title: 'Express',result,login:true });
+  })
 })
 
 
